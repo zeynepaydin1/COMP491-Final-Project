@@ -1,24 +1,24 @@
 //
-//  LecturerPanelView.swift
+//  DoctorPanelView.swift
 //  KUTeach
 //
 //  Created by Zeynep Aydın on 1/23/24.
 //
 import Foundation
 import SwiftUI
-struct LecturerPanelView: View {
+struct DoctorPanelView: View {
     var user: User
     var body: some View {
         TabView {
-            LecturerProfilePageView(user: user)
+            DoctorProfilePageView(user: user)
                 .tabItem {
                     Label("Profile", systemImage: "person.circle")
                 }
-            LecturerDashboardView()
+            DoctorDashboardView()
                 .tabItem {
                     Label("Dashboard", systemImage: "list.dash.header.rectangle")
                 }
-            UploadLectureView()
+            UploadDataView()
                 .tabItem {
                     Label("Upload", systemImage: "square.and.arrow.up.circle")
                 }
@@ -26,6 +26,6 @@ struct LecturerPanelView: View {
     }
 }
 #Preview {
-    LecturerPanelView(user: User(username: "test", email: "test", name: "test", isLecturer: true))
+    DoctorPanelView(user: User(username: "test", email: "test", name: "test", isDoctor: true))
         .environmentObject(LoginViewModel())
 }

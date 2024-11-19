@@ -1,12 +1,12 @@
 //
-//  StudentDashboardViewModel.swift
+//  PatientDashboardViewModel.swift
 //  KUTeach
 //
 //  Created by Zeynep Aydın on 1/24/24.
 //
 import Foundation
 import FirebaseFirestore
-class StudentDashboardViewModel: ObservableObject {
+class PatientDashboardViewModel: ObservableObject {
     @Published var videos: [Video] = []
     func fetchAllVideos() {
         Firestore.firestore().collection("videos").getDocuments { [weak self] (querySnapshot, err) in
@@ -19,12 +19,12 @@ class StudentDashboardViewModel: ObservableObject {
                 return Video(
                     userID: data["userID"] as? String ?? "",
                     imageName: data["imageName"] as? String ?? "defaultImage",
-                    title: data["lectureName"] as? String ?? "Unknown Lecture",
+                    title: data["dataName"] as? String ?? "Unknown data",
                     description: data["videoDescription"] as? String ?? "No description provided.",
                     viewCount: data["viewCount"] as? Int ?? 0,
                     uploadDate: self?.formatDate(timestamp: data["uploadDate"] as? Timestamp) ?? "not indicated",
                     url: URL(string: data["videoURL"] as? String ?? "") ?? URL(fileURLWithPath: ""),
-                    lectureName: data["lectureName"] as? String ?? "Unknown Lecture",
+                    dataName: data["dataName"] as? String ?? "Unknown data",
                     videoName: data["videoName"] as? String ?? "Unknown Video",
                     videoDescription: data["videoDescription"] as? String ?? "No description provided."
                 )

@@ -1,25 +1,25 @@
 //
-//  StudentDashboardPanelView.swift
+//  PatientDashboardPanelView.swift
 //  KUTeach
 //
 //  Created by Sarp Vulaş on 13.01.2024.
 //
 import SwiftUI
 import FirebaseAuth
-struct StudentPanelView: View {
+struct PatientPanelView: View {
     var user: User
     let currentUserId = Auth.auth().currentUser?.uid ?? "defaultID"
     var body: some View {
         TabView {
-            StudentProfilePageView(user: user)
+            PatientProfilePageView(user: user)
                 .tabItem {
                     Label("Profile", systemImage: "person.circle")
                 }
-            StudentDashboardView()
+            PatientDashboardView()
                 .tabItem {
                     Label("Dashboard", systemImage: "list.dash.header.rectangle")
                 }
-            StudentSubscriptionView(subscriptionVM: StudentSubscriptionViewModel(userID: currentUserId))
+            PatientSubscriptionView(subscriptionVM: PatientSubscriptionViewModel(userID: currentUserId))
                 .tabItem {
                     Label("Liked", systemImage: "heart")
                 }
@@ -27,6 +27,6 @@ struct StudentPanelView: View {
     }
 }
 #Preview {
-    StudentPanelView(user: User(username: "test", email: "test", name: "test", isLecturer: false))
+    PatientPanelView(user: User(username: "test", email: "test", name: "test", isDoctor: false))
         .environmentObject(LoginViewModel())
 }

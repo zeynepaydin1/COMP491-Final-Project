@@ -1,12 +1,12 @@
 //
-//  StudentSubscriptionView.swift
+//  PatientSubscriptionView.swift
 //  KUTeach
 //
 //  Created by Sarp Vulaş on 13.01.2024.
 //
 import SwiftUI
-struct StudentSubscriptionView: View {
-    @ObservedObject var subscriptionVM: StudentSubscriptionViewModel
+struct PatientSubscriptionView: View {
+    @ObservedObject var subscriptionVM: PatientSubscriptionViewModel
     var body: some View {
         ZStack(alignment: .center) {
             BackgroundDS(color1: .cyan, color2: .white)
@@ -36,5 +36,5 @@ struct StudentSubscriptionView: View {
     }
 }
 #Preview {
-    StudentSubscriptionView(subscriptionVM: StudentSubscriptionViewModel(userID: "testID"))
+    PatientSubscriptionView(subscriptionVM: PatientSubscriptionViewModel(userID: "testID"))
 }

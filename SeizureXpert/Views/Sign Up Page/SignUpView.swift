@@ -10,7 +10,7 @@ struct SignUpView: View {
     @State private var passwordText: String = ""
     @State private var emailText: String = ""
     @State private var name: String = ""
-    @State private var isLecturer: Bool = false
+    @State private var isDoctor: Bool = false
     @StateObject private var viewModel = SignUpViewModel()
     var body: some View {
         NavigationView {
@@ -24,18 +24,18 @@ struct SignUpView: View {
                     .foregroundColor(.blue.opacity(0.15))
                 VStack {
                     Spacer()
-                    Image(systemName: "person.crop.square")
+                    Image(systemName: "brain.filled.head.profile")
                         .font(.system(size: 100))
-                        .foregroundStyle(.purple)
+                        .foregroundStyle(.black)
 
                     VStack(spacing: -5) {
                         Heading1TextWhite(text: "Welcome!")
                             .padding()
-                        Heading1TextWhite(text: "Sign Up to KUTeach")
+                        Heading1TextWhite(text: "Sign Up to SeizureXpert")
                     }
                     VStack(spacing: -8) {
-                        Toggle(isOn: $isLecturer) {
-                            Text("I am a lecturer.")
+                        Toggle(isOn: $isDoctor) {
+                            Text("I am a doctor.")
                                 .foregroundColor(.white)
                         }
                         .padding()
@@ -55,7 +55,7 @@ struct SignUpView: View {
                             EmptyView()}
                         ButtonDS(buttonTitle: "Sign Up", action: {
                             viewModel.signUp(email: emailText, password: passwordText, username:
-                                                usernameText, isLecturer: isLecturer, name: name)
+                                                usernameText, isDoctor: isDoctor, name: name)
                         }).padding()
                         NavigationLink(destination: LoginView()) {
                             LinkText(text: "Already have an account? Log in!")

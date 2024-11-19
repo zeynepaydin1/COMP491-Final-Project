@@ -20,13 +20,13 @@ class LoginViewModel: ObservableObject {
     }
     var destinationView: AnyView {
         switch userType {
-        case .student:
+        case .Patient:
             if let user = currentUser {
-                return AnyView(StudentPanelView(user: user))
+                return AnyView(PatientPanelView(user: user))
             }
-        case .lecturer:
+        case .Doctor:
             if let user = currentUser {
-                return AnyView(LecturerPanelView(user: user))
+                return AnyView(DoctorPanelView(user: user))
             }
         default:
             return AnyView(Text("Loading..."))
@@ -58,13 +58,13 @@ class LoginViewModel: ObservableObject {
         ref.getDocument { [weak self] (document, _) in
             if let document = document, document.exists {
                 if let userData = document.data() {
-                    let isLecturer = userData["isLecturer"] as? Bool ?? false
+                    let isDoctor = userData["isDoctor"] as? Bool ?? false
                     let username = userData["username"] as? String ?? ""
                     let email = userData["email"] as? String ?? ""
                     let name = userData["name"] as? String ?? ""
-                    self?.userType = isLecturer ? .lecturer : .student
+                    self?.userType = isDoctor ? .Doctor : .Patient
                     DispatchQueue.main.async {
-                        self?.currentUser = User(username: username, email: email, name: name, isLecturer: isLecturer)
+                        self?.currentUser = User(username: username, email: email, name: name, isDoctor: isDoctor)
                     }
                 }
             } else {
@@ -116,6 +116,6 @@ class LoginViewModel: ObservableObject {
     }
 }
 enum UserType {
-    case student
-    case lecturer
+    case Patient
+    case Doctor
 }

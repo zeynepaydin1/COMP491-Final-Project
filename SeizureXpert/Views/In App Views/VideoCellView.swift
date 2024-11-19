@@ -9,7 +9,7 @@ struct VideoCellView: View {
     var video: Video
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
-            Text("Lecture: \(video.lectureName)")
+            Text("Lecture: \(video.dataName)")
             Text(video.videoDescription)
                 .font(.subheadline)
                 .foregroundColor(.secondary)

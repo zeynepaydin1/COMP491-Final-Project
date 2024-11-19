@@ -1,15 +1,15 @@
 //
-//  LecturerProfilePageView.swift
+//  DoctorProfilePageView.swift
 //  KUTeach
 //
 //  Created by Zeynep Aydın on 1/23/24.
 //
 import Foundation
 import SwiftUI
-struct LecturerProfilePageView: View {
+struct DoctorProfilePageView: View {
     @State private var oldPassword: String = ""
     @State private var newPassword: String = ""
-    @StateObject private var viewModel = LecturerProfilePageViewModel()
+    @StateObject private var viewModel = DoctorProfilePageViewModel()
     @EnvironmentObject var loginViewModel: LoginViewModel
     @State private var shouldNavigateToSignUp = false
     @State private var errorMessage: String = ""
@@ -106,6 +106,6 @@ struct LecturerProfilePageView: View {
     }
 }
 #Preview {
-    LecturerProfilePageView(user: User(username: "test", email: "test", name: "test", isLecturer: true))
+    DoctorProfilePageView(user: User(username: "test", email: "test", name: "test", isDoctor: true))
         .environmentObject(LoginViewModel())
 }

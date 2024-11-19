@@ -1,20 +1,20 @@
 //
-//  LecturerDashboardView.swift
+//  DoctorDashboardView.swift
 //  KUTeach
 //
 //  Created by Zeynep Aydın on 1/23/24.
 //
 import Foundation
 import SwiftUI
-struct LecturerDashboardView: View {
-    @StateObject var viewModel = LecturerDashboardViewModel()
+struct DoctorDashboardView: View {
+    @StateObject var viewModel = DoctorDashboardViewModel()
     @EnvironmentObject var loginViewModel: LoginViewModel
     @State private var searchTerm = ""
     var body: some View {
         VStack {
             NavigationView {
                 List(filteredSearchTerms, id: \.id) { video in
-                    NavigationLink(destination: LecturerVideoView(video: video), label: {
+                    NavigationLink(destination: DoctorVideoView(video: video), label: {
                         VideoCellView(video: video)
                     })
                 }.navigationTitle("My Courses")
@@ -22,8 +22,8 @@ struct LecturerDashboardView: View {
                     .searchable(text: $searchTerm)
             }
         }.onAppear {
-            if let lecturerID = loginViewModel.currentUserId {
-                viewModel.fetchVideosForLecturer(lecturerID: lecturerID)
+            if let DoctorID = loginViewModel.currentUserId {
+                viewModel.fetchVideosForDoctor(DoctorID: DoctorID)
             }
         }
     }
@@ -33,5 +33,5 @@ struct LecturerDashboardView: View {
         }
 }
 #Preview {
-    LecturerDashboardView().environmentObject(LoginViewModel())
+    DoctorDashboardView().environmentObject(LoginViewModel())
 }

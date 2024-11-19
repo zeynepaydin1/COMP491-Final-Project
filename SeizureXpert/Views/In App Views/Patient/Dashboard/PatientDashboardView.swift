@@ -1,18 +1,18 @@
 //
-//  StudentDashboardView.swift
+//  PatientDashboardView.swift
 //  KUTeach
 //
 //  Created by Sarp Vulaş on 13.01.2024.
 //
 import SwiftUI
 import FirebaseAuth
-struct StudentDashboardView: View {
-    @StateObject var viewModel = StudentDashboardViewModel()
+struct PatientDashboardView: View {
+    @StateObject var viewModel = PatientDashboardViewModel()
     @State private var searchTerm = ""
-    @StateObject var subscriptionVM: StudentSubscriptionViewModel
+    @StateObject var subscriptionVM: PatientSubscriptionViewModel
     init() {
         let currentUserId = Auth.auth().currentUser?.uid ?? "defaultID"
-        _subscriptionVM = StateObject(wrappedValue: StudentSubscriptionViewModel(userID: currentUserId))
+        _subscriptionVM = StateObject(wrappedValue: PatientSubscriptionViewModel(userID: currentUserId))
     }
     var filteredSearchTerms: [Video] {
         guard !searchTerm.isEmpty else { return viewModel.videos }
@@ -23,10 +23,10 @@ struct StudentDashboardView: View {
                 NavigationView {
                     List(filteredSearchTerms, id: \.id) { video in
                         NavigationLink(destination:
-                                        StudentVideoView(video: video,
+                                        PatientVideoView(video: video,
                                                          userID: subscriptionVM.userID,
                                                          subscriptionVM:
-                                                            StudentSubscriptionViewModel(userID:
+                                                            PatientSubscriptionViewModel(userID:
                                                                                             subscriptionVM.userID))) {
                             VideoCellView(video: video)
                         }
@@ -42,5 +42,5 @@ struct StudentDashboardView: View {
         }
 }
 #Preview {
-    StudentDashboardView().environmentObject(LoginViewModel())
+    PatientDashboardView().environmentObject(LoginViewModel())
 }

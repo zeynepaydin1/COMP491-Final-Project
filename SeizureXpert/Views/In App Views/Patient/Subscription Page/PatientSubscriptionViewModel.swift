@@ -1,5 +1,5 @@
 //
-//  StudentSubscriptionViewModel.swift
+//  PatientSubscriptionViewModel.swift
 //  KUTeach
 //
 //  Created by Zeynep Aydın on 1/24/24.
@@ -7,7 +7,7 @@
 import Foundation
 import FirebaseFirestore
 import FirebaseAuth
-class StudentSubscriptionViewModel: ObservableObject {
+class PatientSubscriptionViewModel: ObservableObject {
     @Published var subscriptions: [Subscription] = []
     @Published var isLoading = false
     @Published var error: Error?
@@ -119,7 +119,7 @@ class StudentSubscriptionViewModel: ObservableObject {
                             viewCount: data["viewCount"] as? Int,
                             uploadDate: uploadDate,
                             url: url,
-                            lectureName: data["lectureName"] as? String ?? "Unknown",
+                            dataName: data["dataName"] as? String ?? "Unknown",
                             videoName: data["videoName"] as? String ?? "Unknown",
                             videoDescription: data["videoDescription"] as? String ?? "No Description"
                         )

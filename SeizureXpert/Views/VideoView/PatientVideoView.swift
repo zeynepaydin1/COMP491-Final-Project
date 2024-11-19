@@ -5,10 +5,10 @@
 //  Created by Sarp Vulaş on 13.01.2024.
 //
 import SwiftUI
-struct StudentVideoView: View {
+struct PatientVideoView: View {
     var video: Video
     var userID: String
-    @ObservedObject var subscriptionVM: StudentSubscriptionViewModel
+    @ObservedObject var subscriptionVM: PatientSubscriptionViewModel
     var body: some View {
         VStack(spacing: 10) {
             Image(video.imageName ?? "image not given")

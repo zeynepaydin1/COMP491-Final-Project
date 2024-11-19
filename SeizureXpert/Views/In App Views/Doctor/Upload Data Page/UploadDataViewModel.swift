@@ -8,6 +8,9 @@ import Foundation
 import SwiftUI
 import PhotosUI
 import Firebase
+import FirebaseAuth
+import FirebaseFirestore
+
 class UploadDataViewModel: ObservableObject {
     @Published var DataName: String = ""
     @Published var videoName: String = ""

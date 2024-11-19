@@ -6,7 +6,7 @@
 //
 import SwiftUI
 @main
-struct KUTeachApp: App {
+struct SeizureXpertApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     @StateObject var loginViewModel = LoginViewModel()
     var body: some Scene {

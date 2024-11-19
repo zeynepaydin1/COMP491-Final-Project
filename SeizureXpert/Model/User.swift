@@ -9,5 +9,5 @@ struct User {
     var username: String
     var email: String
     var name: String
-    var isLecturer: Bool
+    var isDoctor: Bool
 }

@@ -14,7 +14,7 @@ struct Video: Identifiable {
     let viewCount: Int?
     let uploadDate: String
     let url: URL
-    let lectureName: String
+    let dataName: String
     let videoName: String
     let videoDescription: String
 }

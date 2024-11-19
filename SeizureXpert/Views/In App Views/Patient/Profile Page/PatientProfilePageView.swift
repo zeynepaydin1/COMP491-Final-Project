@@ -1,14 +1,14 @@
 //
-//  StudentProfilePageView.swift
+//  PatientProfilePageView.swift
 //  KUTeach
 //
 //  Created by Sarp Vulaş on 13.01.2024.
 //
 import SwiftUI
-struct StudentProfilePageView: View {
+struct PatientProfilePageView: View {
     @State private var oldPassword: String = ""
     @State private var newPassword: String = ""
-    @StateObject private var viewModel = StudentProfilePageViewModel()
+    @StateObject private var viewModel = PatientProfilePageViewModel()
     @EnvironmentObject var loginViewModel: LoginViewModel
     @State private var shouldNavigateToSignUp = false
     @State private var errorMessage: String = ""
@@ -31,7 +31,7 @@ struct StudentProfilePageView: View {
                             .shadow(radius: 1, x: 3, y: 3)
                     }
                     HStack {
-                        BodyText(text: "Student username: \(user.username)")
+                        BodyText(text: "Patient username: \(user.username)")
                     }
                     .padding(.leading, -150)
                     .frame(width: 350, height: 50)
@@ -104,7 +104,7 @@ struct StudentProfilePageView: View {
     }
 }
 #Preview {
-    StudentProfilePageView(user: User(username: "test",
-                                      email: "test", name: "test", isLecturer: false))
+    PatientProfilePageView(user: User(username: "test",
+                                      email: "test", name: "test", isDoctor: false))
     .environmentObject(LoginViewModel())
 }
