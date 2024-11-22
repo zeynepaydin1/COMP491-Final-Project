@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		78D217172CF108C50041DE81 /* PatientDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78D217162CF108C50041DE81 /* PatientDetailView.swift */; };
+		78D217192CF108D80041DE81 /* PatientDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78D217182CF108D80041DE81 /* PatientDetailViewModel.swift */; };
 		D762DA9F2CDCA52A001A6927 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = D762DA9E2CDCA52A001A6927 /* art.scnassets */; };
 		D762DAA12CDCA52A001A6927 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D762DAA02CDCA52A001A6927 /* ViewController.swift */; };
 		D762DAA42CDCA52A001A6927 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D762DAA22CDCA52A001A6927 /* Main.storyboard */; };
@@ -81,6 +83,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		78D217162CF108C50041DE81 /* PatientDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientDetailView.swift; sourceTree = "<group>"; };
+		78D217182CF108D80041DE81 /* PatientDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatientDetailViewModel.swift; sourceTree = "<group>"; };
 		D762DA992CDCA52A001A6927 /* SeizureXpert.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SeizureXpert.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D762DA9E2CDCA52A001A6927 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
 		D762DAA02CDCA52A001A6927 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -166,6 +170,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		78D217152CF104BC0041DE81 /* Patient Details */ = {
+			isa = PBXGroup;
+			children = (
+				78D217162CF108C50041DE81 /* PatientDetailView.swift */,
+				78D217182CF108D80041DE81 /* PatientDetailViewModel.swift */,
+			);
+			path = "Patient Details";
+			sourceTree = "<group>";
+		};
 		D762DA902CDCA52A001A6927 = {
 			isa = PBXGroup;
 			children = (
@@ -202,6 +215,7 @@
 		D762DAAC2CDCA57D001A6927 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				78D217152CF104BC0041DE81 /* Patient Details */,
 				D762DB472CDCAC78001A6927 /* VideoView */,
 				D762DAB02CDCA57D001A6927 /* Sign Up Page */,
 				D762DAD02CDCA57D001A6927 /* Login Page */,
@@ -516,7 +530,9 @@
 				D762DAD62CDCA57D001A6927 /* SignUpView.swift in Sources */,
 				D762DAE92CDCA57D001A6927 /* LoginView.swift in Sources */,
 				D762DADC2CDCA57D001A6927 /* PatientProfilePageViewModel.swift in Sources */,
+				78D217192CF108D80041DE81 /* PatientDetailViewModel.swift in Sources */,
 				D762DB042CDCA5E2001A6927 /* SecureFieldDS.swift in Sources */,
+				78D217172CF108C50041DE81 /* PatientDetailView.swift in Sources */,
 				D762DAEF2CDCA5D6001A6927 /* AppDelegate.swift in Sources */,
 				D762DAD72CDCA57D001A6927 /* PatientDashboardPanelView.swift in Sources */,
 				D762DAE52CDCA57D001A6927 /* VideoCellView.swift in Sources */,
