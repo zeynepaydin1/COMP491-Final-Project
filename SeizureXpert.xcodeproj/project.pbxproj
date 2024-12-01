@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		D71D636B2CEF1E71008C00C2 /* DisableAutofillTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71D636A2CEF1E71008C00C2 /* DisableAutofillTextField.swift */; };
 		D71D636E2CEF2332008C00C2 /* AddPatientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71D636D2CEF2332008C00C2 /* AddPatientView.swift */; };
-		D71D63712CEF23B1008C00C2 /* MyPatientsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71D63702CEF23B1008C00C2 /* MyPatientsViewModel.swift */; };
 		D72A1FEA2CFC99C100017B7F /* PatientDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D72A1FE82CFC99C100017B7F /* PatientDetailViewModel.swift */; };
 		D72A1FEB2CFC99C100017B7F /* PatientDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D72A1FE92CFC99C100017B7F /* PatientDetailView.swift */; };
 		D72A20162CFC9ABA00017B7F /* Radius.swift in Sources */ = {isa = PBXBuildFile; fileRef = D72A20082CFC9AB900017B7F /* Radius.swift */; };
@@ -88,13 +87,31 @@
 		D793A0682CFC7B4F002A8665 /* InputField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D793A0672CFC7B4F002A8665 /* InputField.swift */; };
 		D793A06A2CFC7B76002A8665 /* SecureInputField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D793A0692CFC7B76002A8665 /* SecureInputField.swift */; };
 		D793A06C2CFC7B94002A8665 /* SocialLoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D793A06B2CFC7B94002A8665 /* SocialLoginButton.swift */; };
+		D7A5895E2CFCB60E00F63A7A /* Components.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7A5895D2CFCB60E00F63A7A /* Components.swift */; };
+		D7A589602CFCB78200F63A7A /* MySamplePatientsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7A5895F2CFCB78200F63A7A /* MySamplePatientsView.swift */; };
+		D7BF5BAC2CFCB34300300ADC /* HomeScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7BF5BAA2CFCB34300300ADC /* HomeScreenView.swift */; };
+		D7BF5BAD2CFCB34300300ADC /* HomeScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7BF5BAB2CFCB34300300ADC /* HomeScreenViewModel.swift */; };
+		D7BF5BB02CFCB37000300ADC /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7BF5BAF2CFCB37000300ADC /* SettingsView.swift */; };
+		D7BF5BB42CFCB38C00300ADC /* MySamplePatientsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7BF5BB22CFCB38C00300ADC /* MySamplePatientsViewModel.swift */; };
+		D7BF5BB82CFCB39D00300ADC /* SamplePatient.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7BF5BB62CFCB39C00300ADC /* SamplePatient.swift */; };
+		D7BF5BB92CFCB39D00300ADC /* PatientData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7BF5BB72CFCB39D00300ADC /* PatientData.swift */; };
+		D7BF5BBB2CFCB3A500300ADC /* AnalysisCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7BF5BBA2CFCB3A500300ADC /* AnalysisCellView.swift */; };
+		D7BF5BBF2CFCB3BA00300ADC /* AllPatientsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7BF5BBD2CFCB3BA00300ADC /* AllPatientsView.swift */; };
+		D7BF5BC02CFCB3BA00300ADC /* AllPatientsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7BF5BBE2CFCB3BA00300ADC /* AllPatientsViewModel.swift */; };
+		D7BF5BC22CFCB3E700300ADC /* DoctorProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7BF5BC12CFCB3E700300ADC /* DoctorProfileView.swift */; };
+		D7BF5BC52CFCB3FA00300ADC /* NotificationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7BF5BC42CFCB3FA00300ADC /* NotificationsView.swift */; };
+		D7BF5BC72CFCB44300300ADC /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7BF5BC62CFCB44300300ADC /* ProfileView.swift */; };
+		D7BF5BCA2CFCB45D00300ADC /* VisualizationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7BF5BC92CFCB45D00300ADC /* VisualizationView.swift */; };
+		D7BF5BCC2CFCB46A00300ADC /* SplashScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7BF5BCB2CFCB46A00300ADC /* SplashScreenView.swift */; };
+		D7BF5BCE2CFCB4AB00300ADC /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7BF5BCD2CFCB4AB00300ADC /* Fonts.swift */; };
+		D7BF5BD02CFCB4B200300ADC /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7BF5BCF2CFCB4B200300ADC /* Colors.swift */; };
+		D7BF5BD22CFCB4BD00300ADC /* Dimensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7BF5BD12CFCB4BD00300ADC /* Dimensions.swift */; };
 		D7C5FECF2CDCC3FE00AA67CD /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D7C5FECE2CDCC3FE00AA67CD /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		D71D636A2CEF1E71008C00C2 /* DisableAutofillTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisableAutofillTextField.swift; sourceTree = "<group>"; };
 		D71D636D2CEF2332008C00C2 /* AddPatientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPatientView.swift; sourceTree = "<group>"; };
-		D71D63702CEF23B1008C00C2 /* MyPatientsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPatientsViewModel.swift; sourceTree = "<group>"; };
 		D72A1FE62CFC98B500017B7F /* mul */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; name = mul; path = mul.lproj/Main.xcstrings; sourceTree = "<group>"; };
 		D72A1FE82CFC99C100017B7F /* PatientDetailViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PatientDetailViewModel.swift; sourceTree = "<group>"; };
 		D72A1FE92CFC99C100017B7F /* PatientDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PatientDetailView.swift; sourceTree = "<group>"; };
@@ -146,6 +163,25 @@
 		D793A0672CFC7B4F002A8665 /* InputField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputField.swift; sourceTree = "<group>"; };
 		D793A0692CFC7B76002A8665 /* SecureInputField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureInputField.swift; sourceTree = "<group>"; };
 		D793A06B2CFC7B94002A8665 /* SocialLoginButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialLoginButton.swift; sourceTree = "<group>"; };
+		D7A5895D2CFCB60E00F63A7A /* Components.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Components.swift; sourceTree = "<group>"; };
+		D7A5895F2CFCB78200F63A7A /* MySamplePatientsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MySamplePatientsView.swift; sourceTree = "<group>"; };
+		D7BF5BAA2CFCB34300300ADC /* HomeScreenView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeScreenView.swift; sourceTree = "<group>"; };
+		D7BF5BAB2CFCB34300300ADC /* HomeScreenViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeScreenViewModel.swift; sourceTree = "<group>"; };
+		D7BF5BAF2CFCB37000300ADC /* SettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		D7BF5BB22CFCB38C00300ADC /* MySamplePatientsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MySamplePatientsViewModel.swift; sourceTree = "<group>"; };
+		D7BF5BB62CFCB39C00300ADC /* SamplePatient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SamplePatient.swift; sourceTree = "<group>"; };
+		D7BF5BB72CFCB39D00300ADC /* PatientData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PatientData.swift; sourceTree = "<group>"; };
+		D7BF5BBA2CFCB3A500300ADC /* AnalysisCellView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnalysisCellView.swift; sourceTree = "<group>"; };
+		D7BF5BBD2CFCB3BA00300ADC /* AllPatientsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllPatientsView.swift; sourceTree = "<group>"; };
+		D7BF5BBE2CFCB3BA00300ADC /* AllPatientsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllPatientsViewModel.swift; sourceTree = "<group>"; };
+		D7BF5BC12CFCB3E700300ADC /* DoctorProfileView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DoctorProfileView.swift; sourceTree = "<group>"; };
+		D7BF5BC42CFCB3FA00300ADC /* NotificationsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsView.swift; sourceTree = "<group>"; };
+		D7BF5BC62CFCB44300300ADC /* ProfileView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		D7BF5BC92CFCB45D00300ADC /* VisualizationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisualizationView.swift; sourceTree = "<group>"; };
+		D7BF5BCB2CFCB46A00300ADC /* SplashScreenView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashScreenView.swift; sourceTree = "<group>"; };
+		D7BF5BCD2CFCB4AB00300ADC /* Fonts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
+		D7BF5BCF2CFCB4B200300ADC /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		D7BF5BD12CFCB4BD00300ADC /* Dimensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dimensions.swift; sourceTree = "<group>"; };
 		D7C5FECE2CDCC3FE00AA67CD /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -200,7 +236,6 @@
 		D71D636F2CEF23A4008C00C2 /* MyPatients */ = {
 			isa = PBXGroup;
 			children = (
-				D71D63702CEF23B1008C00C2 /* MyPatientsViewModel.swift */,
 			);
 			path = MyPatients;
 			sourceTree = "<group>";
@@ -250,6 +285,12 @@
 		D762DAAC2CDCA57D001A6927 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				D7BF5BC82CFCB45300300ADC /* SOZ Visualization Page */,
+				D7BF5BC32CFCB3F000300ADC /* Notification Page */,
+				D7BF5BBC2CFCB3AF00300ADC /* All Patients Page */,
+				D7BF5BB12CFCB38300300ADC /* My Patients Page */,
+				D7BF5BAE2CFCB36300300ADC /* Settings Screen */,
+				D7BF5BA92CFCB33300300ADC /* Home Screen */,
 				D72A1FE72CFC99C100017B7F /* Patient Details */,
 				D762DB472CDCAC78001A6927 /* VideoView */,
 				D762DAB02CDCA57D001A6927 /* Sign Up Page */,
@@ -358,6 +399,7 @@
 		D762DAC62CDCA57D001A6927 /* Profile Page */ = {
 			isa = PBXGroup;
 			children = (
+				D7BF5BC62CFCB44300300ADC /* ProfileView.swift */,
 				D762DAC72CDCA57D001A6927 /* DoctorProfilePageViewModel.swift */,
 				D762DAC82CDCA57D001A6927 /* DoctorProfilePageView.swift */,
 			);
@@ -396,6 +438,7 @@
 			isa = PBXGroup;
 			children = (
 				D762DAEB2CDCA5CF001A6927 /* SeizureXpertApp.swift */,
+				D7BF5BCB2CFCB46A00300ADC /* SplashScreenView.swift */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -422,6 +465,10 @@
 		D762DAF92CDCA5E2001A6927 /* Design System */ = {
 			isa = PBXGroup;
 			children = (
+				D7A5895D2CFCB60E00F63A7A /* Components.swift */,
+				D7BF5BD12CFCB4BD00300ADC /* Dimensions.swift */,
+				D7BF5BCF2CFCB4B200300ADC /* Colors.swift */,
+				D7BF5BCD2CFCB4AB00300ADC /* Fonts.swift */,
 				D72A20142CFC9ABA00017B7F /* BackgroundDS.swift */,
 				D72A20092CFC9AB900017B7F /* ButtonDS.swift */,
 				D72A200F2CFC9AB900017B7F /* Colors.xcassets */,
@@ -447,6 +494,61 @@
 				D762DB492CDCAC78001A6927 /* PatientVideoView.swift */,
 			);
 			path = VideoView;
+			sourceTree = "<group>";
+		};
+		D7BF5BA92CFCB33300300ADC /* Home Screen */ = {
+			isa = PBXGroup;
+			children = (
+				D7BF5BC12CFCB3E700300ADC /* DoctorProfileView.swift */,
+				D7BF5BBA2CFCB3A500300ADC /* AnalysisCellView.swift */,
+				D7BF5BB62CFCB39C00300ADC /* SamplePatient.swift */,
+				D7BF5BB72CFCB39D00300ADC /* PatientData.swift */,
+				D7BF5BAA2CFCB34300300ADC /* HomeScreenView.swift */,
+				D7BF5BAB2CFCB34300300ADC /* HomeScreenViewModel.swift */,
+			);
+			path = "Home Screen";
+			sourceTree = "<group>";
+		};
+		D7BF5BAE2CFCB36300300ADC /* Settings Screen */ = {
+			isa = PBXGroup;
+			children = (
+				D7BF5BAF2CFCB37000300ADC /* SettingsView.swift */,
+			);
+			path = "Settings Screen";
+			sourceTree = "<group>";
+		};
+		D7BF5BB12CFCB38300300ADC /* My Patients Page */ = {
+			isa = PBXGroup;
+			children = (
+				D7A5895F2CFCB78200F63A7A /* MySamplePatientsView.swift */,
+				D7BF5BB22CFCB38C00300ADC /* MySamplePatientsViewModel.swift */,
+			);
+			path = "My Patients Page";
+			sourceTree = "<group>";
+		};
+		D7BF5BBC2CFCB3AF00300ADC /* All Patients Page */ = {
+			isa = PBXGroup;
+			children = (
+				D7BF5BBD2CFCB3BA00300ADC /* AllPatientsView.swift */,
+				D7BF5BBE2CFCB3BA00300ADC /* AllPatientsViewModel.swift */,
+			);
+			path = "All Patients Page";
+			sourceTree = "<group>";
+		};
+		D7BF5BC32CFCB3F000300ADC /* Notification Page */ = {
+			isa = PBXGroup;
+			children = (
+				D7BF5BC42CFCB3FA00300ADC /* NotificationsView.swift */,
+			);
+			path = "Notification Page";
+			sourceTree = "<group>";
+		};
+		D7BF5BC82CFCB45300300ADC /* SOZ Visualization Page */ = {
+			isa = PBXGroup;
+			children = (
+				D7BF5BC92CFCB45D00300ADC /* VisualizationView.swift */,
+			);
+			path = "SOZ Visualization Page";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -564,9 +666,13 @@
 				D762DADF2CDCA57D001A6927 /* DoctorDashboardViewModel.swift in Sources */,
 				D762DAE42CDCA57D001A6927 /* UploadDataViewModel.swift in Sources */,
 				D762DAE72CDCA57D001A6927 /* VideoUploader.swift in Sources */,
+				D7BF5BBB2CFCB3A500300ADC /* AnalysisCellView.swift in Sources */,
 				D762DB4B2CDCAC78001A6927 /* PatientVideoView.swift in Sources */,
+				D7A589602CFCB78200F63A7A /* MySamplePatientsView.swift in Sources */,
 				D793A0662CFC7AB5002A8665 /* DesignSystem.swift in Sources */,
+				D7BF5BC52CFCB3FA00300ADC /* NotificationsView.swift in Sources */,
 				D762DAA12CDCA52A001A6927 /* ViewController.swift in Sources */,
+				D7A5895E2CFCB60E00F63A7A /* Components.swift in Sources */,
 				D72A20162CFC9ABA00017B7F /* Radius.swift in Sources */,
 				D72A1FEB2CFC99C100017B7F /* PatientDetailView.swift in Sources */,
 				D72A20212CFC9ABA00017B7F /* SecureFieldDS.swift in Sources */,
@@ -574,30 +680,44 @@
 				D72A201E2CFC9ABA00017B7F /* Spacing.swift in Sources */,
 				D762DADD2CDCA57D001A6927 /* PatientProfilePageView.swift in Sources */,
 				D762DAE22CDCA57D001A6927 /* DoctorProfilePageView.swift in Sources */,
+				D7BF5BD22CFCB4BD00300ADC /* Dimensions.swift in Sources */,
 				D762DADB2CDCA57D001A6927 /* PatientDashboardViewModel.swift in Sources */,
+				D7BF5BD02CFCB4B200300ADC /* Colors.swift in Sources */,
+				D7BF5BC72CFCB44300300ADC /* ProfileView.swift in Sources */,
+				D7BF5BAC2CFCB34300300ADC /* HomeScreenView.swift in Sources */,
 				D762DAD62CDCA57D001A6927 /* SignUpView.swift in Sources */,
 				D793A06A2CFC7B76002A8665 /* SecureInputField.swift in Sources */,
 				D762DAE92CDCA57D001A6927 /* LoginView.swift in Sources */,
 				D762DADC2CDCA57D001A6927 /* PatientProfilePageViewModel.swift in Sources */,
 				D762DAEF2CDCA5D6001A6927 /* AppDelegate.swift in Sources */,
+				D7BF5BB92CFCB39D00300ADC /* PatientData.swift in Sources */,
 				D762DAD72CDCA57D001A6927 /* PatientDashboardPanelView.swift in Sources */,
 				D762DAE52CDCA57D001A6927 /* VideoCellView.swift in Sources */,
 				D793A06C2CFC7B94002A8665 /* SocialLoginButton.swift in Sources */,
 				D762DAF72CDCA5DE001A6927 /* Subscription.swift in Sources */,
+				D7BF5BB82CFCB39D00300ADC /* SamplePatient.swift in Sources */,
+				D7BF5BC02CFCB3BA00300ADC /* AllPatientsViewModel.swift in Sources */,
+				D7BF5BAD2CFCB34300300ADC /* HomeScreenViewModel.swift in Sources */,
+				D7BF5BB42CFCB38C00300ADC /* MySamplePatientsViewModel.swift in Sources */,
 				D72A20172CFC9ABA00017B7F /* ButtonDS.swift in Sources */,
 				D72A201B2CFC9ABA00017B7F /* LinkText.swift in Sources */,
 				D762DADA2CDCA57D001A6927 /* PatientDashboardView.swift in Sources */,
 				D762DAE12CDCA57D001A6927 /* DoctorProfilePageViewModel.swift in Sources */,
-				D71D63712CEF23B1008C00C2 /* MyPatientsViewModel.swift in Sources */,
 				D762DAEC2CDCA5CF001A6927 /* SeizureXpertApp.swift in Sources */,
 				D72A201A2CFC9ABA00017B7F /* TextFieldDS.swift in Sources */,
 				D762DB4A2CDCAC78001A6927 /* DoctorVideoView.swift in Sources */,
 				D793A0682CFC7B4F002A8665 /* InputField.swift in Sources */,
+				D7BF5BB02CFCB37000300ADC /* SettingsView.swift in Sources */,
+				D7BF5BCE2CFCB4AB00300ADC /* Fonts.swift in Sources */,
 				D71D636E2CEF2332008C00C2 /* AddPatientView.swift in Sources */,
+				D7BF5BBF2CFCB3BA00300ADC /* AllPatientsView.swift in Sources */,
 				D72A20222CFC9ABA00017B7F /* BackgroundDS.swift in Sources */,
 				D762DAE62CDCA57D001A6927 /* AppState.swift in Sources */,
 				D762DAE82CDCA57D001A6927 /* LoginViewModel.swift in Sources */,
 				D71D636B2CEF1E71008C00C2 /* DisableAutofillTextField.swift in Sources */,
+				D7BF5BC22CFCB3E700300ADC /* DoctorProfileView.swift in Sources */,
+				D7BF5BCA2CFCB45D00300ADC /* VisualizationView.swift in Sources */,
+				D7BF5BCC2CFCB46A00300ADC /* SplashScreenView.swift in Sources */,
 				D762DAF82CDCA5DE001A6927 /* Video.swift in Sources */,
 				D762DAD82CDCA57D001A6927 /* PatientSubscriptionView.swift in Sources */,
 				D793A0642CFC7941002A8665 /* PlaceholderTextField.swift in Sources */,
