@@ -19,39 +19,45 @@ class LoginViewModel: ObservableObject {
         return Auth.auth().currentUser?.uid
     }
     var destinationView: AnyView {
-        switch userType {
-        case .Patient:
-            if let user = currentUser {
+        if let userType = userType, let user = currentUser {
+            switch userType {
+            case .Patient:
                 return AnyView(PatientPanelView(user: user))
-            }
-        case .Doctor:
-            if let user = currentUser {
+            case .Doctor:
                 return AnyView(DoctorPanelView(user: user))
             }
-        default:
-            return AnyView(Text("Loading..."))
         }
         return AnyView(Text("Loading..."))
     }
+
     func login(withEmail email: String, password: String) {
         self.error = nil
+        print("Attempting to log in with email: \(email)") // Debug log
+
         Auth.auth().signIn(withEmail: email, password: password) { [weak self] authResult, error in
             guard let strongSelf = self else { return }
+
             if let error = error {
                 DispatchQueue.main.async {
                     strongSelf.error = error.localizedDescription
+                    print("Login failed with error: \(error.localizedDescription)") // Debug log
                     strongSelf.loginSuccessful = false
                 }
                 return
             }
+
             DispatchQueue.main.async {
+                print("Login successful") // Debug log
                 strongSelf.loginSuccessful = true
             }
+
             if let userId = authResult?.user.uid {
+                print("User ID: \(userId)") // Debug log
                 self?.fetchUserType(userId: userId)
             }
         }
     }
+
     private func fetchUserType(userId: String) {
         self.error = nil
         let ref = dbs.collection("users").document(userId)

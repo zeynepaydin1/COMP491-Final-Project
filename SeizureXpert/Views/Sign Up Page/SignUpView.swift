@@ -1,78 +1,135 @@
-//
-//  ContentView.swift
-//  KUTeach
-//
-//  Created by Sarp Vulaş on 10.01.2024.
-//
 import SwiftUI
+
 struct SignUpView: View {
     @State private var usernameText: String = ""
     @State private var passwordText: String = ""
     @State private var emailText: String = ""
     @State private var name: String = ""
     @State private var isDoctor: Bool = false
+    @State private var showSuccessMessage = false // State to control success message
+    @State private var navigateToLogin = false // State to control navigation
     @StateObject private var viewModel = SignUpViewModel()
+
     var body: some View {
         NavigationView {
-            ZStack(alignment: .center) {
-                BackgroundDS(color1: .cyan, color2: .white)
-                Circle()
-                    .scale(1.56)
-                    .foregroundColor(.blue)
-                Circle()
-                    .scale(2)
-                    .foregroundColor(.blue.opacity(0.15))
-                VStack {
-                    Spacer()
-                    Image(systemName: "brain.filled.head.profile")
-                        .font(.system(size: 100))
-                        .foregroundStyle(.black)
+            VStack(spacing: DesignSystem.Spacing.vertical) {
+                Spacer().frame(height: DesignSystem.Spacing.vertical)
 
-                    VStack(spacing: -5) {
-                        Heading1TextWhite(text: "Welcome!")
-                            .padding()
-                        Heading1TextWhite(text: "Sign Up to SeizureXpert")
+                // Title Section
+                VStack(spacing: 5) {
+                    Text("Welcome!")
+                        .font(DesignSystem.Fonts.largeTitle)
+                        .foregroundColor(DesignSystem.Colors.primary)
+
+                    Text("Sign Up to SeizureXpert.")
+                        .font(DesignSystem.Fonts.headline)
+                        .foregroundColor(DesignSystem.Colors.textSecondary)
+                }
+
+                // Icon Section
+                Image(systemName: "brain.filled.head.profile")
+                    .resizable()
+                    .frame(width: DesignSystem.ImageSizes.brainIcon.width, height: DesignSystem.ImageSizes.brainIcon.height)
+                    .foregroundColor(DesignSystem.Colors.primary)
+
+                // Input Fields Section
+                VStack(spacing: DesignSystem.Spacing.vertical) {
+                    // Doctor Toggle
+                    Toggle(isOn: $isDoctor) {
+                        Text("I am a doctor.")
+                            .font(DesignSystem.Fonts.subheadline)
+                            .foregroundColor(DesignSystem.Colors.textPrimary)
                     }
-                    VStack(spacing: -8) {
-                        Toggle(isOn: $isDoctor) {
-                            Text("I am a doctor.")
-                                .foregroundColor(.white)
-                        }
-                        .padding()
-                        Rectangle()
-                            .frame(width: 360, height: 1)
-                            .foregroundColor(.white)
+                    .toggleStyle(SwitchToggleStyle(tint: DesignSystem.Colors.primary))
+                    .padding(.horizontal, 20)
+
+                    InputField(label: "Email", placeholder: "Enter email", text: $emailText)
+                        .keyboardType(.emailAddress)
+
+                    InputField(label: "Username", placeholder: "Enter username", text: $usernameText)
+
+                    InputField(label: "Name and Surname", placeholder: "Enter name and surname", text: $name)
+                        .autocapitalization(.words)
+
+                    SecureInputField(label: "Password", placeholder: "************", text: $passwordText, isHidden: .constant(true))
+                }
+
+                // Sign-Up Button
+                Button(action: {
+                    viewModel.signUp(email: emailText, password: passwordText, username: usernameText, isDoctor: isDoctor, name: name)
+                }) {
+                    Text("Sign Up")
+                        .fontWeight(.bold)
+                        .padding(DesignSystem.Spacing.inputPadding)
+                        .frame(maxWidth: .infinity)
+                        .background(DesignSystem.Colors.primary)
+                        .foregroundColor(.white)
+                        .cornerRadius(DesignSystem.Corners.rounded)
+                }
+                .padding(.horizontal, DesignSystem.Spacing.horizontal)
+                .padding(.top, DesignSystem.Spacing.vertical)
+
+                // Success Message
+                if showSuccessMessage {
+                    Text("Sign up successful! Directing to Log in page...")
+                        .font(DesignSystem.Fonts.subheadline)
+                        .foregroundColor(.green)
+                        .multilineTextAlignment(.center)
+                        .padding(.top, DesignSystem.Spacing.vertical)
+                }
+
+                // Login Navigation Section
+                HStack {
+                    Text("Already have an account?")
+                        .foregroundColor(DesignSystem.Colors.textSecondary)
+
+                    Button(action: {
+                        navigateToLogin = true // Manually trigger navigation
+                    }) {
+                        Text("Log in!")
+                            .foregroundColor(DesignSystem.Colors.primary)
+                            .fontWeight(.bold)
                     }
-                    VStack(spacing: -5) {
-                        TextFieldDSWhite(text: $emailText, placeholder: "Enter email")
-                            .padding()
-                        TextFieldDSWhite(text: $usernameText, placeholder: "Enter username").padding()
-                        TextFieldDSWhite(text: $name, placeholder: "Enter name and surname").padding()
-                        SecureFieldDSWhite(text: $passwordText, placeholder: "Enter password")
-                            .padding()
-                        NavigationLink(destination: LoginView(), isActive:
-                                        $viewModel.signupSuccessful) {
-                            EmptyView()}
-                        ButtonDS(buttonTitle: "Sign Up", action: {
-                            viewModel.signUp(email: emailText, password: passwordText, username:
-                                                usernameText, isDoctor: isDoctor, name: name)
-                        }).padding()
-                        NavigationLink(destination: LoginView()) {
-                            LinkText(text: "Already have an account? Log in!")
-                        }
-                    }
-                    Spacer()
-                    Spacer()
-                    Spacer()
-                    if let error = viewModel.error {
-                        Text(error)
-                            .foregroundColor(.red)
+                }
+
+                // NavigationLink for actual navigation
+                NavigationLink(
+                    destination: LoginView().environmentObject(viewModel),
+                    isActive: $navigateToLogin
+                ) {
+                    EmptyView()
+                }
+
+
+                Spacer()
+
+                // Error Message
+                if let error = viewModel.error {
+                    Text(error)
+                        .foregroundColor(DesignSystem.Colors.error)
+                        .padding(.horizontal)
+                }
+            }
+            .padding(.horizontal, DesignSystem.Spacing.horizontal) // Consistent horizontal padding
+            .padding(.top, DesignSystem.Spacing.vertical) // Padding at the top
+            .background(DesignSystem.Colors.background.ignoresSafeArea())
+            .navigationBarHidden(true)
+            .onChange(of: viewModel.signupSuccessful) { success in
+                if success {
+                    showSuccessMessage = true
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
+                        showSuccessMessage = false
+                        navigateToLogin = true // Trigger navigation after delay
                     }
                 }
             }
-        }.navigationBarBackButtonHidden(true)
+        }
+        .navigationBarBackButtonHidden(true)
     }
 }
+
+// Preview for SignUpView
 #Preview {
-    SignUpView().environmentObject(LoginViewModel())
+    SignUpView()
+        .environmentObject(LoginViewModel())
 }

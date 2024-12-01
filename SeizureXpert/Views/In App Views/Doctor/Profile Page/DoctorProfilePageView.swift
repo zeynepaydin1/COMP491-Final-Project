@@ -32,7 +32,7 @@ struct DoctorProfilePageView: View {
                             .shadow(radius: 1, x: 3, y: 3)
                     }
                     HStack {
-                        BodyText(text: "Teacher username: \(user.username)")
+                        BodyText(text: "Doctor username: \(user.username)")
                     }
                     .padding(.leading, -150)
                     .frame(width: 350, height: 50)
