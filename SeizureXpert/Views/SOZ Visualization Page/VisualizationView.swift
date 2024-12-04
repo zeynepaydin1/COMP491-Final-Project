@@ -7,7 +7,7 @@ struct VisualizationView: View {
         VStack {
             // Patient Profile Information
             HStack {
-                Image(patient.profileImage)
+                Image("female_patient")
                     .resizable()
                     .scaledToFill()
                     .frame(width: 80, height: 80)

@@ -48,7 +48,8 @@ class HomeScreenViewModel: ObservableObject {
                         name: data["name"] as? String ?? "",
                         surname: data["surname"] as? String ?? "",
                         age: data["age"] as? String ?? "",
-                        gender: data["gender"] as? String ?? ""
+                        gender: data["gender"] as? String ?? "",
+                        profileImageURL: data["profileImageURL"] as? String ?? "" // Extract profileImageURL
                     )
                 }
 

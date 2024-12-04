@@ -18,16 +18,40 @@ struct AllPatientsView: View {
             } else {
                 List(viewModel.allPatients) { patient in
                     HStack {
-                        Image(patient.profileImage)
-                            .resizable()
-                            .scaledToFill()
-                            .frame(width: 50, height: 50)
-                            .clipShape(Circle())
+                        if let imageURL = URL(string: patient.profileImageURL) {
+                            AsyncImage(url: imageURL) { phase in
+                                if let image = phase.image {
+                                    image
+                                        .resizable()
+                                        .scaledToFill()
+                                        .frame(width: 50, height: 50)
+                                        .clipShape(Circle())
+                                } else if phase.error != nil {
+                                    Image(systemName: "person.crop.circle.badge.exclamationmark")
+                                        .resizable()
+                                        .scaledToFill()
+                                        .frame(width: 50, height: 50)
+                                        .clipShape(Circle())
+                                        .foregroundColor(.red)
+                                } else {
+                                    ProgressView()
+                                        .frame(width: 50, height: 50)
+                                }
+                            }
+                        } else {
+                            Image(systemName: "person.crop.circle.fill")
+                                .resizable()
+                                .scaledToFill()
+                                .frame(width: 50, height: 50)
+                                .clipShape(Circle())
+                                .foregroundColor(.gray)
+                        }
+
                         VStack(alignment: .leading) {
                             Text(patient.name)
                                 .font(Fonts.body)
                                 .foregroundColor(Colors.textPrimary)
-                            Text("Progress: 50%")
+                            Text(patient.surname)
                                 .font(Fonts.caption)
                                 .foregroundColor(Colors.textSecondary)
                         }
@@ -46,6 +70,7 @@ struct AllPatientsView: View {
         .background(Colors.background.ignoresSafeArea())
     }
 }
+
 
 struct AllPatientsView_Previews: PreviewProvider {
     static var previews: some View {

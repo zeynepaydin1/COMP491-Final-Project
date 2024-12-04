@@ -6,17 +6,17 @@ struct SamplePatient: Identifiable, Hashable {
     var surname: String
     var age: String
     var gender: String // "Male" or "Female"
-
-    var profileImage: String {
-        switch gender.lowercased() {
-        case "male":
-            return "male_patient"
-        case "female":
-            return "female_patient"
-        default:
-            return "default_profile"
-        }
-    }
+    let profileImageURL: String
+//    var profileImage: String {
+//        switch gender.lowercased() {
+//        case "male":
+//            return "male_patient"
+//        case "female":
+//            return "female_patient"
+//        default:
+//            return "default_profile"
+//        }
+//    }
 
     // Conformance to Hashable
     static func == (lhs: SamplePatient, rhs: SamplePatient) -> Bool {
