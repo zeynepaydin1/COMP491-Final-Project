@@ -86,8 +86,11 @@ struct HomeScreenView: View {
                                     patient: patient,
                                     onInfoTapped: {
                                         print("Info tapped for \(patient.name)")
+                                        viewModel.selectedPatient = patient
+                                        viewModel.navigateTo(.patientDetail)
                                     },
                                     onVisualizeTapped: {
+                                        print("Visualization tapped for \(patient.name)")
                                         viewModel.selectedPatient = patient
                                         viewModel.navigateTo(.visualization)
                                     }
@@ -97,6 +100,7 @@ struct HomeScreenView: View {
                     }
                 }
                 .listStyle(InsetGroupedListStyle())
+
 
                 // Page Slider
                 Picker("", selection: $selectedTab) {
@@ -154,6 +158,18 @@ struct HomeScreenView: View {
                         }
                     }(),
                     tag: HomeScreenViewModel.Destination.visualization,
+                    selection: $viewModel.currentDestination
+                ) { EmptyView() }
+                
+                NavigationLink(
+                    destination: {
+                        if let patient = viewModel.selectedPatient {
+                            AnyView(PatientDetailView(patient: patient))
+                        } else {
+                            AnyView(EmptyView())
+                        }
+                    }(),
+                    tag: HomeScreenViewModel.Destination.patientDetail,
                     selection: $viewModel.currentDestination
                 ) { EmptyView() }
             }

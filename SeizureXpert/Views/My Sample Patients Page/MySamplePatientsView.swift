@@ -4,88 +4,29 @@ struct MySamplePatientsView: View {
     @StateObject private var viewModel = MySamplePatientsViewModel()
 
     var body: some View {
-        NavigationStack(path: $viewModel.navigationPath) {
+
+        NavigationStack(path: $viewModel.navigationPath) { // Use the navigation path
+
             VStack {
-                Text("My Patients")
-                    .font(Fonts.title)
-                    .foregroundColor(Colors.textPrimary)
-                    .padding()
+                headerView
 
                 if viewModel.myPatients.isEmpty {
-                    Text("No patients available. Add new patients.")
-                        .font(.caption)
-                        .foregroundColor(.gray)
-                        .padding()
+                    emptyStateView
                 } else {
-                    List(viewModel.myPatients) { patient in
-                        NavigationLink(value: patient) {
-                            HStack {
-                                if let imageURL = URL(string: patient.profileImageURL) {
-                                    AsyncImage(url: imageURL) { phase in
-                                        if let image = phase.image {
-                                            image
-                                                .resizable()
-                                                .scaledToFill()
-                                                .frame(width: 50, height: 50)
-                                                .clipShape(Circle())
-                                        } else if phase.error != nil {
-                                            Image(systemName: "person.crop.circle.badge.exclamationmark")
-                                                .resizable()
-                                                .scaledToFill()
-                                                .frame(width: 50, height: 50)
-                                                .clipShape(Circle())
-                                                .foregroundColor(.red)
-                                        } else {
-                                            ProgressView()
-                                                .frame(width: 50, height: 50)
-                                        }
-                                    }
-                                } else {
-                                    Image(systemName: "person.crop.circle.fill")
-                                        .resizable()
-                                        .scaledToFill()
-                                        .frame(width: 50, height: 50)
-                                        .clipShape(Circle())
-                                        .foregroundColor(.gray)
-                                }
 
-                                VStack(alignment: .leading) {
-                                    Text(patient.name)
-                                        .font(Fonts.body)
-                                        .foregroundColor(Colors.textPrimary)
-                                    Text(patient.surname)
-                                        .font(Fonts.caption)
-                                        .foregroundColor(Colors.textSecondary)
-                                }
-                            }
-                        }
-                    }
-                    .listStyle(PlainListStyle())
+                    patientsListView
                 }
 
                 Spacer()
 
-                Button(action: {
-                    viewModel.navigationPath.append(MySamplePatientsViewModel.Destination.assignPatient)
-                }) {
-                    Text("Add New Patient")
-                        .font(.headline)
-                        .foregroundColor(.white)
-                        .padding()
-                        .frame(maxWidth: .infinity)
-                        .background(Colors.primary)
-                        .cornerRadius(10)
-                }
-                .navigationDestination(for: MySamplePatientsViewModel.Destination.self) { destination in
-                    switch destination {
-                    case .assignPatient:
-                        AssignPatientView() // Navigate to AssignPatientView
-                    }
-                }
-                .padding()
+                addPatientButton // Add New Patient button
             }
-            .navigationDestination(for: SamplePatient.self) { patient in
-                PatientDetailView(patient: patient)
+            .navigationDestination(for: MySamplePatientsViewModel.Destination.self) { destination in
+                switch destination {
+                case .addPatient:
+                    AddPatientView()
+                }
+
             }
             .onAppear {
                 viewModel.fetchMyPatients()
@@ -93,7 +34,73 @@ struct MySamplePatientsView: View {
             .background(Colors.background.ignoresSafeArea())
         }
     }
+
+
+    // MARK: - Subviews
+
+    private var headerView: some View {
+        Text("My Patients")
+            .font(Fonts.title)
+            .foregroundColor(Colors.textPrimary)
+            .padding()
+    }
+
+    private var emptyStateView: some View {
+        Text("No patients available. Please add new patients.")
+            .font(Fonts.body)
+            .foregroundColor(.gray)
+            .padding()
+    }
+
+    private var patientsListView: some View {
+        List(viewModel.myPatients) { patient in
+            NavigationLink(destination: PatientDetailView(patient: patient)) {
+                patientRow(patient)
+            }
+        }
+        .listStyle(PlainListStyle())
+    }
+
+    private func patientRow(_ patient: SamplePatient) -> some View {
+        HStack {
+            Image(patient.profileImage)
+                .resizable()
+                .scaledToFill()
+                .frame(width: 50, height: 50)
+                .clipShape(Circle())
+
+            VStack(alignment: .leading) {
+                Text(patient.name)
+                    .font(Fonts.body)
+                    .foregroundColor(Colors.textPrimary)
+
+                Text("Progress: 50%")
+                    .font(Fonts.caption)
+                    .foregroundColor(Colors.textSecondary)
+            }
+        }
+        .padding(8)
+        .background(Color.white)
+        .cornerRadius(10)
+        .shadow(radius: 2, x: 0, y: 2)
+    }
+
+    private var addPatientButton: some View {
+        Button(action: {
+            viewModel.navigateToAddPatient() // Call navigation function
+        }) {
+            Text("Add New Patient")
+                .font(.headline)
+                .foregroundColor(.white)
+                .padding()
+                .frame(maxWidth: .infinity)
+                .background(Colors.primary)
+                .cornerRadius(10)
+        }
+        .padding()
+    }
 }
+
 
 struct MySamplePatientsView_Previews: PreviewProvider {
     static var previews: some View {
@@ -122,4 +129,3 @@ struct MySamplePatientsView_Previews: PreviewProvider {
             .environmentObject(mockViewModel)
     }
 }
-
