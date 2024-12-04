@@ -102,9 +102,8 @@ struct AddPatientViewOld: View {
     }
 }
 
-// Preview for AddPatientView
 #Preview {
-    AddPatientView { newPatient in
-        print("New patient added: \(newPatient.name)")
-    }
+    AddPatientView()
+        .previewLayout(.sizeThatFits) // Optional: Adjusts the size for better viewing in the preview
+        .padding()
 }

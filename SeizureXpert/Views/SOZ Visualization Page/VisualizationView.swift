@@ -16,7 +16,7 @@ struct VisualizationView: View {
                     Text(patient.name)
                         .font(Fonts.primary(size: 20, weight: .bold))
                         .foregroundColor(Colors.textPrimary)
-                    Text("Progress: \(Int(patient.progress * 100))%")
+                    Text("Progress: 50%")
                         .font(Fonts.body)
                         .foregroundColor(Colors.textSecondary)
                 }

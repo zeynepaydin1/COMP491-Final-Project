@@ -19,8 +19,7 @@ class AllPatientsViewModel: ObservableObject {
                         name: data["name"] as? String ?? "",
                         surname: data["surname"] as? String ?? "",
                         age: data["age"] as? String ?? "",
-                        gender: data["gender"] as? String ?? "",
-                        progress: data["progress"] as? Float ?? 0.0
+                        gender: data["gender"] as? String ?? ""
                     )
                 }
             }

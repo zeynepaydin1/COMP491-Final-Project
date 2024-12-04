@@ -1,31 +1,37 @@
-import SwiftUI
-import FirebaseAuth
 import FirebaseFirestore
+import FirebaseAuth
 
 class HomeScreenViewModel: ObservableObject {
-    @Published var proceedingAnalyses: [SamplePatient] = []
     @Published var completedAnalyses: [SamplePatient] = []
     @Published var currentDestination: Destination? // Used for navigation
     @Published var selectedPatient: SamplePatient? // Used for passing data to the visualization page
 
     private let db = Firestore.firestore()
+    private var listener: ListenerRegistration? // For real-time updates
 
     init() {
-        fetchPatients()
+        listenToPatients() // Start listening to Firestore changes
     }
-    func fetchPatients() {
+
+    deinit {
+        // Stop listening when the view model is deallocated
+        listener?.remove()
+    }
+
+    func listenToPatients() {
         guard let userId = Auth.auth().currentUser?.uid else {
             print("Error: User not authenticated.")
             return
         }
 
-        db.collection("patients")
-            .whereField("userId", isEqualTo: userId) // Ensure you're filtering by the current user
-            .getDocuments { [weak self] (snapshot, error) in
+        // Listen for real-time changes in the `patients` collection
+        listener = db.collection("patients")
+            .whereField("userId", isEqualTo: userId)
+            .addSnapshotListener { [weak self] (snapshot, error) in
                 guard let self = self else { return }
 
                 if let error = error {
-                    print("Error fetching patients: \(error.localizedDescription)")
+                    print("Error listening to patients: \(error.localizedDescription)")
                     return
                 }
 
@@ -34,6 +40,7 @@ class HomeScreenViewModel: ObservableObject {
                     return
                 }
 
+                // Map Firestore documents to SamplePatient objects
                 let allPatients = documents.compactMap { doc -> SamplePatient? in
                     let data = doc.data()
                     return SamplePatient(
@@ -41,18 +48,16 @@ class HomeScreenViewModel: ObservableObject {
                         name: data["name"] as? String ?? "",
                         surname: data["surname"] as? String ?? "",
                         age: data["age"] as? String ?? "",
-                        gender: data["gender"] as? String ?? "",
-                        progress: data["progress"] as? Float ?? 0.0
+                        gender: data["gender"] as? String ?? ""
                     )
                 }
 
+                // Update the completedAnalyses array with real-time data
                 DispatchQueue.main.async {
-                    self.proceedingAnalyses = allPatients.filter { $0.progress < 1.0 }
-                    self.completedAnalyses = allPatients.filter { $0.progress == 1.0 }
+                    self.completedAnalyses = allPatients
                 }
             }
     }
-
 
     func navigateTo(_ destination: Destination) {
         currentDestination = destination

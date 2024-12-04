@@ -72,7 +72,7 @@ struct PatientDetailView: View {
                                 Text("Progress")
                                     .font(.headline)
                                     .fontWeight(.bold)
-                                Text("\(Int(patient.progress * 100))%")
+                                Text("50%")
                                     .padding(10)
                                     .frame(maxWidth: .infinity, alignment: .leading)
                                     .background(Color.blue.opacity(0.1))
@@ -143,8 +143,7 @@ struct PatientDetailView_Previews: PreviewProvider {
             name: "John",
             surname: "Doe",
             age: "23",
-            gender: "Male",
-            progress: 0.75
+            gender: "Male"
         )
         PatientDetailView(patient: samplePatient)
     }

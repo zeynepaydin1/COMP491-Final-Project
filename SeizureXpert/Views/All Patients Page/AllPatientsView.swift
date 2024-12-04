@@ -27,7 +27,7 @@ struct AllPatientsView: View {
                             Text(patient.name)
                                 .font(Fonts.body)
                                 .foregroundColor(Colors.textPrimary)
-                            Text("Progress: \(Int(patient.progress * 100))%")
+                            Text("Progress: 50%")
                                 .font(Fonts.caption)
                                 .foregroundColor(Colors.textSecondary)
                         }

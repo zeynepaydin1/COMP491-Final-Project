@@ -6,37 +6,31 @@ class FirestoreUtility {
     static func fetchPatientsForCurrentUser(completion: @escaping ([SamplePatient]) -> Void) {
         guard let userId = Auth.auth().currentUser?.uid else {
             print("Error: User not authenticated.")
-            completion([]) // Return an empty array if the user is not authenticated
+            completion([])
             return
         }
 
         let db = Firestore.firestore()
         db.collection("patients")
-            .whereField("userId", isEqualTo: userId) // Filter patients by the logged-in user's ID
+            .whereField("userId", isEqualTo: userId)
             .getDocuments { snapshot, error in
                 if let error = error {
                     print("Error fetching patients: \(error.localizedDescription)")
-                    completion([]) // Return an empty array if there was an error
+                    completion([])
                     return
                 }
 
-                guard let documents = snapshot?.documents else {
-                    print("No patient documents found.")
-                    completion([]) // Return an empty array if there are no documents
-                    return
-                }
-
-                let patients = documents.compactMap { doc -> SamplePatient? in
+                let patients = snapshot?.documents.compactMap { doc -> SamplePatient? in
                     let data = doc.data()
                     return SamplePatient(
-                        id: doc.documentID, // Use Firestore's document ID
+                        id: doc.documentID,
                         name: data["name"] as? String ?? "",
                         surname: data["surname"] as? String ?? "",
                         age: data["age"] as? String ?? "",
-                        gender: data["gender"] as? String ?? "",
-                        progress: data["progress"] as? Float ?? 0.0
+                        gender: data["gender"] as? String ?? ""
                     )
-                }
+                } ?? []
+
                 completion(patients)
             }
     }
@@ -51,12 +45,11 @@ class FirestoreUtility {
 
         let db = Firestore.firestore()
         let newPatient: [String: Any] = [
-            "userId": userId, // Attach the logged-in user's ID
+            "userId": userId,
             "name": patient.name,
             "surname": patient.surname,
             "age": patient.age,
-            "gender": patient.gender,
-            "progress": patient.progress
+            "gender": patient.gender
         ]
 
         db.collection("patients").addDocument(data: newPatient) { error in
@@ -69,5 +62,4 @@ class FirestoreUtility {
             }
         }
     }
-
 }
