@@ -30,7 +30,7 @@ struct MySamplePatientsView: View {
                                     Text(patient.name)
                                         .font(Fonts.body)
                                         .foregroundColor(Colors.textPrimary)
-                                    Text("Progress: \(Int(patient.progress * 100))%")
+                                    Text("Progress: 50%")
                                         .font(Fonts.caption)
                                         .foregroundColor(Colors.textSecondary)
                                 }
@@ -61,9 +61,7 @@ struct MySamplePatientsView: View {
             .navigationDestination(for: MySamplePatientsViewModel.Destination.self) { destination in
                 switch destination {
                 case .addPatient:
-                    AddPatientView { newPatient in
-                        viewModel.addPatient(newPatient)
-                    }
+                    AddPatientView() // No callback needed here
                 }
             }
             .onAppear {
@@ -80,8 +78,8 @@ struct MySamplePatientsView_Previews: PreviewProvider {
         let mockViewModel = MySamplePatientsViewModel()
 
         mockViewModel.myPatients = [
-            SamplePatient(id: UUID().uuidString, name: "Jane", surname: "Smith", age: "23", gender: "Female", progress: 1.0),
-            SamplePatient(id: UUID().uuidString, name: "John", surname: "Doe", age: "23", gender: "Male", progress: 0.75)
+            SamplePatient(id: UUID().uuidString, name: "Jane", surname: "Smith", age: "23", gender: "Female"),
+            SamplePatient(id: UUID().uuidString, name: "John", surname: "Doe", age: "23", gender: "Male")
         ]
 
         return MySamplePatientsView()

@@ -2,7 +2,7 @@ import SwiftUI
 
 struct HomeScreenView: View {
     @StateObject private var viewModel = HomeScreenViewModel()
-    @EnvironmentObject var loginViewModel: LoginViewModel // Inject LoginViewModel for user data
+    @EnvironmentObject var loginViewModel: LoginViewModel
     @State private var selectedTab = 0
 
     var body: some View {
@@ -81,22 +81,6 @@ struct HomeScreenView: View {
                             }
                         }
                     }
-                    Section(header: Text("Proceeding Analyses")) {
-                        if viewModel.proceedingAnalyses.isEmpty {
-                            Text("No proceeding analyses available.")
-                                .foregroundColor(.gray)
-                        } else {
-                            ForEach(viewModel.proceedingAnalyses) { patient in
-                                AnalysisCellView(
-                                    patient: patient,
-                                    onInfoTapped: {
-                                        print("Info tapped for \(patient.name)")
-                                    },
-                                    onVisualizeTapped: nil
-                                )
-                            }
-                        }
-                    }
                 }
                 .listStyle(InsetGroupedListStyle())
 
@@ -164,6 +148,7 @@ struct HomeScreenView: View {
     }
 }
 
+
 struct HomeScreenView_Previews: PreviewProvider {
     static var previews: some View {
         let mockLoginViewModel = LoginViewModel()
@@ -177,16 +162,13 @@ struct HomeScreenView_Previews: PreviewProvider {
 
         let mockViewModel = HomeScreenViewModel()
         mockViewModel.completedAnalyses = [
-            SamplePatient(id: UUID().uuidString, name: "Jane", surname: "Smith", age: "23", gender: "Female", progress: 1.0),
-            SamplePatient(id: UUID().uuidString, name: "John", surname: "Doe", age: "23", gender: "Male", progress: 1.0)
-        ]
-        mockViewModel.proceedingAnalyses = [
-            SamplePatient(id: UUID().uuidString, name: "Emily", surname: "Davis", age: "23", gender: "Female", progress: 0.5),
-            SamplePatient(id: UUID().uuidString, name: "Michael", surname: "Brown", age: "23", gender: "Male", progress: 0.8)
+            SamplePatient(id: UUID().uuidString, name: "Jane", surname: "Smith", age: "23", gender: "Female"),
+            SamplePatient(id: UUID().uuidString, name: "John", surname: "Doe", age: "23", gender: "Male")
         ]
 
         return HomeScreenView()
             .environmentObject(mockLoginViewModel)
     }
 }
+
 

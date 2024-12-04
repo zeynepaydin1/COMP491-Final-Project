@@ -6,7 +6,6 @@ struct SamplePatient: Identifiable, Hashable {
     var surname: String
     var age: String
     var gender: String // "Male" or "Female"
-    var progress: Float
 
     var profileImage: String {
         switch gender.lowercased() {

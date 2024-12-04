@@ -32,6 +32,7 @@ class MySamplePatientsViewModel: ObservableObject {
         }
     }
 
+
     enum Destination: Hashable {
         case addPatient
     }

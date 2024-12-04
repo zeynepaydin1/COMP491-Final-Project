@@ -21,10 +21,8 @@ struct AnalysisCellView: View {
                     .font(Fonts.primary(size: 16, weight: .bold))
                     .foregroundColor(Colors.textPrimary)
                     .lineLimit(1) // Ensures the name doesn't overflow
-                ProgressView(value: patient.progress)
-                    .progressViewStyle(LinearProgressViewStyle(tint: Colors.progressBarFill))
-                    .frame(height: 8)
-                Text("\(Int(patient.progress * 100))%")
+
+                Text("50%")
                     .font(Fonts.caption)
                     .foregroundColor(Colors.textSecondary)
             }
@@ -43,7 +41,7 @@ struct AnalysisCellView: View {
                         .cornerRadius(8)
                 }
 
-                if let onVisualizeTapped = onVisualizeTapped, patient.progress == 1.0 {
+                if let onVisualizeTapped = onVisualizeTapped {
                     Button(action: onVisualizeTapped) {
                         Text("Visualize")
                             .font(Fonts.body)
