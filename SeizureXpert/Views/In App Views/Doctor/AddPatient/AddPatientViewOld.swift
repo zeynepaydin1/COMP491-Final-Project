@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct AddPatientView: View {
+struct AddPatientViewOld: View {
     @State private var name: String = ""
     @State private var surname: String = ""
     @State private var age: String = ""
@@ -63,7 +63,7 @@ struct AddPatientView: View {
 
                     // Gender Selection
                     HStack {
-                        Text("Sex:")
+                        Text("Gender:")
                             .font(.subheadline)
                             .foregroundColor(.black)
 
@@ -104,5 +104,7 @@ struct AddPatientView: View {
 
 // Preview for AddPatientView
 #Preview {
-    AddPatientView()
+    AddPatientView { newPatient in
+        print("New patient added: \(newPatient.name)")
+    }
 }

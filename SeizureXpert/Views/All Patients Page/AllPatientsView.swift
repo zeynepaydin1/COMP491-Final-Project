@@ -10,28 +10,38 @@ struct AllPatientsView: View {
                 .foregroundColor(Colors.textPrimary)
                 .padding()
 
-            List(viewModel.allPatients) { patient in
-                HStack {
-                    Image(patient.profileImage)
-                        .resizable()
-                        .scaledToFill()
-                        .frame(width: 50, height: 50)
-                        .clipShape(Circle())
-                    VStack(alignment: .leading) {
-                        Text(patient.name)
-                            .font(Fonts.body)
-                            .foregroundColor(Colors.textPrimary)
-                        Text("Progress: \(Int(patient.progress * 100))%")
-                            .font(Fonts.caption)
-                            .foregroundColor(Colors.textSecondary)
+            if viewModel.allPatients.isEmpty {
+                Text("No patients available. Please add new patients.")
+                    .font(Fonts.body)
+                    .foregroundColor(.gray)
+                    .padding()
+            } else {
+                List(viewModel.allPatients) { patient in
+                    HStack {
+                        Image(patient.profileImage)
+                            .resizable()
+                            .scaledToFill()
+                            .frame(width: 50, height: 50)
+                            .clipShape(Circle())
+                        VStack(alignment: .leading) {
+                            Text(patient.name)
+                                .font(Fonts.body)
+                                .foregroundColor(Colors.textPrimary)
+                            Text("Progress: \(Int(patient.progress * 100))%")
+                                .font(Fonts.caption)
+                                .foregroundColor(Colors.textSecondary)
+                        }
                     }
+                    .padding(8)
+                    .background(Color.white)
+                    .cornerRadius(10)
+                    .shadow(radius: 2, x: 0, y: 2)
                 }
-                .padding(8)
-                .background(Color.white)
-                .cornerRadius(10)
-                .shadow(radius: 2, x: 0, y: 2)
+                .listStyle(PlainListStyle())
             }
-            .listStyle(PlainListStyle())
+        }
+        .onAppear {
+            viewModel.fetchAllPatients()
         }
         .background(Colors.background.ignoresSafeArea())
     }

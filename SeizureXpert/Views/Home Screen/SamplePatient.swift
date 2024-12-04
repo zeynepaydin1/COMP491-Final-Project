@@ -1,9 +1,11 @@
-import SwiftUI
+import Foundation
 
-struct SamplePatient: Identifiable {
-    var id = UUID()
+struct SamplePatient: Identifiable, Hashable {
+    var id: String
     var name: String
-    var gender: String // "male", "female", or other
+    var surname: String
+    var age: String
+    var gender: String // "Male" or "Female"
     var progress: Float
 
     var profileImage: String {
@@ -16,5 +18,13 @@ struct SamplePatient: Identifiable {
             return "default_profile"
         }
     }
-}
 
+    // Conformance to Hashable
+    static func == (lhs: SamplePatient, rhs: SamplePatient) -> Bool {
+        lhs.id == rhs.id
+    }
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+}

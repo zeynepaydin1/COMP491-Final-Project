@@ -46,18 +46,15 @@ class SignUpViewModel: ObservableObject {
             "name": name
         ]
 
-        // Save user data to Firestore under the "users" collection
         db.collection("users").document(userId).setData(userData) { [weak self] error in
-            guard let self = self else { return }
-
             DispatchQueue.main.async {
                 if let error = error {
-                    self.error = "Failed to save user data: \(error.localizedDescription)"
+                    self?.error = "Failed to save user data: \(error.localizedDescription)"
                 } else {
-                    // If Firestore save is successful, trigger signup completion
-                    self.signupSuccessful = true
+                    self?.signupSuccessful = true
                 }
             }
         }
     }
+
 }

@@ -4,10 +4,10 @@
 //
 //  Created by Sarp Vulaş on 22.11.2024.
 //
-
 import SwiftUI
 
 struct PatientDetailView: View {
+    var patient: SamplePatient // Accept a SamplePatient object
     @ObservedObject var viewModel = PatientDetailViewModel()
 
     var body: some View {
@@ -15,10 +15,11 @@ struct PatientDetailView: View {
             ZStack {
                 LinearGradient(
                     gradient: Gradient(colors: [Color.white, Color.cyan.opacity(0.3)]),
-                               startPoint: .topLeading,
-                               endPoint: .bottomTrailing
-                           )
-                           .ignoresSafeArea()
+                    startPoint: .topLeading,
+                    endPoint: .bottomTrailing
+                )
+                .ignoresSafeArea()
+
                 VStack {
                     // Main Content of Patient Details
                     ScrollView {
@@ -39,71 +40,44 @@ struct PatientDetailView: View {
                             )
                             .shadow(radius: 10)
                             .padding(.bottom, 10)
+
                         // Information Fields
-                        VStack {
+                        VStack(spacing: 20) {
                             // Name Field
                             VStack(alignment: .leading, spacing: 5) {
                                 Text("Name")
                                     .font(.headline)
                                     .fontWeight(.bold)
-                                    .padding(.bottom, 5)
-                                TextField("Name", text: $viewModel.name)
-                                    .textFieldStyle(PlainTextFieldStyle())
+                                Text(patient.name)
                                     .padding(10)
+                                    .frame(maxWidth: .infinity, alignment: .leading)
                                     .background(Color.blue.opacity(0.1))
                                     .cornerRadius(20)
-                                    .disabled(true) // Non-editable
                             }
-                            .padding(.horizontal, 5)
-                            .padding(.vertical, 5)
 
-                            // Surname Field
+                            // Gender Field
                             VStack(alignment: .leading, spacing: 5) {
-                                Text("Surname")
+                                Text("Gender")
                                     .font(.headline)
                                     .fontWeight(.bold)
-                                    .padding(.bottom, 5)
-                                TextField("Surname", text: $viewModel.surname)
-                                    .textFieldStyle(PlainTextFieldStyle())
+                                Text(patient.gender.capitalized)
                                     .padding(10)
+                                    .frame(maxWidth: .infinity, alignment: .leading)
                                     .background(Color.blue.opacity(0.1))
                                     .cornerRadius(20)
-                                    .disabled(true) // Non-editable
                             }
-                            .padding(.horizontal, 5)
-                            .padding(.vertical, 5)
 
-                            // Age Field
+                            // Progress Field
                             VStack(alignment: .leading, spacing: 5) {
-                                Text("Age")
+                                Text("Progress")
                                     .font(.headline)
                                     .fontWeight(.bold)
-                                    .padding(.bottom, 5)
-                                TextField("Age", text: $viewModel.age)
-                                    .textFieldStyle(PlainTextFieldStyle())
+                                Text("\(Int(patient.progress * 100))%")
                                     .padding(10)
+                                    .frame(maxWidth: .infinity, alignment: .leading)
                                     .background(Color.blue.opacity(0.1))
                                     .cornerRadius(20)
-                                    .disabled(true) // Non-editable
                             }
-                            .padding(.horizontal, 5)
-                            .padding(.vertical, 5)
-
-                            // Sex Field (Non-selectable)
-                            VStack(alignment: .leading, spacing: 5) {
-                                Text("Sex")
-                                    .font(.headline)
-                                    .fontWeight(.bold)
-                                    .padding(.bottom, 5)
-                                TextField("Sex", text: $viewModel.sex)
-                                    .padding(10)
-                                    .frame(maxWidth: .infinity)
-                                    .background(Color.blue.opacity(0.1))
-                                    .cornerRadius(20)
-                                    .disabled(true)
-                            }
-                            .padding(.horizontal, 5)
-                            .padding(.bottom, 5)
                         }
                         .padding(15)
                         .background(
@@ -119,46 +93,29 @@ struct PatientDetailView: View {
                         VStack(spacing: 10) {
                             // Upload EEG Data Button
                             Button(action: {
-                                viewModel.isUploadingEEG = true // Trigger animation
-                                viewModel.uploadEEGData()      // Perform the action
-
-                                // Reset the animation state after a slight delay
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                                    viewModel.isUploadingEEG = false
-                                }
+                                print("Upload EEG Data for \(patient.name)")
                             }) {
                                 Text("Upload EEG Data")
                                     .font(.headline)
                                     .fontWeight(.bold)
                                     .foregroundColor(.white)
                                     .frame(width: 300, height: 40) // Set button size
-                                    .background(viewModel.isUploadingEEG ? Color.blue.opacity(0.8) : Color.blue) // Dimming effect
+                                    .background(Color.blue)
                                     .cornerRadius(10)
-                                    .scaleEffect(viewModel.isUploadingEEG ? 0.95 : 1.0) // Press effect
-                                    .animation(.easeInOut(duration: 0.2), value: viewModel.isUploadingEEG) // Smooth animation
                             }
 
                             // Visualize SOZs Button
                             Button(action: {
-                                viewModel.isVisualizingSOZ = true // Trigger animation
-                                viewModel.visualizeSOZs()        // Perform the action
-
-                                // Reset the animation state after a slight delay
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                                    viewModel.isVisualizingSOZ = false
-                                }
+                                print("Visualize SOZs for \(patient.name)")
                             }) {
                                 Text("Visualize SOZs")
                                     .font(.headline)
                                     .fontWeight(.bold)
                                     .foregroundColor(.white)
                                     .frame(width: 300, height: 40) // Set button size
-                                    .background(viewModel.isVisualizingSOZ ? Color.blue.opacity(0.8) : Color.blue) // Dimming effect
+                                    .background(Color.blue)
                                     .cornerRadius(10)
-                                    .scaleEffect(viewModel.isVisualizingSOZ ? 0.95 : 1.0) // Press effect
-                                    .animation(.easeInOut(duration: 0.2), value: viewModel.isVisualizingSOZ) // Smooth animation
                             }
-
                         }
                         .padding(.horizontal)
                     }
@@ -176,12 +133,19 @@ struct PatientDetailView: View {
                     Text("Settings")
                 }
         }
-        
     }
 }
 
 struct PatientDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        PatientDetailView()
+        let samplePatient = SamplePatient(
+            id: "123",
+            name: "John",
+            surname: "Doe",
+            age: "23",
+            gender: "Male",
+            progress: 0.75
+        )
+        PatientDetailView(patient: samplePatient)
     }
 }

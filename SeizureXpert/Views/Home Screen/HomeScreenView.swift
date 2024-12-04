@@ -2,6 +2,7 @@ import SwiftUI
 
 struct HomeScreenView: View {
     @StateObject private var viewModel = HomeScreenViewModel()
+    @EnvironmentObject var loginViewModel: LoginViewModel // Inject LoginViewModel for user data
     @State private var selectedTab = 0
 
     var body: some View {
@@ -22,12 +23,18 @@ struct HomeScreenView: View {
                     }
 
                     VStack(alignment: .leading) {
-                        Text("Dr. Sarah Lee")
-                            .font(Fonts.primary(size: 20, weight: .bold))
-                            .foregroundColor(Colors.textPrimary)
-                        Text("Neurologist | EEG Specialist")
-                            .font(Fonts.body)
-                            .foregroundColor(Colors.textSecondary)
+                        if let user = loginViewModel.currentUser {
+                            Text("Dr. \(user.name)") // Display logged-in user's name
+                                .font(Fonts.primary(size: 20, weight: .bold))
+                                .foregroundColor(Colors.textPrimary)
+                            Text(user.isDoctor ? "Neurologist | EEG Specialist" : "Patient") // Dynamic title based on user role
+                                .font(Fonts.body)
+                                .foregroundColor(Colors.textSecondary)
+                        } else {
+                            Text("Loading...")
+                                .font(Fonts.body)
+                                .foregroundColor(.gray)
+                        }
                     }
                     Spacer()
 
@@ -56,28 +63,38 @@ struct HomeScreenView: View {
                 // Analysis Table
                 List {
                     Section(header: Text("Completed Analyses")) {
-                        ForEach(viewModel.completedAnalyses) { patient in
-                            AnalysisCellView(
-                                patient: patient,
-                                onInfoTapped: {
-                                    print("Info tapped for \(patient.name)")
-                                },
-                                onVisualizeTapped: {
-                                    viewModel.selectedPatient = patient
-                                    viewModel.navigateTo(.visualization)
-                                }
-                            )
+                        if viewModel.completedAnalyses.isEmpty {
+                            Text("No completed analyses available.")
+                                .foregroundColor(.gray)
+                        } else {
+                            ForEach(viewModel.completedAnalyses) { patient in
+                                AnalysisCellView(
+                                    patient: patient,
+                                    onInfoTapped: {
+                                        print("Info tapped for \(patient.name)")
+                                    },
+                                    onVisualizeTapped: {
+                                        viewModel.selectedPatient = patient
+                                        viewModel.navigateTo(.visualization)
+                                    }
+                                )
+                            }
                         }
                     }
                     Section(header: Text("Proceeding Analyses")) {
-                        ForEach(viewModel.proceedingAnalyses) { patient in
-                            AnalysisCellView(
-                                patient: patient,
-                                onInfoTapped: {
-                                    print("Info tapped for \(patient.name)")
-                                },
-                                onVisualizeTapped: nil
-                            )
+                        if viewModel.proceedingAnalyses.isEmpty {
+                            Text("No proceeding analyses available.")
+                                .foregroundColor(.gray)
+                        } else {
+                            ForEach(viewModel.proceedingAnalyses) { patient in
+                                AnalysisCellView(
+                                    patient: patient,
+                                    onInfoTapped: {
+                                        print("Info tapped for \(patient.name)")
+                                    },
+                                    onVisualizeTapped: nil
+                                )
+                            }
                         }
                     }
                 }
@@ -141,11 +158,35 @@ struct HomeScreenView: View {
                     tag: HomeScreenViewModel.Destination.visualization,
                     selection: $viewModel.currentDestination
                 ) { EmptyView() }
-
-
-
             }
             .background(Colors.background.ignoresSafeArea())
         }
     }
 }
+
+struct HomeScreenView_Previews: PreviewProvider {
+    static var previews: some View {
+        let mockLoginViewModel = LoginViewModel()
+        mockLoginViewModel.currentUser = User(
+            username: "dr.jane.doe",
+            email: "jane.doe@example.com",
+            name: "Jane Doe",
+            isDoctor: true
+        )
+        mockLoginViewModel.loginSuccessful = true
+
+        let mockViewModel = HomeScreenViewModel()
+        mockViewModel.completedAnalyses = [
+            SamplePatient(id: UUID().uuidString, name: "Jane", surname: "Smith", age: "23", gender: "Female", progress: 1.0),
+            SamplePatient(id: UUID().uuidString, name: "John", surname: "Doe", age: "23", gender: "Male", progress: 1.0)
+        ]
+        mockViewModel.proceedingAnalyses = [
+            SamplePatient(id: UUID().uuidString, name: "Emily", surname: "Davis", age: "23", gender: "Female", progress: 0.5),
+            SamplePatient(id: UUID().uuidString, name: "Michael", surname: "Brown", age: "23", gender: "Male", progress: 0.8)
+        ]
+
+        return HomeScreenView()
+            .environmentObject(mockLoginViewModel)
+    }
+}
+

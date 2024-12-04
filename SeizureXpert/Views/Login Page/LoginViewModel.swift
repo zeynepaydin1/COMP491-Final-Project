@@ -18,45 +18,51 @@ class LoginViewModel: ObservableObject {
     var currentUserId: String? {
         return Auth.auth().currentUser?.uid
     }
+
+//    var destinationView: AnyView {
+//        if let userType = userType, let user = currentUser {
+//            switch userType {
+//            case .Patient:
+//                return AnyView(PatientPanelView(user: user))
+//            case .Doctor:
+//                return AnyView(DoctorPanelView(user: user))
+//            }
+//        }
+//        return AnyView(Text("Loading..."))
+//    }
+
     var destinationView: AnyView {
-        if let userType = userType, let user = currentUser {
-            switch userType {
-            case .Patient:
-                return AnyView(PatientPanelView(user: user))
-            case .Doctor:
-                return AnyView(DoctorPanelView(user: user))
-            }
+        if loginSuccessful {
+            return AnyView(HomeScreenView()) // Always navigate to HomeScreenView after login
         }
-        return AnyView(Text("Loading..."))
+        return AnyView(Text("Loading...")) // Placeholder for loading
     }
+
 
     func login(withEmail email: String, password: String) {
         self.error = nil
-        print("Attempting to log in with email: \(email)") // Debug log
 
         Auth.auth().signIn(withEmail: email, password: password) { [weak self] authResult, error in
             guard let strongSelf = self else { return }
 
             if let error = error {
                 DispatchQueue.main.async {
-                    strongSelf.error = error.localizedDescription
-                    print("Login failed with error: \(error.localizedDescription)") // Debug log
+                    strongSelf.error = "Login failed: \(error.localizedDescription)"
                     strongSelf.loginSuccessful = false
                 }
                 return
             }
 
             DispatchQueue.main.async {
-                print("Login successful") // Debug log
                 strongSelf.loginSuccessful = true
             }
 
             if let userId = authResult?.user.uid {
-                print("User ID: \(userId)") // Debug log
-                self?.fetchUserType(userId: userId)
+                strongSelf.fetchUserType(userId: userId)
             }
         }
     }
+
 
     private func fetchUserType(userId: String) {
         self.error = nil

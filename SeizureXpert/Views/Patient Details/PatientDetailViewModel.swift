@@ -12,7 +12,7 @@ class PatientDetailViewModel: ObservableObject {
     @Published var name: String = "Sarp"
     @Published var surname: String = "Vulaş"
     @Published var age: String = "23"
-    @Published var sex: String = "Male" // Already pre-selected and not editable.
+    @Published var gender: String = "Male" // Already pre-selected and not editable.
     @Published var isUploadingEEG: Bool = false
     @Published var isVisualizingSOZ: Bool = false
 
