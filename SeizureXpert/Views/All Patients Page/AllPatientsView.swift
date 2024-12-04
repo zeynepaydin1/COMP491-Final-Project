@@ -4,6 +4,7 @@ struct AllPatientsView: View {
     @StateObject private var viewModel = AllPatientsViewModel()
 
     var body: some View {
+
         NavigationStack {
             VStack {
                 headerView
@@ -70,6 +71,7 @@ struct AllPatientsView: View {
         .shadow(radius: 2, x: 0, y: 2)
     }
 }
+
 
 struct AllPatientsView_Previews: PreviewProvider {
     static var previews: some View {

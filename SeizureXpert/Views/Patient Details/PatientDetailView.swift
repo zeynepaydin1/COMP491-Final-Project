@@ -1,9 +1,3 @@
-//
-//  PatientDetailView.swift
-//  SeizureXpert
-//
-//  Created by Sarp Vulaş on 22.11.2024.
-//
 import SwiftUI
 
 struct PatientDetailView: View {
@@ -31,15 +25,24 @@ struct PatientDetailView: View {
                             .padding(.bottom, 10)
 
                         // Profile Image
-                        Image(systemName: "brain.head.profile")
-                            .resizable()
-                            .frame(width: 125, height: 125)
-                            .clipShape(Circle()) // Optional: Make it circular
-                            .overlay(
-                                Circle().stroke(Color.white, lineWidth: 3) // Optional: Add a border
-                            )
-                            .shadow(radius: 10)
-                            .padding(.bottom, 10)
+                        AsyncImage(url: URL(string: patient.profileImageURL)) { image in
+                            image
+                                .resizable()
+                                .scaledToFill()
+                                .frame(width: 125, height: 125)
+                                .clipShape(Circle())
+                                .overlay(
+                                    Circle().stroke(Color.white, lineWidth: 3)
+                                )
+                                .shadow(radius: 10)
+                                .padding(.bottom, 10)
+                        } placeholder: {
+                            Image(systemName: "person.crop.circle.fill")
+                                .resizable()
+                                .frame(width: 125, height: 125)
+                                .clipShape(Circle())
+                                .padding(.bottom, 10)
+                        }
 
                         // Information Fields
                         VStack(spacing: 20) {
@@ -49,6 +52,18 @@ struct PatientDetailView: View {
                                     .font(.headline)
                                     .fontWeight(.bold)
                                 Text(patient.name)
+                                    .padding(10)
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                    .background(Color.blue.opacity(0.1))
+                                    .cornerRadius(20)
+                            }
+
+                            // Surname Field
+                            VStack(alignment: .leading, spacing: 5) {
+                                Text("Surname")
+                                    .font(.headline)
+                                    .fontWeight(.bold)
+                                Text(patient.surname)
                                     .padding(10)
                                     .frame(maxWidth: .infinity, alignment: .leading)
                                     .background(Color.blue.opacity(0.1))
@@ -67,12 +82,12 @@ struct PatientDetailView: View {
                                     .cornerRadius(20)
                             }
 
-                            // Progress Field
+                            // Age Field
                             VStack(alignment: .leading, spacing: 5) {
-                                Text("Progress")
+                                Text("Age")
                                     .font(.headline)
                                     .fontWeight(.bold)
-                                Text("50%")
+                                Text(patient.age)
                                     .padding(10)
                                     .frame(maxWidth: .infinity, alignment: .leading)
                                     .background(Color.blue.opacity(0.1))
@@ -93,26 +108,26 @@ struct PatientDetailView: View {
                         VStack(spacing: 10) {
                             // Upload EEG Data Button
                             Button(action: {
-                                print("Upload EEG Data for \(patient.name)")
+                                viewModel.uploadEEGData(for: patient)
                             }) {
                                 Text("Upload EEG Data")
                                     .font(.headline)
                                     .fontWeight(.bold)
                                     .foregroundColor(.white)
-                                    .frame(width: 300, height: 40) // Set button size
+                                    .frame(width: 300, height: 40)
                                     .background(Color.blue)
                                     .cornerRadius(10)
                             }
 
                             // Visualize SOZs Button
                             Button(action: {
-                                print("Visualize SOZs for \(patient.name)")
+                                viewModel.visualizeSOZs(for: patient)
                             }) {
                                 Text("Visualize SOZs")
                                     .font(.headline)
                                     .fontWeight(.bold)
                                     .foregroundColor(.white)
-                                    .frame(width: 300, height: 40) // Set button size
+                                    .frame(width: 300, height: 40)
                                     .background(Color.blue)
                                     .cornerRadius(10)
                             }
@@ -143,7 +158,8 @@ struct PatientDetailView_Previews: PreviewProvider {
             name: "John",
             surname: "Doe",
             age: "23",
-            gender: "Male"
+            gender: "Male",
+            profileImageURL: "https://via.placeholder.com/150"
         )
         PatientDetailView(patient: samplePatient)
     }

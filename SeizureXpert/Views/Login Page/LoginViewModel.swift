@@ -33,10 +33,17 @@ class LoginViewModel: ObservableObject {
 
     var destinationView: AnyView {
         if loginSuccessful {
-            return AnyView(HomeScreenView()) // Always navigate to HomeScreenView after login
+            if let userType = userType {
+                if userType == .Doctor {
+                    return AnyView(HomeScreenView()) // Doctor's Home Screen
+                } else {
+                    return AnyView(AddPatientView()) // Patient Registration View
+                }
+            }
         }
-        return AnyView(Text("Loading...")) // Placeholder for loading
+        return AnyView(Text("Loading..."))
     }
+
 
 
     func login(withEmail email: String, password: String) {

@@ -60,6 +60,20 @@ struct HomeScreenView: View {
                 }
                 .padding()
 
+                Button(action: {
+                                    handleLogout() // Call the logout function
+                                }) {
+                                    Text("Logout")
+                                        .font(.headline)
+                                        .foregroundColor(.white)
+                                        .padding()
+                                        .frame(maxWidth: .infinity)
+                                        .background(Colors.primary)
+                                        .cornerRadius(10)
+                                }
+                                .padding()
+
+
                 // Analysis Table
                 List {
                     Section(header: Text("Completed Analyses")) {
@@ -162,6 +176,16 @@ struct HomeScreenView: View {
             .background(Colors.background.ignoresSafeArea())
         }
     }
+
+    private func handleLogout() {
+            loginViewModel.logout { success in
+                if success {
+                    print("Logout successful.")
+                } else {
+                    print("Failed to logout.")
+                }
+            }
+        }
 }
 
 
@@ -178,13 +202,28 @@ struct HomeScreenView_Previews: PreviewProvider {
 
         let mockViewModel = HomeScreenViewModel()
         mockViewModel.completedAnalyses = [
-            SamplePatient(id: UUID().uuidString, name: "Jane", surname: "Smith", age: "23", gender: "Female"),
-            SamplePatient(id: UUID().uuidString, name: "John", surname: "Doe", age: "23", gender: "Male")
+            SamplePatient(
+                id: UUID().uuidString,
+                name: "Jane",
+                surname: "Smith",
+                age: "23",
+                gender: "Female",
+                profileImageURL: "https://via.placeholder.com/150" // Example image URL
+            ),
+            SamplePatient(
+                id: UUID().uuidString,
+                name: "John",
+                surname: "Doe",
+                age: "23",
+                gender: "Male",
+                profileImageURL: "https://via.placeholder.com/150" // Example image URL
+            )
         ]
 
         return HomeScreenView()
             .environmentObject(mockLoginViewModel)
     }
 }
+
 
 

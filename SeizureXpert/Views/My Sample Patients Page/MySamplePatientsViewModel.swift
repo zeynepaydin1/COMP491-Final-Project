@@ -16,24 +16,8 @@ class MySamplePatientsViewModel: ObservableObject {
         }
     }
 
-    func navigateToAddPatient() {
-        navigationPath.append(Destination.addPatient)
-    }
-
-    func addPatient(_ patient: SamplePatient) {
-        FirestoreUtility.addPatient(patient) { [weak self] success in
-            if success {
-                DispatchQueue.main.async {
-                    self?.fetchMyPatients() // Refresh the list after adding
-                }
-            } else {
-                print("Failed to add patient.")
-            }
-        }
-    }
-
-
     enum Destination: Hashable {
-        case addPatient
+        case assignPatient // Add this case
     }
+    
 }

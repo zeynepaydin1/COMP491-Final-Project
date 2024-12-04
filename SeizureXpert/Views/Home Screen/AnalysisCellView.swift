@@ -8,7 +8,7 @@ struct AnalysisCellView: View {
     var body: some View {
         HStack {
             // Profile Image
-            Image(patient.profileImage)
+            Image("female_patient")
                 .resizable()
                 .scaledToFill()
                 .frame(width: 40, height: 40)

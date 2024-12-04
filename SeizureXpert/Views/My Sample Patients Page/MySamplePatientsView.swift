@@ -4,13 +4,16 @@ struct MySamplePatientsView: View {
     @StateObject private var viewModel = MySamplePatientsViewModel()
 
     var body: some View {
+
         NavigationStack(path: $viewModel.navigationPath) { // Use the navigation path
+
             VStack {
                 headerView
 
                 if viewModel.myPatients.isEmpty {
                     emptyStateView
                 } else {
+
                     patientsListView
                 }
 
@@ -23,6 +26,7 @@ struct MySamplePatientsView: View {
                 case .addPatient:
                     AddPatientView()
                 }
+
             }
             .onAppear {
                 viewModel.fetchMyPatients()
@@ -30,6 +34,7 @@ struct MySamplePatientsView: View {
             .background(Colors.background.ignoresSafeArea())
         }
     }
+
 
     // MARK: - Subviews
 
@@ -96,13 +101,28 @@ struct MySamplePatientsView: View {
     }
 }
 
+
 struct MySamplePatientsView_Previews: PreviewProvider {
     static var previews: some View {
         let mockViewModel = MySamplePatientsViewModel()
 
         mockViewModel.myPatients = [
-            SamplePatient(id: UUID().uuidString, name: "Jane", surname: "Smith", age: "23", gender: "Female"),
-            SamplePatient(id: UUID().uuidString, name: "John", surname: "Doe", age: "23", gender: "Male")
+            SamplePatient(
+                id: UUID().uuidString,
+                name: "Jane",
+                surname: "Smith",
+                age: "23",
+                gender: "Female",
+                profileImageURL: "https://via.placeholder.com/150" // Example image URL
+            ),
+            SamplePatient(
+                id: UUID().uuidString,
+                name: "John",
+                surname: "Doe",
+                age: "23",
+                gender: "Male",
+                profileImageURL: "https://via.placeholder.com/150" // Example image URL
+            )
         ]
 
         return MySamplePatientsView()
