@@ -3,7 +3,7 @@ import SwiftUI
 struct AnalysisCellView: View {
     var patient: SamplePatient
     var onInfoTapped: () -> Void
-    var onVisualizeTapped: (() -> Void)?
+    var onVisualizeTapped: () -> Void
 
     var body: some View {
         HStack {
@@ -22,7 +22,7 @@ struct AnalysisCellView: View {
                     .foregroundColor(Colors.textPrimary)
                     .lineLimit(1) // Ensures the name doesn't overflow
 
-                Text("50%")
+                Text("Progress: 50%")
                     .font(Fonts.caption)
                     .foregroundColor(Colors.textSecondary)
             }
@@ -31,7 +31,10 @@ struct AnalysisCellView: View {
 
             // Action Buttons
             VStack(spacing: 8) { // Adjust spacing between buttons if needed
-                Button(action: onInfoTapped) {
+                Button(action: {
+                    print("Info button pressed for \(patient.name)")
+                    onInfoTapped()
+                }) {
                     Text("Info")
                         .font(Fonts.body)
                         .padding(8)
@@ -41,16 +44,17 @@ struct AnalysisCellView: View {
                         .cornerRadius(8)
                 }
 
-                if let onVisualizeTapped = onVisualizeTapped {
-                    Button(action: onVisualizeTapped) {
-                        Text("Visualize")
-                            .font(Fonts.body)
-                            .padding(8)
-                            .frame(maxWidth: .infinity) // Makes the button's width consistent
-                            .background(Colors.secondary)
-                            .foregroundColor(.white)
-                            .cornerRadius(8)
-                    }
+                Button(action: {
+                    print("Visualize button pressed for \(patient.name)")
+                    onVisualizeTapped()
+                }) {
+                    Text("Visualize")
+                        .font(Fonts.body)
+                        .padding(8)
+                        .frame(maxWidth: .infinity) // Makes the button's width consistent
+                        .background(Colors.secondary)
+                        .foregroundColor(.white)
+                        .cornerRadius(8)
                 }
             }
             .frame(width: 100) // Adjust button container width as needed
@@ -59,5 +63,6 @@ struct AnalysisCellView: View {
         .background(Color.white)
         .clipShape(RoundedRectangle(cornerRadius: Dimensions.CornerRadius.medium))
         .shadow(radius: 2, x: 0, y: 2)
+      
     }
 }
