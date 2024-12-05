@@ -23,8 +23,8 @@ struct MySamplePatientsView: View {
             }
             .navigationDestination(for: MySamplePatientsViewModel.Destination.self) { destination in
                 switch destination {
-                case .addPatient:
-                    AddPatientView()
+                case .assignPatient:
+                    AssignPatientView()
                 }
 
             }
@@ -63,7 +63,7 @@ struct MySamplePatientsView: View {
 
     private func patientRow(_ patient: SamplePatient) -> some View {
         HStack {
-            Image(patient.profileImage)
+            Image("female_patient")
                 .resizable()
                 .scaledToFill()
                 .frame(width: 50, height: 50)
@@ -87,7 +87,8 @@ struct MySamplePatientsView: View {
 
     private var addPatientButton: some View {
         Button(action: {
-            viewModel.navigateToAddPatient() // Call navigation function
+            print("Navigating to AssignPatientView") // Debug log
+            viewModel.navigationPath.append(MySamplePatientsViewModel.Destination.assignPatient)
         }) {
             Text("Add New Patient")
                 .font(.headline)

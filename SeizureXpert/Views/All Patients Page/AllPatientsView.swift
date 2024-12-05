@@ -49,7 +49,7 @@ struct AllPatientsView: View {
 
     private func patientRow(_ patient: SamplePatient) -> some View {
         HStack {
-            Image(patient.profileImage)
+            Image("female_patient n  ")
                 .resizable()
                 .scaledToFill()
                 .frame(width: 50, height: 50)
