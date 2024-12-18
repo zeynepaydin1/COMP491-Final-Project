@@ -13,15 +13,15 @@ struct SplashScreenView: View {
                     .ignoresSafeArea()
 
                 VStack {
-                    Image("LogoBlue")
+                    Image("LogoWhite")
                         .resizable()
                         .scaledToFit()
-                        .frame(width: 100, height: 100)
+                        .frame(width: 150, height: 150)
                         .opacity(opacity)
 
-                    Text("Seizure Xpert")
+                    Text("SeizureXpert")
                         .font(Fonts.title)
-                        .foregroundColor(Colors.textSecondary)
+                        .foregroundColor(.white)
                         .opacity(opacity)
                 }
             }
