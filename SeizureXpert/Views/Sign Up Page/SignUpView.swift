@@ -6,31 +6,61 @@ struct SignUpView: View {
     @State private var emailText: String = ""
     @State private var name: String = ""
     @State private var isDoctor: Bool = false
-    @State private var showSuccessMessage = false // State to control success message
-    @State private var navigateToLogin = false // State to control navigation
+    @State private var profileImage: UIImage?
+    @State private var showImagePicker = false
+    @State private var showSuccessMessage = false
+    @State private var navigateToLogin = false
     @StateObject private var viewModel = SignUpViewModel()
+    @State private var isPasswordHidden: Bool = true
+
 
     var body: some View {
         NavigationView {
-            VStack(spacing: DesignSystem.Spacing.vertical) {
-                Spacer().frame(height: DesignSystem.Spacing.vertical)
+            VStack(spacing: 20) {
+                Spacer().frame(height: 20)
 
                 // Title Section
                 VStack(spacing: 5) {
                     Text("Welcome!")
-                        .font(DesignSystem.Fonts.largeTitle)
-                        .foregroundColor(DesignSystem.Colors.primary)
+                        .font(.largeTitle)
+                        .foregroundColor(.blue)
 
                     Text("Sign Up to SeizureXpert.")
-                        .font(DesignSystem.Fonts.headline)
-                        .foregroundColor(DesignSystem.Colors.textSecondary)
+                        .font(.headline)
+                        .foregroundColor(.gray)
                 }
 
-                // Icon Section
-                Image(systemName: "brain.filled.head.profile")
-                    .resizable()
-                    .frame(width: DesignSystem.ImageSizes.brainIcon.width, height: DesignSystem.ImageSizes.brainIcon.height)
-                    .foregroundColor(DesignSystem.Colors.primary)
+                // Profile Picture Section
+                VStack {
+                    if let profileImage {
+                        Image(uiImage: profileImage)
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: 120, height: 120)
+                            .clipShape(Circle())
+                            .overlay(Circle().stroke(Color.blue, lineWidth: 2))
+                            .onTapGesture {
+                                showImagePicker = true
+                            }
+                    } else {
+                        Circle()
+                            .frame(width: 120, height: 120)
+                            .foregroundColor(Color.blue.opacity(0.3))
+                            .overlay(
+                                VStack {
+                                    Image(systemName: "camera")
+                                        .font(.largeTitle)
+                                        .foregroundColor(.blue)
+                                    Text("Add Photo")
+                                        .font(.subheadline)
+                                        .foregroundColor(.blue)
+                                }
+                            )
+                            .onTapGesture {
+                                showImagePicker = true
+                            }
+                    }
+                }
 
                 // Input Fields Section
                 VStack(spacing: DesignSystem.Spacing.vertical) {
@@ -56,43 +86,51 @@ struct SignUpView: View {
 
                 // Sign-Up Button
                 Button(action: {
-                    viewModel.signUp(email: emailText, password: passwordText, username: usernameText, isDoctor: isDoctor, name: name)
+                    viewModel.signUp(
+                        email: emailText,
+                        password: passwordText,
+                        username: usernameText,
+                        isDoctor: isDoctor,
+                        name: name,
+                        profileImage: profileImage
+                    )
                 }) {
                     Text("Sign Up")
                         .fontWeight(.bold)
-                        .padding(DesignSystem.Spacing.inputPadding)
                         .frame(maxWidth: .infinity)
+                        .padding()
                         .background(DesignSystem.Colors.primary)
                         .foregroundColor(.white)
                         .cornerRadius(DesignSystem.Corners.rounded)
-                }
-                .padding(.horizontal, DesignSystem.Spacing.horizontal)
-                .padding(.top, DesignSystem.Spacing.vertical)
+                }.padding(.top, 16) // Ensure button is slightly separated
+                    .padding(.horizontal, DesignSystem.Spacing.horizontal)
+
 
                 // Success Message
                 if showSuccessMessage {
-                    Text("Sign up successful! Directing to Log in page...")
-                        .font(DesignSystem.Fonts.subheadline)
+                    Text("Sign-up successful! Welcome to SeizureXpert.")
+                        .font(.headline)
                         .foregroundColor(.green)
-                        .multilineTextAlignment(.center)
-                        .padding(.top, DesignSystem.Spacing.vertical)
+                        .padding(.top)
                 }
 
-                // Login Navigation Section
+
+
+                // Already Have an Account Section
                 HStack {
                     Text("Already have an account?")
-                        .foregroundColor(DesignSystem.Colors.textSecondary)
+                        .foregroundColor(.gray)
 
                     Button(action: {
-                        navigateToLogin = true // Manually trigger navigation
+                        navigateToLogin = true
                     }) {
                         Text("Log in!")
-                            .foregroundColor(DesignSystem.Colors.primary)
+                            .foregroundColor(.blue)
                             .fontWeight(.bold)
                     }
                 }
 
-                // NavigationLink for actual navigation
+                // Navigation Link to Login View
                 NavigationLink(
                     destination: LoginView().environmentObject(viewModel),
                     isActive: $navigateToLogin
@@ -100,33 +138,32 @@ struct SignUpView: View {
                     EmptyView()
                 }
 
-
-                Spacer()
-
                 // Error Message
                 if let error = viewModel.error {
                     Text(error)
-                        .foregroundColor(DesignSystem.Colors.error)
-                        .padding(.horizontal)
+                        .foregroundColor(.red)
+                        .padding()
                 }
             }
-            .padding(.horizontal, DesignSystem.Spacing.horizontal) // Consistent horizontal padding
-            .padding(.top, DesignSystem.Spacing.vertical) // Padding at the top
+            .padding(.horizontal, DesignSystem.Spacing.horizontal) // Global padding for the whole VStack
             .background(DesignSystem.Colors.background.ignoresSafeArea())
             .navigationBarHidden(true)
+            .sheet(isPresented: $showImagePicker) {
+                ImagePicker(image: $profileImage)
+            }
             .onChange(of: viewModel.signupSuccessful) { success in
                 if success {
                     showSuccessMessage = true
                     DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
                         showSuccessMessage = false
-                        navigateToLogin = true // Trigger navigation after delay
+                        navigateToLogin = true // Automatically navigate to Login after success
                     }
                 }
             }
-        }
-        .navigationBarBackButtonHidden(true)
+        }.navigationBarBackButtonHidden(true)
     }
 }
+
 
 // Preview for SignUpView
 #Preview {
