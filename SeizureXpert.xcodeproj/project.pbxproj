@@ -22,7 +22,6 @@
 		D751E35E2D0058AE00F179C6 /* AssignPatientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D751E35D2D0058AE00F179C6 /* AssignPatientView.swift */; };
 		D751E3602D0058BA00F179C6 /* AssignPatientViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D751E35F2D0058BA00F179C6 /* AssignPatientViewModel.swift */; };
 		D75F376B2D005D4D0038C742 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D75F376A2D005D4D0038C742 /* ImagePicker.swift */; };
-		D75F376D2D005F770038C742 /* visualizationviewProfilePic.swift in Sources */ = {isa = PBXBuildFile; fileRef = D75F376C2D005F770038C742 /* visualizationviewProfilePic.swift */; };
 		D75F376F2D007C1C0038C742 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = D75F376E2D007C1C0038C742 /* FirebaseAnalytics */; };
 		D75F37712D007C1C0038C742 /* FirebaseAnalyticsOnDeviceConversion in Frameworks */ = {isa = PBXBuildFile; productRef = D75F37702D007C1C0038C742 /* FirebaseAnalyticsOnDeviceConversion */; };
 		D75F37732D007C1C0038C742 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = D75F37722D007C1C0038C742 /* FirebaseAnalyticsWithoutAdIdSupport */; };
@@ -80,8 +79,13 @@
 		D793A0682CFC7B4F002A8665 /* InputField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D793A0672CFC7B4F002A8665 /* InputField.swift */; };
 		D793A06A2CFC7B76002A8665 /* SecureInputField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D793A0692CFC7B76002A8665 /* SecureInputField.swift */; };
 		D793A06C2CFC7B94002A8665 /* SocialLoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D793A06B2CFC7B94002A8665 /* SocialLoginButton.swift */; };
+		D7A2A3312D1361580056CC3B /* UploadEEGDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7A2A3302D1361580056CC3B /* UploadEEGDataView.swift */; };
+		D7A2A3332D13616B0056CC3B /* UploadEEGDataViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7A2A3322D13616B0056CC3B /* UploadEEGDataViewModel.swift */; };
+		D7A2A3352D1364B10056CC3B /* DocumentPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7A2A3342D1364B10056CC3B /* DocumentPickerView.swift */; };
 		D7A5895E2CFCB60E00F63A7A /* Components.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7A5895D2CFCB60E00F63A7A /* Components.swift */; };
 		D7A589602CFCB78200F63A7A /* MySamplePatientsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7A5895F2CFCB78200F63A7A /* MySamplePatientsView.swift */; };
+		D7B145622D134CB400F48834 /* ServerConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B145612D134CB400F48834 /* ServerConfig.swift */; };
+		D7B145642D13575400F48834 /* ProfileImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B145632D13575400F48834 /* ProfileImageView.swift */; };
 		D7B73CD62CFE7651006FAAC8 /* FirestoreUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7B73CD52CFE7651006FAAC8 /* FirestoreUtility.swift */; };
 		D7BA90812CFE5A3900229618 /* AppFlowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7BA90802CFE5A3900229618 /* AppFlowView.swift */; };
 		D7BA90842CFE608E00229618 /* AddPatientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7BA90832CFE608E00229618 /* AddPatientView.swift */; };
@@ -121,7 +125,6 @@
 		D751E35D2D0058AE00F179C6 /* AssignPatientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignPatientView.swift; sourceTree = "<group>"; };
 		D751E35F2D0058BA00F179C6 /* AssignPatientViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignPatientViewModel.swift; sourceTree = "<group>"; };
 		D75F376A2D005D4D0038C742 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
-		D75F376C2D005F770038C742 /* visualizationviewProfilePic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = visualizationviewProfilePic.swift; sourceTree = "<group>"; };
 		D762DA992CDCA52A001A6927 /* SeizureXpert.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SeizureXpert.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D762DA9E2CDCA52A001A6927 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
 		D762DAA02CDCA52A001A6927 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -146,8 +149,13 @@
 		D793A0672CFC7B4F002A8665 /* InputField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputField.swift; sourceTree = "<group>"; };
 		D793A0692CFC7B76002A8665 /* SecureInputField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureInputField.swift; sourceTree = "<group>"; };
 		D793A06B2CFC7B94002A8665 /* SocialLoginButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialLoginButton.swift; sourceTree = "<group>"; };
+		D7A2A3302D1361580056CC3B /* UploadEEGDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadEEGDataView.swift; sourceTree = "<group>"; };
+		D7A2A3322D13616B0056CC3B /* UploadEEGDataViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadEEGDataViewModel.swift; sourceTree = "<group>"; };
+		D7A2A3342D1364B10056CC3B /* DocumentPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentPickerView.swift; sourceTree = "<group>"; };
 		D7A5895D2CFCB60E00F63A7A /* Components.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Components.swift; sourceTree = "<group>"; };
 		D7A5895F2CFCB78200F63A7A /* MySamplePatientsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MySamplePatientsView.swift; sourceTree = "<group>"; };
+		D7B145612D134CB400F48834 /* ServerConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerConfig.swift; sourceTree = "<group>"; };
+		D7B145632D13575400F48834 /* ProfileImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageView.swift; sourceTree = "<group>"; };
 		D7B73CD52CFE7651006FAAC8 /* FirestoreUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreUtility.swift; sourceTree = "<group>"; };
 		D7BA90802CFE5A3900229618 /* AppFlowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFlowView.swift; sourceTree = "<group>"; };
 		D7BA90832CFE608E00229618 /* AddPatientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPatientView.swift; sourceTree = "<group>"; };
@@ -277,6 +285,7 @@
 		D762DAAC2CDCA57D001A6927 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				D7A2A32F2D1361400056CC3B /* Upload EEG Page */,
 				D751E35C2D00589D00F179C6 /* Assign Patient Page */,
 				D751E3592D00543A00F179C6 /* Doctor Profile View */,
 				D7BA90822CFE608000229618 /* AddPatientView */,
@@ -310,6 +319,8 @@
 				D762DACF2CDCA57D001A6927 /* VideoUploader.swift */,
 				D7B73CD52CFE7651006FAAC8 /* FirestoreUtility.swift */,
 				D75F376A2D005D4D0038C742 /* ImagePicker.swift */,
+				D7B145612D134CB400F48834 /* ServerConfig.swift */,
+				D7B145632D13575400F48834 /* ProfileImageView.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -378,6 +389,16 @@
 			path = "Design System";
 			sourceTree = "<group>";
 		};
+		D7A2A32F2D1361400056CC3B /* Upload EEG Page */ = {
+			isa = PBXGroup;
+			children = (
+				D7A2A3302D1361580056CC3B /* UploadEEGDataView.swift */,
+				D7A2A3322D13616B0056CC3B /* UploadEEGDataViewModel.swift */,
+				D7A2A3342D1364B10056CC3B /* DocumentPickerView.swift */,
+			);
+			path = "Upload EEG Page";
+			sourceTree = "<group>";
+		};
 		D7BA90822CFE608000229618 /* AddPatientView */ = {
 			isa = PBXGroup;
 			children = (
@@ -438,7 +459,6 @@
 			isa = PBXGroup;
 			children = (
 				D7BF5BC92CFCB45D00300ADC /* VisualizationView.swift */,
-				D75F376C2D005F770038C742 /* visualizationviewProfilePic.swift */,
 			);
 			path = "SOZ Visualization Page";
 			sourceTree = "<group>";
@@ -560,6 +580,7 @@
 				D762DAE72CDCA57D001A6927 /* VideoUploader.swift in Sources */,
 				D7BF5BBB2CFCB3A500300ADC /* AnalysisCellView.swift in Sources */,
 				D7A589602CFCB78200F63A7A /* MySamplePatientsView.swift in Sources */,
+				D7A2A3332D13616B0056CC3B /* UploadEEGDataViewModel.swift in Sources */,
 				D793A0662CFC7AB5002A8665 /* DesignSystem.swift in Sources */,
 				D75F376B2D005D4D0038C742 /* ImagePicker.swift in Sources */,
 				D7BF5BC52CFCB3FA00300ADC /* NotificationsView.swift in Sources */,
@@ -577,15 +598,16 @@
 				D7BF5BD02CFCB4B200300ADC /* Colors.swift in Sources */,
 				D7BF5BAC2CFCB34300300ADC /* HomeScreenView.swift in Sources */,
 				D762DAD62CDCA57D001A6927 /* SignUpView.swift in Sources */,
+				D7B145642D13575400F48834 /* ProfileImageView.swift in Sources */,
 				D793A06A2CFC7B76002A8665 /* SecureInputField.swift in Sources */,
 				D762DAE92CDCA57D001A6927 /* LoginView.swift in Sources */,
 				D762DAEF2CDCA5D6001A6927 /* AppDelegate.swift in Sources */,
-				D75F376D2D005F770038C742 /* visualizationviewProfilePic.swift in Sources */,
 				D7BF5BB92CFCB39D00300ADC /* PatientData.swift in Sources */,
 				D7BA90842CFE608E00229618 /* AddPatientView.swift in Sources */,
 				D793A06C2CFC7B94002A8665 /* SocialLoginButton.swift in Sources */,
 				D751E35B2D00544700F179C6 /* ProfileView.swift in Sources */,
 				D762DAF72CDCA5DE001A6927 /* Subscription.swift in Sources */,
+				D7A2A3312D1361580056CC3B /* UploadEEGDataView.swift in Sources */,
 				D7BF5BB82CFCB39D00300ADC /* SamplePatient.swift in Sources */,
 				D7BF5BC02CFCB3BA00300ADC /* AllPatientsViewModel.swift in Sources */,
 				D7BF5BAD2CFCB34300300ADC /* HomeScreenViewModel.swift in Sources */,
@@ -604,9 +626,11 @@
 				D72A20222CFC9ABA00017B7F /* BackgroundDS.swift in Sources */,
 				D762DAE62CDCA57D001A6927 /* AppState.swift in Sources */,
 				D762DAE82CDCA57D001A6927 /* LoginViewModel.swift in Sources */,
+				D7B145622D134CB400F48834 /* ServerConfig.swift in Sources */,
 				D71D636B2CEF1E71008C00C2 /* DisableAutofillTextField.swift in Sources */,
 				D7BF5BC22CFCB3E700300ADC /* DoctorProfileView.swift in Sources */,
 				D7BF5BCA2CFCB45D00300ADC /* VisualizationView.swift in Sources */,
+				D7A2A3352D1364B10056CC3B /* DocumentPickerView.swift in Sources */,
 				D7BF5BCC2CFCB46A00300ADC /* SplashScreenView.swift in Sources */,
 				D762DAF82CDCA5DE001A6927 /* Video.swift in Sources */,
 				D793A0642CFC7941002A8665 /* PlaceholderTextField.swift in Sources */,

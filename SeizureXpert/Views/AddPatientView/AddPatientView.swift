@@ -10,18 +10,17 @@ struct AddPatientView: View {
     @State private var successMessage: String?
     @State private var errorMessage: String?
 
+    @StateObject private var viewModel = AddPatientViewModel()
     @Environment(\.presentationMode) private var presentationMode
     @EnvironmentObject var loginViewModel: LoginViewModel // To handle logout
 
     var body: some View {
         VStack(spacing: 20) {
-            // Title
             Text("Register Yourself")
                 .font(.title2)
                 .foregroundColor(Colors.primary)
                 .padding()
 
-            // Success or Error Message
             if let successMessage = successMessage {
                 Text(successMessage)
                     .foregroundColor(.green)
@@ -36,7 +35,6 @@ struct AddPatientView: View {
                     .padding(.horizontal)
             }
 
-            // Profile Image Picker
             Button(action: {
                 isImagePickerPresented = true
             }) {
@@ -51,18 +49,15 @@ struct AddPatientView: View {
                                 .stroke(Color.blue, lineWidth: 2)
                         )
                 } else {
-                    Image(systemName: "person.crop.circle.fill")
-                        .resizable()
-                        .scaledToFill()
+                    ProfileImageView(username: "\(name.lowercased())_\(surname.lowercased())")
                         .frame(width: 100, height: 100)
-                        .foregroundColor(.gray)
+                        .clipShape(Circle())
                 }
             }
             .sheet(isPresented: $isImagePickerPresented) {
                 ImagePicker(image: $profileImage)
             }
 
-            // Input Fields
             TextField("Name", text: $name)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .padding()
@@ -83,7 +78,6 @@ struct AddPatientView: View {
             .pickerStyle(SegmentedPickerStyle())
             .padding()
 
-            // Add Patient Button
             Button(action: {
                 addPatient()
             }) {
@@ -99,7 +93,6 @@ struct AddPatientView: View {
 
             Spacer()
 
-            // Sign Out Button
             Button(action: {
                 loginViewModel.logout { success in
                     if success {
@@ -119,45 +112,32 @@ struct AddPatientView: View {
         .padding()
     }
 
-    // Function to Add Patient
     private func addPatient() {
         successMessage = nil
         errorMessage = nil
 
-        guard let profileImage = profileImage else {
-            errorMessage = "Please upload a profile picture."
-            return
-        }
+        let uniqueDirectory = "\(name.lowercased())_\(surname.lowercased())"
+        let patient = SamplePatient(
+            id: UUID().uuidString,
+            name: name,
+            surname: surname,
+            age: age,
+            gender: gender,
+            username: uniqueDirectory
+        )
 
-        print("Starting image upload...") // Debug Log
-
-        // Upload profile image to Firebase Storage and get the URL
-        FirestoreUtility.uploadProfileImage(profileImage) { result in
-            switch result {
-            case .success(let imageURL):
-                print("Successfully uploaded image. URL: \(imageURL)") // Debug Log
-                // Save patient data to Firestore
-                FirestoreUtility.addPatient(
-                    SamplePatient(
-                        id: UUID().uuidString,
-                        name: name,
-                        surname: surname,
-                        age: age,
-                        gender: gender,
-                        profileImageURL: imageURL
-                    )
-                ) { success in
-                    if success {
-                        successMessage = "You have registered successfully!"
-                        print("Patient added with profileImageURL: \(imageURL)") // Debug Log
-                    } else {
-                        errorMessage = "Failed to register. Please try again."
-                    }
-                }
-            case .failure(let error):
-                errorMessage = "Failed to upload profile image: \(error.localizedDescription)"
-                print(errorMessage) // Debug Log
+        viewModel.addPatient(patient: patient, profileImage: profileImage) { success in
+            if success {
+                successMessage = "You have registered successfully!"
+            } else {
+                errorMessage = viewModel.error ?? "Failed to register. Please try again."
             }
         }
+    }
+}
+struct AddPatientView_Previews: PreviewProvider {
+    static var previews: some View {
+        AddPatientView()
+            .environmentObject(LoginViewModel()) // Provide the environment object required by the view
     }
 }

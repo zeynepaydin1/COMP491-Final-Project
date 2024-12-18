@@ -8,7 +8,9 @@ import SwiftUI
 
 struct PatientDetailView: View {
     var patient: SamplePatient // Accept a SamplePatient object
-    @ObservedObject var viewModel = PatientDetailViewModel()
+
+    @State private var isVisualizingSOZ: Bool = false // State for navigation to VisualizationView
+    @State private var isUploadingEEG: Bool = false // State for navigation to UploadEEGDataView
 
     var body: some View {
         TabView {
@@ -21,7 +23,6 @@ struct PatientDetailView: View {
                 .ignoresSafeArea()
 
                 VStack {
-                    // Main Content of Patient Details
                     ScrollView {
                         // Title
                         Text("Patient Details")
@@ -30,54 +31,21 @@ struct PatientDetailView: View {
                             .foregroundColor(.blue)
                             .padding(.bottom, 10)
 
-                        // Profile Image
-                        Image(systemName: "brain.head.profile")
-                            .resizable()
+                        // Profile Image using ProfileImageView
+                        ProfileImageView(username: patient.username)
                             .frame(width: 125, height: 125)
-                            .clipShape(Circle()) // Optional: Make it circular
+                            .clipShape(Circle())
                             .overlay(
-                                Circle().stroke(Color.white, lineWidth: 3) // Optional: Add a border
+                                Circle().stroke(Color.white, lineWidth: 3)
                             )
                             .shadow(radius: 10)
                             .padding(.bottom, 10)
 
                         // Information Fields
                         VStack(spacing: 20) {
-                            // Name Field
-                            VStack(alignment: .leading, spacing: 5) {
-                                Text("Name")
-                                    .font(.headline)
-                                    .fontWeight(.bold)
-                                Text(patient.name)
-                                    .padding(10)
-                                    .frame(maxWidth: .infinity, alignment: .leading)
-                                    .background(Color.blue.opacity(0.1))
-                                    .cornerRadius(20)
-                            }
-
-                            // Gender Field
-                            VStack(alignment: .leading, spacing: 5) {
-                                Text("Gender")
-                                    .font(.headline)
-                                    .fontWeight(.bold)
-                                Text(patient.gender.capitalized)
-                                    .padding(10)
-                                    .frame(maxWidth: .infinity, alignment: .leading)
-                                    .background(Color.blue.opacity(0.1))
-                                    .cornerRadius(20)
-                            }
-
-                            // Progress Field
-                            VStack(alignment: .leading, spacing: 5) {
-                                Text("Progress")
-                                    .font(.headline)
-                                    .fontWeight(.bold)
-                                Text("50%")
-                                    .padding(10)
-                                    .frame(maxWidth: .infinity, alignment: .leading)
-                                    .background(Color.blue.opacity(0.1))
-                                    .cornerRadius(20)
-                            }
+                            InfoField(title: "Name", value: patient.name)
+                            InfoField(title: "Gender", value: patient.gender.capitalized)
+                            InfoField(title: "Progress", value: "50%")
                         }
                         .padding(15)
                         .background(
@@ -91,30 +59,22 @@ struct PatientDetailView: View {
 
                         // Buttons
                         VStack(spacing: 10) {
-                            // Upload EEG Data Button
-                            Button(action: {
-                                print("Upload EEG Data for \(patient.name)")
-                            }) {
-                                Text("Upload EEG Data")
-                                    .font(.headline)
-                                    .fontWeight(.bold)
-                                    .foregroundColor(.white)
-                                    .frame(width: 300, height: 40) // Set button size
-                                    .background(Color.blue)
-                                    .cornerRadius(10)
+                            NavigationLink(
+                                destination: UploadEEGDataView(patient: patient),
+                                isActive: $isUploadingEEG
+                            ) {
+                                ActionButton(title: "Upload EEG Data") {
+                                    isUploadingEEG = true
+                                }
                             }
 
-                            // Visualize SOZs Button
-                            Button(action: {
-                                print("Visualize SOZs for \(patient.name)")
-                            }) {
-                                Text("Visualize SOZs")
-                                    .font(.headline)
-                                    .fontWeight(.bold)
-                                    .foregroundColor(.white)
-                                    .frame(width: 300, height: 40) // Set button size
-                                    .background(Color.blue)
-                                    .cornerRadius(10)
+                            NavigationLink(
+                                destination: VisualizationView(patient: patient),
+                                isActive: $isVisualizingSOZ
+                            ) {
+                                ActionButton(title: "Visualize SOZs") {
+                                    isVisualizingSOZ = true
+                                }
                             }
                         }
                         .padding(.horizontal)
@@ -125,13 +85,48 @@ struct PatientDetailView: View {
                 Image(systemName: "brain.head.profile")
                 Text("Patient")
             }
-
-            // Placeholder Tab
             Text("Other Tab Content")
                 .tabItem {
                     Image(systemName: "gearshape")
                     Text("Settings")
                 }
+        }
+    }
+}
+
+// Helper for Info Field
+private struct InfoField: View {
+    let title: String
+    let value: String
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 5) {
+            Text(title)
+                .font(.headline)
+                .fontWeight(.bold)
+            Text(value)
+                .padding(10)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .background(Color.blue.opacity(0.1))
+                .cornerRadius(20)
+        }
+    }
+}
+
+// Helper for Action Button
+private struct ActionButton: View {
+    let title: String
+    let action: () -> Void
+
+    var body: some View {
+        Button(action: action) {
+            Text(title)
+                .font(.headline)
+                .fontWeight(.bold)
+                .foregroundColor(.white)
+                .frame(width: 300, height: 40)
+                .background(Color.blue)
+                .cornerRadius(10)
         }
     }
 }
@@ -144,7 +139,7 @@ struct PatientDetailView_Previews: PreviewProvider {
             surname: "Doe",
             age: "23",
             gender: "Male",
-            profileImageURL:"xxx1"
+            username: "john_doe" // Add username to dynamically generate profileImageURL
         )
         PatientDetailView(patient: samplePatient)
     }

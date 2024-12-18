@@ -14,6 +14,7 @@ class AssignPatientViewModel: ObservableObject {
     @Published var patients: [SamplePatient] = []
     private let db = Firestore.firestore()
 
+    /// Fetch patients without a doctor assigned
     func fetchUnassignedPatients() {
         db.collection("patients")
             .whereField("userId", isEqualTo: "") // Fetch patients without a doctor assigned
@@ -31,12 +32,13 @@ class AssignPatientViewModel: ObservableObject {
                         surname: data["surname"] as? String ?? "",
                         age: data["age"] as? String ?? "",
                         gender: data["gender"] as? String ?? "",
-                        profileImageURL: data["profileImageURL"] as? String ?? "" // Extract profileImageURL
+                        username: data["username"] as? String ?? "" // Use username for dynamic profileImageURL
                     )
                 } ?? []
             }
     }
 
+    /// Assign a patient to the current authenticated user
     func assignPatient(patient: SamplePatient, completion: @escaping (Bool) -> Void) {
         guard let userId = Auth.auth().currentUser?.uid else {
             print("Error: User not authenticated.")

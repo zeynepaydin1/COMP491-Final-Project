@@ -49,11 +49,28 @@ struct AllPatientsView: View {
 
     private func patientRow(_ patient: SamplePatient) -> some View {
         HStack {
-            Image("female_patient n  ")
-                .resizable()
-                .scaledToFill()
-                .frame(width: 50, height: 50)
-                .clipShape(Circle())
+            // Fetch and display profile image or fallback to default system image
+            AsyncImage(url: URL(string: patient.profileImageURL)) { phase in
+                if let image = phase.image {
+                    image
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: 50, height: 50)
+                        .clipShape(Circle())
+                } else if phase.error != nil {
+                    // Show fallback system image
+                    Image(systemName: patient.systemImageName)
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: 50, height: 50)
+                        .clipShape(Circle())
+                        .foregroundColor(.gray)
+                } else {
+                    // Placeholder while loading
+                    ProgressView()
+                        .frame(width: 50, height: 50)
+                }
+            }
 
             VStack(alignment: .leading) {
                 Text(patient.name)
@@ -72,9 +89,30 @@ struct AllPatientsView: View {
     }
 }
 
-
 struct AllPatientsView_Previews: PreviewProvider {
     static var previews: some View {
-        AllPatientsView()
+        let mockViewModel = AllPatientsViewModel()
+
+        mockViewModel.allPatients = [
+            SamplePatient(
+                id: UUID().uuidString,
+                name: "Jane",
+                surname: "Smith",
+                age: "23",
+                gender: "Female",
+                username: "jane_smith" // Username for dynamic profileImageURL
+            ),
+            SamplePatient(
+                id: UUID().uuidString,
+                name: "John",
+                surname: "Doe",
+                age: "30",
+                gender: "Male",
+                username: "john_doe" // Username for dynamic profileImageURL
+            )
+        ]
+
+        return AllPatientsView()
+            .environmentObject(mockViewModel)
     }
 }

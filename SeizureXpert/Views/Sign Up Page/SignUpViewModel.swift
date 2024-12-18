@@ -9,7 +9,6 @@ class SignUpViewModel: ObservableObject {
 
     private let auth = Auth.auth() // Firebase Auth instance
     private let db = Firestore.firestore() // Firestore instance
-    private let serverURL = "http://172.21.155.107:8080/" // Replace with your server's URL
 
     func signUp(email: String, password: String, username: String, isDoctor: Bool, name: String, profileImage: UIImage?) {
         // Reset error and signup status
@@ -41,8 +40,14 @@ class SignUpViewModel: ObservableObject {
 
         // Create a unique path for the user's profile picture
         let fileName = "\(username)/profile_picture.jpg" // Folder and file name
+        let fullURL = ServerConfig.constructURL(for: fileName) // Use ServerConfig to construct URL
 
-        var request = URLRequest(url: URL(string: serverURL)!)
+        guard let url = URL(string: fullURL) else {
+            completion(.failure(NSError(domain: "URLConstructionError", code: -1, userInfo: [NSLocalizedDescriptionKey: "Invalid URL constructed."])))
+            return
+        }
+
+        var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.addValue(fileName, forHTTPHeaderField: "X-File-Name") // Include folder in the header
         request.addValue("application/octet-stream", forHTTPHeaderField: "Content-Type")

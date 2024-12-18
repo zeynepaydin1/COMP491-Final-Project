@@ -1,6 +1,6 @@
 import FirebaseFirestore
 import FirebaseAuth
-import FirebaseStorage
+import UIKit
 
 class FirestoreUtility {
     /// Fetches patients for the current authenticated user
@@ -29,14 +29,15 @@ class FirestoreUtility {
                         surname: data["surname"] as? String ?? "",
                         age: data["age"] as? String ?? "",
                         gender: data["gender"] as? String ?? "",
-                        profileImageURL: data["profileImageURL"] as? String ?? "" // Extract profileImageURL
+                        username: data["username"] as? String ?? "" // Use username for dynamic profileImageURL
                     )
                 } ?? []
 
-                completion(patients)
+                DispatchQueue.main.async {
+                    completion(patients)
+                }
             }
     }
-
 
     /// Fetches unassigned patients from Firestore
     static func fetchUnassignedPatients(completion: @escaping ([SamplePatient]) -> Void) {
@@ -57,114 +58,99 @@ class FirestoreUtility {
                         surname: data["surname"] as? String ?? "",
                         age: data["age"] as? String ?? "",
                         gender: data["gender"] as? String ?? "",
-                        profileImageURL: data["profileImageURL"] as? String ?? ""
+                        username: data["username"] as? String ?? "" // Use username for dynamic profileImageURL
                     )
                 } ?? []
 
-                completion(patients)
+                DispatchQueue.main.async {
+                    completion(patients)
+                }
             }
     }
 
     /// Adds a new patient to Firestore
-    static func addPatient(_ patient: SamplePatient, profileImageData: Data? = nil, completion: @escaping (Bool) -> Void) {
+    /// Adds a new patient to Firestore
+    static func addPatient(_ patient: SamplePatient, profileImage: UIImage?, completion: @escaping (Bool) -> Void) {
         let db = Firestore.firestore()
 
+        // Prepare patient data
         var newPatient: [String: Any] = [
             "userId": "",
             "name": patient.name,
             "surname": patient.surname,
             "age": patient.age,
             "gender": patient.gender,
-            "profileImageURL": "" // Placeholder for profile image URL
+            "username": patient.username // Store username for dynamic profileImageURL
         ]
 
         // If no profile image, save patient directly
-        guard let profileImageData = profileImageData else {
+        guard let profileImage = profileImage,
+              let imageData = profileImage.jpegData(compressionQuality: 0.8) else {
             print("No profile image provided. Adding patient without image.")
             db.collection("patients").addDocument(data: newPatient) { error in
-                if let error = error {
-                    print("Error adding patient: \(error.localizedDescription)")
-                    completion(false)
-                } else {
-                    print("Patient added successfully without profile image.")
-                    completion(true)
-                }
-            }
-            return
-        }
-
-        // Upload profile image to Firebase Storage
-        let storageRef = Storage.storage().reference().child("profile_images/\(UUID().uuidString).jpg")
-        print("Starting image upload for patient \(patient.name)...")
-
-        storageRef.putData(profileImageData, metadata: nil) { _, error in
-            if let error = error {
-                print("Error uploading profile image: \(error.localizedDescription)")
-                completion(false)
-                return
-            }
-
-            // Fetch the download URL
-            storageRef.downloadURL { url, error in
-                if let error = error {
-                    print("Error retrieving profile image URL: \(error.localizedDescription)")
-                    completion(false)
-                    return
-                }
-
-                guard let url = url else {
-                    print("Profile image URL is nil.")
-                    completion(false)
-                    return
-                }
-
-                // Update the newPatient dictionary with the profile image URL
-                newPatient["profileImageURL"] = url.absoluteString
-                print("Profile image URL retrieved: \(url.absoluteString)")
-
-                // Write the patient data to Firestore
-                db.collection("patients").addDocument(data: newPatient) { error in
+                DispatchQueue.main.async {
                     if let error = error {
-                        print("Error adding patient with profile image: \(error.localizedDescription)")
+                        print("Error adding patient: \(error.localizedDescription)")
                         completion(false)
                     } else {
-                        print("Patient added successfully with profile image.")
+                        print("Patient added successfully without profile image.")
                         completion(true)
                     }
                 }
             }
-        }
-    }
-
-
-
-
-
-    /// Uploads a profile image to Firebase Storage
-    static func uploadProfileImage(_ image: UIImage, completion: @escaping (Result<String, Error>) -> Void) {
-        let storageRef = Storage.storage().reference().child("profile_images/\(UUID().uuidString).jpg")
-        guard let imageData = image.jpegData(compressionQuality: 0.8) else {
-            completion(.failure(NSError(domain: "ImageError", code: -1, userInfo: [NSLocalizedDescriptionKey: "Invalid Image"])))
             return
         }
 
-        print("Starting image upload...") // Log
-        storageRef.putData(imageData, metadata: nil) { metadata, error in
-            if let error = error {
-                print("Error uploading image: \(error.localizedDescription)") // Log
-                completion(.failure(error))
-            } else {
-                print("Image uploaded successfully: \(String(describing: metadata))") // Log
-                storageRef.downloadURL { url, error in
-                    if let url = url {
-                        print("Image URL retrieved: \(url.absoluteString)") // Log
-                        completion(.success(url.absoluteString))
-                    } else if let error = error {
-                        print("Error getting download URL: \(error.localizedDescription)") // Log
-                        completion(.failure(error))
+        // Upload profile image to the server
+        let profileImagePath = "\(patient.username)/profile_picture.jpg"
+        uploadProfileImage(to: profileImagePath, data: imageData) { result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success:
+                    print("Profile image uploaded successfully.")
+                    db.collection("patients").addDocument(data: newPatient) { error in
+                        if let error = error {
+                            print("Error adding patient with profile image: \(error.localizedDescription)")
+                            completion(false)
+                        } else {
+                            print("Patient added successfully with profile image.")
+                            completion(true)
+                        }
                     }
+                case .failure(let error):
+                    print("Error uploading profile image: \(error.localizedDescription)")
+                    completion(false)
                 }
             }
         }
     }
+
+    /// Uploads a profile image to the server
+    private static func uploadProfileImage(to path: String, data: Data, completion: @escaping (Result<Void, Error>) -> Void) {
+        var request = URLRequest(url: URL(string: ServerConfig.baseURL)!)
+        request.httpMethod = "POST"
+        request.addValue(path, forHTTPHeaderField: "X-File-Name")
+        request.addValue("application/octet-stream", forHTTPHeaderField: "Content-Type")
+        request.httpBody = data
+
+        URLSession.shared.dataTask(with: request) { _, response, error in
+            if let error = error {
+                completion(.failure(error))
+                return
+            }
+
+            guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
+                let uploadError = NSError(
+                    domain: "UploadError",
+                    code: -2,
+                    userInfo: [NSLocalizedDescriptionKey: "Failed to upload profile image."]
+                )
+                completion(.failure(uploadError))
+                return
+            }
+
+            completion(.success(()))
+        }.resume()
+    }
+
 }

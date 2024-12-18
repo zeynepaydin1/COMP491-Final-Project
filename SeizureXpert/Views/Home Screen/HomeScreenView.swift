@@ -10,31 +10,23 @@ struct HomeScreenView: View {
             VStack(spacing: 0) {
                 // Doctor Profile Section
                 HStack {
-                    NavigationLink(
-                        destination: ProfileView(),
-                        tag: HomeScreenViewModel.Destination.profile,
-                        selection: $viewModel.currentDestination
-                    ) {
-                        Image("doctor")
-                            .resizable()
-                            .scaledToFill()
+                    if let user = loginViewModel.currentUser {
+                        ProfileImageView(username: user.username)
                             .frame(width: 80, height: 80)
                             .clipShape(Circle())
-                    }
 
-                    VStack(alignment: .leading) {
-                        if let user = loginViewModel.currentUser {
+                        VStack(alignment: .leading) {
                             Text("Dr. \(user.name)") // Display logged-in user's name
                                 .font(Fonts.primary(size: 20, weight: .bold))
                                 .foregroundColor(Colors.textPrimary)
                             Text(user.isDoctor ? "Neurologist | EEG Specialist" : "Patient")
                                 .font(Fonts.body)
                                 .foregroundColor(Colors.textSecondary)
-                        } else {
-                            Text("Loading...")
-                                .font(Fonts.body)
-                                .foregroundColor(.gray)
                         }
+                    } else {
+                        Text("Loading...")
+                            .font(Fonts.body)
+                            .foregroundColor(.gray)
                     }
                     Spacer()
 
@@ -60,22 +52,6 @@ struct HomeScreenView: View {
                 }
                 .padding()
 
-           /*     Button(action: {
-                                    handleLogout()
-                                }) {
-                                    Text("Logout")
-                                        .font(.headline)
-                                        .foregroundColor(Colors.primary)
-                                        .padding()
-                                        .frame(maxWidth: .infinity)
-                                        .background(.white)
-                                        .cornerRadius(10)
-                                        .shadow(color: .gray.opacity(0.5), radius: 5, x: 0, y: 4)
-                                }
-                                .padding()
-            
-            */
-
                 // Analysis Table
                 List {
                     Section(header: Text("Completed Analyses")) {
@@ -97,10 +73,10 @@ struct HomeScreenView: View {
                                         viewModel.navigateTo(.visualization)
                                     }
                                 )
-                                .padding() // Add padding around each cell
-                                .background(RoundedRectangle(cornerRadius: 10).fill(Color.white)) // Rounded background
-                                .shadow(color: .gray.opacity(0.3), radius: 3, x: 0, y: 2) // Add shadow for separation
-                                .padding(.vertical, 5) // Space between rows
+                                .padding()
+                                .background(RoundedRectangle(cornerRadius: 10).fill(Color.white))
+                                .shadow(color: .gray.opacity(0.3), radius: 3, x: 0, y: 2)
+                                .padding(.vertical, 5)
                                 .listRowInsets(EdgeInsets())
                                 .listRowBackground(Color.clear)
                             }
@@ -109,13 +85,7 @@ struct HomeScreenView: View {
                 }
                 .listStyle(InsetGroupedListStyle())
 
-
-
-
-
-
-
-                HStack(spacing: 16) { // Horizontal Stack with spacing
+                HStack(spacing: 16) {
                     Button(action: {
                         viewModel.navigateTo(.myPatients)
                     }) {
@@ -145,8 +115,6 @@ struct HomeScreenView: View {
                 .padding(.horizontal)
                 .padding(.vertical, 10)
 
-                
-                
                 // Navigation Links
                 NavigationLink(
                     destination: NotificationsView(),
@@ -171,8 +139,7 @@ struct HomeScreenView: View {
                     tag: HomeScreenViewModel.Destination.allPatients,
                     selection: $viewModel.currentDestination
                 ) { EmptyView() }
-              
-                // Visualization Navigation Link
+
                 NavigationLink(
                     destination: Group {
                         if let patient = viewModel.selectedPatient {
@@ -185,7 +152,6 @@ struct HomeScreenView: View {
                     selection: $viewModel.currentDestination
                 ) { EmptyView() }
 
-                // Patient Detail Navigation Link
                 NavigationLink(
                     destination: Group {
                         if let patient = viewModel.selectedPatient {
@@ -197,29 +163,19 @@ struct HomeScreenView: View {
                     tag: HomeScreenViewModel.Destination.patientDetail,
                     selection: $viewModel.currentDestination
                 ) { EmptyView() }
-
             }
             .background(Colors.background.ignoresSafeArea())
         }
     }
-
-    private func handleLogout() {
-            loginViewModel.logout { success in
-                if success {
-                    print("Logout successful.")
-                } else {
-                    print("Failed to logout.")
-                }
-            }
-        }
 }
+
 
 struct HomeScreenView_Previews: PreviewProvider {
     static var previews: some View {
         let viewModel = LoginViewModel()
         viewModel.loginSuccessful = true // Simulate successful login
         viewModel.userType = .Doctor    // Set a user type
-        viewModel.currentUser = User(username: "Dr. Smith", email: "drsmith@example.com", name: "John Smith", isDoctor: true) // Mock user data
+        viewModel.currentUser = User(username: "john", email: "drsmith@example.com", name: "John Smith", isDoctor: true) // Mock user data
 
         return HomeScreenView()
             .environmentObject(viewModel) // Inject the mocked LoginViewModel

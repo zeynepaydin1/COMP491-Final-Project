@@ -4,16 +4,13 @@ struct MySamplePatientsView: View {
     @StateObject private var viewModel = MySamplePatientsViewModel()
 
     var body: some View {
-
         NavigationStack(path: $viewModel.navigationPath) { // Use the navigation path
-
             VStack {
                 headerView
 
                 if viewModel.myPatients.isEmpty {
                     emptyStateView
                 } else {
-
                     patientsListView
                 }
 
@@ -26,7 +23,6 @@ struct MySamplePatientsView: View {
                 case .assignPatient:
                     AssignPatientView()
                 }
-
             }
             .onAppear {
                 viewModel.fetchMyPatients()
@@ -34,7 +30,6 @@ struct MySamplePatientsView: View {
             .background(Colors.background.ignoresSafeArea())
         }
     }
-
 
     // MARK: - Subviews
 
@@ -63,11 +58,25 @@ struct MySamplePatientsView: View {
 
     private func patientRow(_ patient: SamplePatient) -> some View {
         HStack {
-            Image("female_patient")
-                .resizable()
-                .scaledToFill()
-                .frame(width: 50, height: 50)
-                .clipShape(Circle())
+            AsyncImage(url: URL(string: patient.profileImageURL)) { phase in
+                if let image = phase.image {
+                    image
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: 50, height: 50)
+                        .clipShape(Circle())
+                } else if phase.error != nil {
+                    Image(systemName: "brain.head.profile") // Default image on error
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: 50, height: 50)
+                        .clipShape(Circle())
+                        .foregroundColor(.gray)
+                } else {
+                    ProgressView() // Placeholder while loading
+                        .frame(width: 50, height: 50)
+                }
+            }
 
             VStack(alignment: .leading) {
                 Text(patient.name)
@@ -102,6 +111,7 @@ struct MySamplePatientsView: View {
     }
 }
 
+// MARK: - Preview
 
 struct MySamplePatientsView_Previews: PreviewProvider {
     static var previews: some View {
@@ -114,7 +124,7 @@ struct MySamplePatientsView_Previews: PreviewProvider {
                 surname: "Smith",
                 age: "23",
                 gender: "Female",
-                profileImageURL: "https://via.placeholder.com/150" // Example image URL
+                username: "jane_smith" // Username used for profile image generation
             ),
             SamplePatient(
                 id: UUID().uuidString,
@@ -122,7 +132,7 @@ struct MySamplePatientsView_Previews: PreviewProvider {
                 surname: "Doe",
                 age: "23",
                 gender: "Male",
-                profileImageURL: "https://via.placeholder.com/150" // Example image URL
+                username: "john_doe" // Username used for profile image generation
             )
         ]
 
