@@ -72,7 +72,7 @@ class HomeScreenViewModel: ObservableObject {
         case myPatients
         case allPatients
         case visualization
-        case patientDetail // Add this case for navigating to PatientDetailView
+        case patientDetail
 
         var description: String {
             switch self {
@@ -86,5 +86,6 @@ class HomeScreenViewModel: ObservableObject {
             }
         }
     }
+
 
 }

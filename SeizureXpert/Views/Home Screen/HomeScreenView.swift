@@ -27,7 +27,7 @@ struct HomeScreenView: View {
                             Text("Dr. \(user.name)") // Display logged-in user's name
                                 .font(Fonts.primary(size: 20, weight: .bold))
                                 .foregroundColor(Colors.textPrimary)
-                            Text(user.isDoctor ? "Neurologist | EEG Specialist" : "Patient") // Dynamic title based on user role
+                            Text(user.isDoctor ? "Neurologist | EEG Specialist" : "Patient")
                                 .font(Fonts.body)
                                 .foregroundColor(Colors.textSecondary)
                         } else {
@@ -60,19 +60,21 @@ struct HomeScreenView: View {
                 }
                 .padding()
 
-                Button(action: {
-                                    handleLogout() // Call the logout function
+           /*     Button(action: {
+                                    handleLogout()
                                 }) {
                                     Text("Logout")
                                         .font(.headline)
-                                        .foregroundColor(.white)
+                                        .foregroundColor(Colors.primary)
                                         .padding()
                                         .frame(maxWidth: .infinity)
-                                        .background(Colors.primary)
+                                        .background(.white)
                                         .cornerRadius(10)
+                                        .shadow(color: .gray.opacity(0.5), radius: 5, x: 0, y: 4)
                                 }
                                 .padding()
-
+            
+            */
 
                 // Analysis Table
                 List {
@@ -90,11 +92,17 @@ struct HomeScreenView: View {
                                         viewModel.navigateTo(.patientDetail)
                                     },
                                     onVisualizeTapped: {
-                                        print("Visualization tapped for \(patient.name)")
+                                        print("Visualize tapped for \(patient.name)")
                                         viewModel.selectedPatient = patient
                                         viewModel.navigateTo(.visualization)
                                     }
                                 )
+                                .padding() // Add padding around each cell
+                                .background(RoundedRectangle(cornerRadius: 10).fill(Color.white)) // Rounded background
+                                .shadow(color: .gray.opacity(0.3), radius: 3, x: 0, y: 2) // Add shadow for separation
+                                .padding(.vertical, 5) // Space between rows
+                                .listRowInsets(EdgeInsets())
+                                .listRowBackground(Color.clear)
                             }
                         }
                     }
@@ -102,28 +110,43 @@ struct HomeScreenView: View {
                 .listStyle(InsetGroupedListStyle())
 
 
-                // Page Slider
-                Picker("", selection: $selectedTab) {
-                    Text("Home").tag(0)
-                    Text("My Patients").tag(1)
-                    Text("All Patients").tag(2)
-                    Text("Profile").tag(3)
-                }
-                .pickerStyle(SegmentedPickerStyle())
-                .padding()
-                .onChange(of: selectedTab) { newValue in
-                    switch newValue {
-                    case 1:
+
+
+
+
+
+                HStack(spacing: 16) { // Horizontal Stack with spacing
+                    Button(action: {
                         viewModel.navigateTo(.myPatients)
-                    case 2:
+                    }) {
+                        Text("My Patients")
+                            .font(.headline)
+                            .foregroundColor(Colors.primary)
+                            .padding()
+                            .frame(maxWidth: UIScreen.main.bounds.width / 2.5)
+                            .background(.white)
+                            .cornerRadius(10)
+                            .shadow(color: .gray.opacity(0.5), radius: 5, x: 0, y: 4)
+                    }
+
+                    Button(action: {
                         viewModel.navigateTo(.allPatients)
-                    case 3:
-                        viewModel.navigateTo(.profile)
-                    default:
-                        break
+                    }) {
+                        Text("All Patients")
+                            .font(.headline)
+                            .foregroundColor(Colors.primary)
+                            .padding()
+                            .frame(maxWidth: UIScreen.main.bounds.width / 2.5)
+                            .background(.white)
+                            .cornerRadius(10)
+                            .shadow(color: .gray.opacity(0.5), radius: 5, x: 0, y: 4)
                     }
                 }
+                .padding(.horizontal)
+                .padding(.vertical, 10)
 
+                
+                
                 // Navigation Links
                 NavigationLink(
                     destination: NotificationsView(),
@@ -148,30 +171,33 @@ struct HomeScreenView: View {
                     tag: HomeScreenViewModel.Destination.allPatients,
                     selection: $viewModel.currentDestination
                 ) { EmptyView() }
-
+              
+                // Visualization Navigation Link
                 NavigationLink(
-                    destination: {
+                    destination: Group {
                         if let patient = viewModel.selectedPatient {
-                            AnyView(VisualizationView(patient: patient))
+                            VisualizationView(patient: patient)
                         } else {
-                            AnyView(EmptyView())
+                            EmptyView()
                         }
-                    }(),
+                    },
                     tag: HomeScreenViewModel.Destination.visualization,
                     selection: $viewModel.currentDestination
                 ) { EmptyView() }
-                
+
+                // Patient Detail Navigation Link
                 NavigationLink(
-                    destination: {
+                    destination: Group {
                         if let patient = viewModel.selectedPatient {
-                            AnyView(PatientDetailView(patient: patient))
+                            PatientDetailView(patient: patient)
                         } else {
-                            AnyView(EmptyView())
+                            EmptyView()
                         }
-                    }(),
+                    },
                     tag: HomeScreenViewModel.Destination.patientDetail,
                     selection: $viewModel.currentDestination
                 ) { EmptyView() }
+
             }
             .background(Colors.background.ignoresSafeArea())
         }
@@ -188,42 +214,15 @@ struct HomeScreenView: View {
         }
 }
 
-
 struct HomeScreenView_Previews: PreviewProvider {
     static var previews: some View {
-        let mockLoginViewModel = LoginViewModel()
-        mockLoginViewModel.currentUser = User(
-            username: "dr.jane.doe",
-            email: "jane.doe@example.com",
-            name: "Jane Doe",
-            isDoctor: true
-        )
-        mockLoginViewModel.loginSuccessful = true
-
-        let mockViewModel = HomeScreenViewModel()
-        mockViewModel.completedAnalyses = [
-            SamplePatient(
-                id: UUID().uuidString,
-                name: "Jane",
-                surname: "Smith",
-                age: "23",
-                gender: "Female",
-                profileImageURL: "https://via.placeholder.com/150" // Example image URL
-            ),
-            SamplePatient(
-                id: UUID().uuidString,
-                name: "John",
-                surname: "Doe",
-                age: "23",
-                gender: "Male",
-                profileImageURL: "https://via.placeholder.com/150" // Example image URL
-            )
-        ]
+        let viewModel = LoginViewModel()
+        viewModel.loginSuccessful = true // Simulate successful login
+        viewModel.userType = .Doctor    // Set a user type
+        viewModel.currentUser = User(username: "Dr. Smith", email: "drsmith@example.com", name: "John Smith", isDoctor: true) // Mock user data
 
         return HomeScreenView()
-            .environmentObject(mockLoginViewModel)
+            .environmentObject(viewModel) // Inject the mocked LoginViewModel
+            .previewDisplayName("Doctor Home Preview")
     }
 }
-
-
-
