@@ -9,8 +9,6 @@
 /* Begin PBXBuildFile section */
 		D71CDCE72CFF1D7400DDDFF7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D71CDCE62CFF1D7400DDDFF7 /* GoogleService-Info.plist */; };
 		D71D636B2CEF1E71008C00C2 /* DisableAutofillTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71D636A2CEF1E71008C00C2 /* DisableAutofillTextField.swift */; };
-		D72A1FEA2CFC99C100017B7F /* PatientDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D72A1FE82CFC99C100017B7F /* PatientDetailViewModel.swift */; };
-		D72A1FEB2CFC99C100017B7F /* PatientDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D72A1FE92CFC99C100017B7F /* PatientDetailView.swift */; };
 		D72A20162CFC9ABA00017B7F /* Radius.swift in Sources */ = {isa = PBXBuildFile; fileRef = D72A20082CFC9AB900017B7F /* Radius.swift */; };
 		D72A20172CFC9ABA00017B7F /* ButtonDS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D72A20092CFC9AB900017B7F /* ButtonDS.swift */; };
 		D72A201A2CFC9ABA00017B7F /* TextFieldDS.swift in Sources */ = {isa = PBXBuildFile; fileRef = D72A200C2CFC9AB900017B7F /* TextFieldDS.swift */; };
@@ -75,6 +73,8 @@
 		D762DB422CDCA8D9001A6927 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = D762DB412CDCA8D9001A6927 /* FirebaseStorage */; };
 		D762DB442CDCA8D9001A6927 /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = D762DB432CDCA8D9001A6927 /* FirebaseStorageCombine-Community */; };
 		D762DB462CDCA8D9001A6927 /* FirebaseVertexAI in Frameworks */ = {isa = PBXBuildFile; productRef = D762DB452CDCA8D9001A6927 /* FirebaseVertexAI */; };
+		D786DE132D12F4C600E71396 /* PatientDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D786DE122D12F4C600E71396 /* PatientDetailViewModel.swift */; };
+		D786DE152D12F4CB00E71396 /* PatientDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D786DE142D12F4CB00E71396 /* PatientDetailView.swift */; };
 		D793A0642CFC7941002A8665 /* PlaceholderTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D793A0632CFC7941002A8665 /* PlaceholderTextField.swift */; };
 		D793A0662CFC7AB5002A8665 /* DesignSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D793A0652CFC7AB5002A8665 /* DesignSystem.swift */; };
 		D793A0682CFC7B4F002A8665 /* InputField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D793A0672CFC7B4F002A8665 /* InputField.swift */; };
@@ -108,8 +108,6 @@
 		D71CDCE62CFF1D7400DDDFF7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D71D636A2CEF1E71008C00C2 /* DisableAutofillTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisableAutofillTextField.swift; sourceTree = "<group>"; };
 		D72A1FE62CFC98B500017B7F /* mul */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; name = mul; path = mul.lproj/Main.xcstrings; sourceTree = "<group>"; };
-		D72A1FE82CFC99C100017B7F /* PatientDetailViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PatientDetailViewModel.swift; sourceTree = "<group>"; };
-		D72A1FE92CFC99C100017B7F /* PatientDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PatientDetailView.swift; sourceTree = "<group>"; };
 		D72A20082CFC9AB900017B7F /* Radius.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Radius.swift; sourceTree = "<group>"; };
 		D72A20092CFC9AB900017B7F /* ButtonDS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonDS.swift; sourceTree = "<group>"; };
 		D72A200C2CFC9AB900017B7F /* TextFieldDS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldDS.swift; sourceTree = "<group>"; };
@@ -141,6 +139,8 @@
 		D762DAF22CDCA5DE001A6927 /* Majors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Majors.swift; sourceTree = "<group>"; };
 		D762DAF32CDCA5DE001A6927 /* Subscription.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Subscription.swift; sourceTree = "<group>"; };
 		D762DAF42CDCA5DE001A6927 /* Video.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Video.swift; sourceTree = "<group>"; };
+		D786DE122D12F4C600E71396 /* PatientDetailViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PatientDetailViewModel.swift; sourceTree = "<group>"; };
+		D786DE142D12F4CB00E71396 /* PatientDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PatientDetailView.swift; sourceTree = "<group>"; };
 		D793A0632CFC7941002A8665 /* PlaceholderTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceholderTextField.swift; sourceTree = "<group>"; };
 		D793A0652CFC7AB5002A8665 /* DesignSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignSystem.swift; sourceTree = "<group>"; };
 		D793A0672CFC7B4F002A8665 /* InputField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputField.swift; sourceTree = "<group>"; };
@@ -218,8 +218,8 @@
 		D72A1FE72CFC99C100017B7F /* Patient Details */ = {
 			isa = PBXGroup;
 			children = (
-				D72A1FE82CFC99C100017B7F /* PatientDetailViewModel.swift */,
-				D72A1FE92CFC99C100017B7F /* PatientDetailView.swift */,
+				D786DE142D12F4CB00E71396 /* PatientDetailView.swift */,
+				D786DE122D12F4C600E71396 /* PatientDetailViewModel.swift */,
 			);
 			path = "Patient Details";
 			sourceTree = "<group>";
@@ -557,7 +557,6 @@
 			files = (
 				D762DAF62CDCA5DE001A6927 /* Majors.swift in Sources */,
 				D762DAF52CDCA5DE001A6927 /* User.swift in Sources */,
-				D72A1FEA2CFC99C100017B7F /* PatientDetailViewModel.swift in Sources */,
 				D762DAE72CDCA57D001A6927 /* VideoUploader.swift in Sources */,
 				D7BF5BBB2CFCB3A500300ADC /* AnalysisCellView.swift in Sources */,
 				D7A589602CFCB78200F63A7A /* MySamplePatientsView.swift in Sources */,
@@ -567,10 +566,10 @@
 				D762DAA12CDCA52A001A6927 /* ViewController.swift in Sources */,
 				D7A5895E2CFCB60E00F63A7A /* Components.swift in Sources */,
 				D72A20162CFC9ABA00017B7F /* Radius.swift in Sources */,
-				D72A1FEB2CFC99C100017B7F /* PatientDetailView.swift in Sources */,
 				D72A20212CFC9ABA00017B7F /* SecureFieldDS.swift in Sources */,
 				D7B73CD62CFE7651006FAAC8 /* FirestoreUtility.swift in Sources */,
 				D762DAD52CDCA57D001A6927 /* SignUpViewModel.swift in Sources */,
+				D786DE132D12F4C600E71396 /* PatientDetailViewModel.swift in Sources */,
 				D72A201E2CFC9ABA00017B7F /* Spacing.swift in Sources */,
 				D7BF5BD22CFCB4BD00300ADC /* Dimensions.swift in Sources */,
 				D751E35E2D0058AE00F179C6 /* AssignPatientView.swift in Sources */,
@@ -593,6 +592,7 @@
 				D7BF5BB42CFCB38C00300ADC /* MySamplePatientsViewModel.swift in Sources */,
 				D72A20172CFC9ABA00017B7F /* ButtonDS.swift in Sources */,
 				D72A201B2CFC9ABA00017B7F /* LinkText.swift in Sources */,
+				D786DE152D12F4CB00E71396 /* PatientDetailView.swift in Sources */,
 				D751E3602D0058BA00F179C6 /* AssignPatientViewModel.swift in Sources */,
 				D762DAEC2CDCA5CF001A6927 /* SeizureXpertApp.swift in Sources */,
 				D72A201A2CFC9ABA00017B7F /* TextFieldDS.swift in Sources */,
