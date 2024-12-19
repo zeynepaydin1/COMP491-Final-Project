@@ -126,6 +126,7 @@ class LoginViewModel: ObservableObject {
         self.error = nil
         do {
             self.loginSuccessful = false
+            self.currentUser = nil // Clear the current user
             try Auth.auth().signOut()
             completion(true)
         } catch let signOutError as NSError {
@@ -133,6 +134,7 @@ class LoginViewModel: ObservableObject {
             completion(false)
         }
     }
+
 }
 enum UserType {
     case Patient
