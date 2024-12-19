@@ -13,7 +13,6 @@ class AddPatientViewModel: ObservableObject {
         isAdding = true
         error = nil
 
-        // If there is a profile image, upload it first
         if let profileImage = profileImage {
             let profileImagePath = "\(patient.username)/profile_picture.jpg"
 
@@ -21,7 +20,7 @@ class AddPatientViewModel: ObservableObject {
                 DispatchQueue.main.async {
                     switch result {
                     case .success:
-                        self?.savePatient(patient, profileImage: profileImage, completion: completion) // Pass profileImage
+                        self?.savePatient(patient, completion: completion)
                     case .failure(let uploadError):
                         self?.isAdding = false
                         self?.error = "Failed to upload profile image: \(uploadError.localizedDescription)"
@@ -30,14 +29,13 @@ class AddPatientViewModel: ObservableObject {
                 }
             }
         } else {
-            // No profile image, save patient directly
-            savePatient(patient, profileImage: nil, completion: completion) // Pass nil explicitly
+            savePatient(patient, completion: completion)
         }
     }
 
     /// Saves patient data to Firestore
-    private func savePatient(_ patient: SamplePatient, profileImage: UIImage?, completion: @escaping (Bool) -> Void) {
-        FirestoreUtility.addPatient(patient, profileImage: profileImage) { [weak self] success in
+    private func savePatient(_ patient: SamplePatient, completion: @escaping (Bool) -> Void) {
+        FirestoreUtility.addPatient(patient, profileImage: nil) { [weak self] success in
             DispatchQueue.main.async {
                 self?.isAdding = false
                 if !success {
@@ -68,12 +66,7 @@ class AddPatientViewModel: ObservableObject {
             }
 
             guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
-                let uploadError = NSError(
-                    domain: "UploadError",
-                    code: -2,
-                    userInfo: [NSLocalizedDescriptionKey: "Failed to upload profile image."]
-                )
-                completion(.failure(uploadError))
+                completion(.failure(NSError(domain: "UploadError", code: -2, userInfo: [NSLocalizedDescriptionKey: "Failed to upload profile image."])))
                 return
             }
 

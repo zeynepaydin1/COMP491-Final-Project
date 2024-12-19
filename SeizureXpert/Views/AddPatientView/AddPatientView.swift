@@ -12,7 +12,7 @@ struct AddPatientView: View {
 
     @StateObject private var viewModel = AddPatientViewModel()
     @Environment(\.presentationMode) private var presentationMode
-    @EnvironmentObject var loginViewModel: LoginViewModel // To handle logout
+    @EnvironmentObject var loginViewModel: LoginViewModel // To retrieve the username of the logged-in user
 
     var body: some View {
         VStack(spacing: 20) {
@@ -48,8 +48,8 @@ struct AddPatientView: View {
                             Circle()
                                 .stroke(Color.blue, lineWidth: 2)
                         )
-                } else {
-                    ProfileImageView(username: "\(name.lowercased())_\(surname.lowercased())")
+                } else if let username = loginViewModel.currentUser?.username {
+                    ProfileImageView(username: username)
                         .frame(width: 100, height: 100)
                         .clipShape(Circle())
                 }
@@ -58,18 +58,16 @@ struct AddPatientView: View {
                 ImagePicker(image: $profileImage)
             }
 
-            TextField("Name", text: $name)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-                .padding()
 
-            TextField("Surname", text: $surname)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-                .padding()
+            InputField(label: "", placeholder: "Name", text: $name)
+                .keyboardType(.emailAddress)
 
-            TextField("Age", text: $age)
+            InputField(label: "", placeholder: "Surname", text: $surname)
+                .keyboardType(.emailAddress)
+
+            InputField(label: "", placeholder: "Age", text: $age)
                 .keyboardType(.numberPad)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-                .padding()
+
 
             Picker("Gender", selection: $gender) {
                 Text("Male").tag("Male")
@@ -116,14 +114,18 @@ struct AddPatientView: View {
         successMessage = nil
         errorMessage = nil
 
-        let uniqueDirectory = "\(name.lowercased())_\(surname.lowercased())"
+        guard let username = loginViewModel.currentUser?.username else {
+            errorMessage = "Failed to retrieve username. Please log in again."
+            return
+        }
+
         let patient = SamplePatient(
             id: UUID().uuidString,
             name: name,
             surname: surname,
             age: age,
             gender: gender,
-            username: uniqueDirectory
+            username: username // Use the username from the logged-in user
         )
 
         viewModel.addPatient(patient: patient, profileImage: profileImage) { success in
@@ -135,9 +137,13 @@ struct AddPatientView: View {
         }
     }
 }
+
 struct AddPatientView_Previews: PreviewProvider {
     static var previews: some View {
-        AddPatientView()
-            .environmentObject(LoginViewModel()) // Provide the environment object required by the view
+        let loginViewModel = LoginViewModel()
+        loginViewModel.currentUser = User(username: "john_doe", email: "john@example.com", name: "John Doe", isDoctor: false)
+
+        return AddPatientView()
+            .environmentObject(loginViewModel) // Provide the environment object required by the view
     }
 }
