@@ -80,14 +80,15 @@ struct AddPatientView: View {
                 addPatient()
             }) {
                 Text("Register")
-                    .font(.headline)
-                    .foregroundColor(.white)
-                    .padding()
+                    .fontWeight(.bold)
                     .frame(maxWidth: .infinity)
-                    .background(Colors.primary)
-                    .cornerRadius(10)
+                    .padding()
+                    .background(DesignSystem.Colors.primary)
+                    .foregroundColor(.white)
+                    .cornerRadius(DesignSystem.Corners.rounded)
             }
-            .padding()
+            .padding(.top, 16) // Ensure button is slightly separated
+            .padding(.horizontal, DesignSystem.Spacing.horizontal)
 
             Spacer()
 
