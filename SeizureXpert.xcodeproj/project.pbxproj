@@ -74,6 +74,7 @@
 		D762DB462CDCA8D9001A6927 /* FirebaseVertexAI in Frameworks */ = {isa = PBXBuildFile; productRef = D762DB452CDCA8D9001A6927 /* FirebaseVertexAI */; };
 		D786DE132D12F4C600E71396 /* PatientDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D786DE122D12F4C600E71396 /* PatientDetailViewModel.swift */; };
 		D786DE152D12F4CB00E71396 /* PatientDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D786DE142D12F4CB00E71396 /* PatientDetailView.swift */; };
+		D79164892D142B8D00FF9D83 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D79164882D142B8D00FF9D83 /* SettingsViewModel.swift */; };
 		D793A0642CFC7941002A8665 /* PlaceholderTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D793A0632CFC7941002A8665 /* PlaceholderTextField.swift */; };
 		D793A0662CFC7AB5002A8665 /* DesignSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D793A0652CFC7AB5002A8665 /* DesignSystem.swift */; };
 		D793A0682CFC7B4F002A8665 /* InputField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D793A0672CFC7B4F002A8665 /* InputField.swift */; };
@@ -144,6 +145,7 @@
 		D762DAF42CDCA5DE001A6927 /* Video.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Video.swift; sourceTree = "<group>"; };
 		D786DE122D12F4C600E71396 /* PatientDetailViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PatientDetailViewModel.swift; sourceTree = "<group>"; };
 		D786DE142D12F4CB00E71396 /* PatientDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PatientDetailView.swift; sourceTree = "<group>"; };
+		D79164882D142B8D00FF9D83 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		D793A0632CFC7941002A8665 /* PlaceholderTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceholderTextField.swift; sourceTree = "<group>"; };
 		D793A0652CFC7AB5002A8665 /* DesignSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignSystem.swift; sourceTree = "<group>"; };
 		D793A0672CFC7B4F002A8665 /* InputField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputField.swift; sourceTree = "<group>"; };
@@ -425,6 +427,7 @@
 			isa = PBXGroup;
 			children = (
 				D7BF5BAF2CFCB37000300ADC /* SettingsView.swift */,
+				D79164882D142B8D00FF9D83 /* SettingsViewModel.swift */,
 			);
 			path = "Settings Screen";
 			sourceTree = "<group>";
@@ -613,6 +616,7 @@
 				D7BF5BAD2CFCB34300300ADC /* HomeScreenViewModel.swift in Sources */,
 				D7BF5BB42CFCB38C00300ADC /* MySamplePatientsViewModel.swift in Sources */,
 				D72A20172CFC9ABA00017B7F /* ButtonDS.swift in Sources */,
+				D79164892D142B8D00FF9D83 /* SettingsViewModel.swift in Sources */,
 				D72A201B2CFC9ABA00017B7F /* LinkText.swift in Sources */,
 				D786DE152D12F4CB00E71396 /* PatientDetailView.swift in Sources */,
 				D751E3602D0058BA00F179C6 /* AssignPatientViewModel.swift in Sources */,

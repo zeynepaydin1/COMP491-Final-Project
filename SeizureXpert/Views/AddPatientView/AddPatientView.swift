@@ -142,7 +142,7 @@ struct AddPatientView: View {
 struct AddPatientView_Previews: PreviewProvider {
     static var previews: some View {
         let loginViewModel = LoginViewModel()
-        loginViewModel.currentUser = User(username: "john_doe", email: "john@example.com", name: "John Doe", isDoctor: false)
+        loginViewModel.currentUser = User(username: "Zeyzey", email: "john@example.com", name: "John Doe", isDoctor: false)
 
         return AddPatientView()
             .environmentObject(loginViewModel) // Provide the environment object required by the view

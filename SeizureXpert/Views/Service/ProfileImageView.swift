@@ -7,11 +7,12 @@
 
 import Foundation
 import SwiftUI
+import SwiftUI
 
 struct ProfileImageView: View {
     let username: String
-    @State private var image: UIImage?
-    @State private var isUsingSystemImage: Bool = false
+    @State private var image: UIImage? // Store the fetched image
+    @State private var isUsingFallbackImage: Bool = false // Track if fallback image is being used
 
     var body: some View {
         Group {
@@ -19,12 +20,19 @@ struct ProfileImageView: View {
                 Image(uiImage: image)
                     .resizable()
                     .scaledToFill()
-            } else {
-                Image(systemName: "brain.head.profile") // Fallback system image
+                    .clipShape(Circle())
+            } else if isUsingFallbackImage {
+                // Fallback system image
+                Image(systemName: "brain.head.profile")
                     .resizable()
                     .scaledToFill()
-                    .frame(width: 50, height: 50) // Set the desired size
+                    .clipShape(Circle())
                     .foregroundColor(.gray)
+                    .frame(width: 50, height: 50) // Set desired size for profile image
+            } else {
+                // Placeholder while loading
+                ProgressView()
+                    .frame(width: 50, height: 50)
             }
         }
         .onAppear {
@@ -32,13 +40,18 @@ struct ProfileImageView: View {
         }
     }
 
+    // MARK: - Fetch Profile Image
     private func fetchProfileImage(for username: String) {
         let profileImageURL = ServerConfig.constructURL(for: "\(username)/profile_picture.jpg")
+        print("Fetching profile image from URL: \(profileImageURL)") // Log the URL
+
         guard let url = URL(string: profileImageURL) else {
+            print("Invalid URL for profile image.")
             useFallbackImage()
             return
         }
 
+        // Perform URL session to fetch image
         URLSession.shared.dataTask(with: url) { data, response, error in
             if let error = error {
                 print("Error fetching profile image for \(username): \(error.localizedDescription)")
@@ -47,22 +60,24 @@ struct ProfileImageView: View {
             }
 
             guard let data = data, let fetchedImage = UIImage(data: data) else {
-                print("Failed to decode profile image for \(username).")
+                print("Failed to decode image data for \(username).")
                 useFallbackImage()
                 return
             }
 
+            // Update image on the main thread
             DispatchQueue.main.async {
                 self.image = fetchedImage
-                self.isUsingSystemImage = false
+                self.isUsingFallbackImage = false
             }
         }.resume()
     }
 
+    // MARK: - Fallback Image
     private func useFallbackImage() {
         DispatchQueue.main.async {
             self.image = nil
-            self.isUsingSystemImage = true
+            self.isUsingFallbackImage = true
         }
     }
 }
