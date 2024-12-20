@@ -8,11 +8,21 @@
 import SwiftUI
 
 struct DisplayRawEEGView: View {
+    let file: EEGFile // The selected EEG file
+
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack {
+            Text("Displaying Raw EEG Data")
+                .font(.headline)
+                .padding()
+            Text("File: \(file.name)")
+                .font(.subheadline)
+                .foregroundColor(.gray)
+        }
     }
 }
 
+// MARK: - Preview
 #Preview {
-    DisplayRawEEGView()
+    DisplayRawEEGView(file: EEGFile(id: UUID(), name: "example.eeg", path: "/path/to/example.eeg"))
 }

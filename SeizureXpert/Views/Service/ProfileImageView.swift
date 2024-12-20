@@ -7,7 +7,6 @@
 
 import Foundation
 import SwiftUI
-import SwiftUI
 
 struct ProfileImageView: View {
     let username: String

@@ -12,6 +12,7 @@
 		78A2DD4B2D148F190032C2E4 /* GPTResponseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78A2DD4A2D148F190032C2E4 /* GPTResponseView.swift */; };
 		78A2DD4D2D148F290032C2E4 /* HeatmapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78A2DD4C2D148F290032C2E4 /* HeatmapView.swift */; };
 		78A2DD4F2D148F430032C2E4 /* DisplayRawEEGView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78A2DD4E2D148F430032C2E4 /* DisplayRawEEGView.swift */; };
+		78A2DD512D15A6FF0032C2E4 /* EEGFileListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78A2DD502D15A6FF0032C2E4 /* EEGFileListView.swift */; };
 		D71CDCE72CFF1D7400DDDFF7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D71CDCE62CFF1D7400DDDFF7 /* GoogleService-Info.plist */; };
 		D71D636B2CEF1E71008C00C2 /* DisableAutofillTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = D71D636A2CEF1E71008C00C2 /* DisableAutofillTextField.swift */; };
 		D72A20162CFC9ABA00017B7F /* Radius.swift in Sources */ = {isa = PBXBuildFile; fileRef = D72A20082CFC9AB900017B7F /* Radius.swift */; };
@@ -120,6 +121,7 @@
 		78A2DD4A2D148F190032C2E4 /* GPTResponseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPTResponseView.swift; sourceTree = "<group>"; };
 		78A2DD4C2D148F290032C2E4 /* HeatmapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeatmapView.swift; sourceTree = "<group>"; };
 		78A2DD4E2D148F430032C2E4 /* DisplayRawEEGView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayRawEEGView.swift; sourceTree = "<group>"; };
+		78A2DD502D15A6FF0032C2E4 /* EEGFileListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EEGFileListView.swift; sourceTree = "<group>"; };
 		D71CDCE62CFF1D7400DDDFF7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D71D636A2CEF1E71008C00C2 /* DisableAutofillTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisableAutofillTextField.swift; sourceTree = "<group>"; };
 		D72A1FE62CFC98B500017B7F /* mul */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; name = mul; path = mul.lproj/Main.xcstrings; sourceTree = "<group>"; };
@@ -477,6 +479,7 @@
 				78A2DD4A2D148F190032C2E4 /* GPTResponseView.swift */,
 				78A2DD4C2D148F290032C2E4 /* HeatmapView.swift */,
 				78A2DD4E2D148F430032C2E4 /* DisplayRawEEGView.swift */,
+				78A2DD502D15A6FF0032C2E4 /* EEGFileListView.swift */,
 			);
 			path = "SOZ Visualization Page";
 			sourceTree = "<group>";
@@ -607,6 +610,7 @@
 				D7A5895E2CFCB60E00F63A7A /* Components.swift in Sources */,
 				D72A20162CFC9ABA00017B7F /* Radius.swift in Sources */,
 				D72A20212CFC9ABA00017B7F /* SecureFieldDS.swift in Sources */,
+				78A2DD512D15A6FF0032C2E4 /* EEGFileListView.swift in Sources */,
 				D7B73CD62CFE7651006FAAC8 /* FirestoreUtility.swift in Sources */,
 				D762DAD52CDCA57D001A6927 /* SignUpViewModel.swift in Sources */,
 				D786DE132D12F4C600E71396 /* PatientDetailViewModel.swift in Sources */,

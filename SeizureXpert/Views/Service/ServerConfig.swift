@@ -8,7 +8,7 @@
 import Foundation
 
 struct ServerConfig {
-    static let baseURL = "http://172.21.155.107:8080/" // Update this as needed
+    static let baseURL = "http://192.168.1.50:8080/" // Update this as needed
 
     /// Constructs a full URL for a given path
     static func constructURL(for path: String) -> String {

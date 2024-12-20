@@ -2,6 +2,7 @@ import SwiftUI
 
 struct GPTResponseView: View {
     let patient: SamplePatient
+    let file: EEGFile // The selected EEG file
 
     @State private var gptReport: String = "Generating report..."
     @State private var isLoading: Bool = true
@@ -30,7 +31,7 @@ struct GPTResponseView: View {
 
                 // GPT Report Section
                 VStack(alignment: .leading, spacing: 16) {
-                    Text("Generated GPT Report")
+                    Text("Generated GPT Report for File: \(file.name)")
                         .font(.headline)
                         .foregroundColor(Colors.primary)
 
@@ -78,7 +79,10 @@ struct GPTResponseView: View {
     private func generateGPTReport() {
         isLoading = true
         DispatchQueue.global().asyncAfter(deadline: .now() + 2) { // Simulating network or processing delay
-            let generatedText = "This is a detailed GPT-generated report based on the patient's data. It contains valuable insights and observations for further analysis."
+            let generatedText = """
+            This is a detailed GPT-generated report for the file \(file.name). It contains valuable insights and observations \
+            based on the patient's data and the selected EEG file.
+            """
             DispatchQueue.main.async {
                 gptReport = generatedText
                 isLoading = false
@@ -102,8 +106,9 @@ struct GPTResponseView_Previews: PreviewProvider {
             gender: "female",
             username: "janedoe" // Sample patient data
         )
+        let mockFile = EEGFile(id: UUID(), name: "example.eeg", path: "/path/to/example.eeg")
 
-        GPTResponseView(patient: mockPatient)
+        GPTResponseView(patient: mockPatient, file: mockFile)
             .previewDisplayName("GPT Response View")
     }
 }
