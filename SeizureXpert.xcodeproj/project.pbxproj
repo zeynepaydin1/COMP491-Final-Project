@@ -8,8 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		789A88782D1F53A900B941F8 /* EEGFileListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 789A88772D1F53A900B941F8 /* EEGFileListViewModel.swift */; };
-		78A2DD432D148EE10032C2E4 /* Visualize2DView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78A2DD422D148EE10032C2E4 /* Visualize2DView.swift */; };
-		78A2DD452D148EF00032C2E4 /* Visualize3DView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78A2DD442D148EF00032C2E4 /* Visualize3DView.swift */; };
+		789A887A2D20487C00B941F8 /* SurgeryOutcomePredictionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 789A88792D20487C00B941F8 /* SurgeryOutcomePredictionView.swift */; };
+		789A887C2D204BA100B941F8 /* ChannelListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 789A887B2D204BA100B941F8 /* ChannelListView.swift */; };
 		78A2DD4B2D148F190032C2E4 /* GPTResponseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78A2DD4A2D148F190032C2E4 /* GPTResponseView.swift */; };
 		78A2DD4D2D148F290032C2E4 /* HeatmapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78A2DD4C2D148F290032C2E4 /* HeatmapView.swift */; };
 		78A2DD4F2D148F430032C2E4 /* DisplayRawEEGView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78A2DD4E2D148F430032C2E4 /* DisplayRawEEGView.swift */; };
@@ -118,8 +118,8 @@
 
 /* Begin PBXFileReference section */
 		789A88772D1F53A900B941F8 /* EEGFileListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EEGFileListViewModel.swift; sourceTree = "<group>"; };
-		78A2DD422D148EE10032C2E4 /* Visualize2DView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Visualize2DView.swift; sourceTree = "<group>"; };
-		78A2DD442D148EF00032C2E4 /* Visualize3DView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Visualize3DView.swift; sourceTree = "<group>"; };
+		789A88792D20487C00B941F8 /* SurgeryOutcomePredictionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurgeryOutcomePredictionView.swift; sourceTree = "<group>"; };
+		789A887B2D204BA100B941F8 /* ChannelListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelListView.swift; sourceTree = "<group>"; };
 		78A2DD4A2D148F190032C2E4 /* GPTResponseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPTResponseView.swift; sourceTree = "<group>"; };
 		78A2DD4C2D148F290032C2E4 /* HeatmapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeatmapView.swift; sourceTree = "<group>"; };
 		78A2DD4E2D148F430032C2E4 /* DisplayRawEEGView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayRawEEGView.swift; sourceTree = "<group>"; };
@@ -476,13 +476,13 @@
 			isa = PBXGroup;
 			children = (
 				D7BF5BC92CFCB45D00300ADC /* VisualizationView.swift */,
-				78A2DD422D148EE10032C2E4 /* Visualize2DView.swift */,
-				78A2DD442D148EF00032C2E4 /* Visualize3DView.swift */,
 				78A2DD4A2D148F190032C2E4 /* GPTResponseView.swift */,
 				78A2DD4C2D148F290032C2E4 /* HeatmapView.swift */,
 				78A2DD4E2D148F430032C2E4 /* DisplayRawEEGView.swift */,
 				78A2DD502D15A6FF0032C2E4 /* EEGFileListView.swift */,
 				789A88772D1F53A900B941F8 /* EEGFileListViewModel.swift */,
+				789A88792D20487C00B941F8 /* SurgeryOutcomePredictionView.swift */,
+				789A887B2D204BA100B941F8 /* ChannelListView.swift */,
 			);
 			path = "SOZ Visualization Page";
 			sourceTree = "<group>";
@@ -600,6 +600,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D762DAF62CDCA5DE001A6927 /* Majors.swift in Sources */,
+				789A887A2D20487C00B941F8 /* SurgeryOutcomePredictionView.swift in Sources */,
 				78A2DD4D2D148F290032C2E4 /* HeatmapView.swift in Sources */,
 				D762DAF52CDCA5DE001A6927 /* User.swift in Sources */,
 				D762DAE72CDCA57D001A6927 /* VideoUploader.swift in Sources */,
@@ -646,13 +647,13 @@
 				D786DE152D12F4CB00E71396 /* PatientDetailView.swift in Sources */,
 				D751E3602D0058BA00F179C6 /* AssignPatientViewModel.swift in Sources */,
 				D762DAEC2CDCA5CF001A6927 /* SeizureXpertApp.swift in Sources */,
+				789A887C2D204BA100B941F8 /* ChannelListView.swift in Sources */,
 				D72A201A2CFC9ABA00017B7F /* TextFieldDS.swift in Sources */,
 				D7BA90862CFE60AB00229618 /* AddPatientViewModel.swift in Sources */,
 				D793A0682CFC7B4F002A8665 /* InputField.swift in Sources */,
 				D7BF5BB02CFCB37000300ADC /* SettingsView.swift in Sources */,
 				D7BF5BCE2CFCB4AB00300ADC /* Fonts.swift in Sources */,
 				D7BF5BBF2CFCB3BA00300ADC /* AllPatientsView.swift in Sources */,
-				78A2DD432D148EE10032C2E4 /* Visualize2DView.swift in Sources */,
 				D72A20222CFC9ABA00017B7F /* BackgroundDS.swift in Sources */,
 				D762DAE62CDCA57D001A6927 /* AppState.swift in Sources */,
 				D762DAE82CDCA57D001A6927 /* LoginViewModel.swift in Sources */,
@@ -665,7 +666,6 @@
 				D7BF5BCC2CFCB46A00300ADC /* SplashScreenView.swift in Sources */,
 				D762DAF82CDCA5DE001A6927 /* Video.swift in Sources */,
 				D793A0642CFC7941002A8665 /* PlaceholderTextField.swift in Sources */,
-				78A2DD452D148EF00032C2E4 /* Visualize3DView.swift in Sources */,
 				D72A201C2CFC9ABA00017B7F /* TextDS.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

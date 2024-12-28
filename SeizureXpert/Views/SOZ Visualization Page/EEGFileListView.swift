@@ -1,13 +1,29 @@
+//
+//  EEGFileListView.swift
+//  SeizureXpert
+//
+//  Created by Sarp Vulaş on 28.12.2024.
+//
+
 import SwiftUI
 import Foundation
 
 // MARK: - EEGFileListView
 struct EEGFileListView: View {
     @ObservedObject var viewModel: EEGFileListViewModel
+
+    /// Determines how the view behaves:
+    /// - `"prediction"`: Skip script execution when an EEG file is tapped
+    /// - Otherwise: Call the default script command (e.g., `sendHeatmapCommand`)
+    let mode: String?
+
+    /// Closure called when an EEG file is selected.
+    /// The parent view will navigate using this callback.
     var onSelect: (EEGFile) -> Void
 
     var body: some View {
         VStack(spacing: 20) {
+            // 1) Loading state
             if viewModel.isLoading {
                 VStack {
                     ProgressView()
@@ -17,7 +33,9 @@ struct EEGFileListView: View {
                         .font(.headline)
                         .foregroundColor(.secondary)
                 }
-            } else if let error = viewModel.fetchError {
+            }
+            // 2) Error state
+            else if let error = viewModel.fetchError {
                 VStack(spacing: 10) {
                     Image(systemName: "xmark.octagon")
                         .font(.system(size: 50))
@@ -27,7 +45,9 @@ struct EEGFileListView: View {
                         .multilineTextAlignment(.center)
                         .padding()
                 }
-            } else if viewModel.eegFiles.isEmpty {
+            }
+            // 3) Empty state
+            else if viewModel.eegFiles.isEmpty {
                 VStack(spacing: 10) {
                     Image(systemName: "folder.badge.questionmark")
                         .font(.system(size: 50))
@@ -37,18 +57,27 @@ struct EEGFileListView: View {
                         .foregroundColor(.secondary)
                         .padding()
                 }
-            } else {
+            }
+            // 4) Show the list of .eeg files
+            else {
                 ScrollView {
                     LazyVStack(spacing: 15) {
                         ForEach(viewModel.eegFiles) { file in
                             Button(action: {
-                                viewModel.isSendingCommand = true
-                                viewModel.sendHeatmapCommand(for: file) { success in
-                                    viewModel.isSendingCommand = false
-                                    if success {
-                                        onSelect(file)
-                                    } else {
-                                        viewModel.commandError = "Failed to send heatmap creation command."
+                                // If mode == "prediction", skip sending any commands
+                                if mode == "prediction" {
+                                    onSelect(file)
+                                } else {
+                                    // Default behavior: send a heatmap command
+                                    // (Feel free to add more checks for "heatmap", "raw", etc.)
+                                    viewModel.isSendingCommand = true
+                                    viewModel.sendHeatmapCommand(for: file) { success in
+                                        viewModel.isSendingCommand = false
+                                        if success {
+                                            onSelect(file)
+                                        } else {
+                                            viewModel.commandError = "Failed to send heatmap creation command."
+                                        }
                                     }
                                 }
                             }) {
@@ -79,6 +108,7 @@ struct EEGFileListView: View {
                     .padding(.horizontal)
                 }
 
+                // Display any command error that happened after pressing a file
                 if let commandError = viewModel.commandError {
                     Text("Error: \(commandError)")
                         .foregroundColor(.red)
@@ -93,9 +123,10 @@ struct EEGFileListView: View {
     }
 }
 
-// MARK: - VisualizationView_Previews
+// MARK: - Preview
 struct EEGFileListView_Previews: PreviewProvider {
     static var previews: some View {
+        // Mock patient
         let mockPatient = SamplePatient(
             id: "",
             name: "Jane",
@@ -105,9 +136,13 @@ struct EEGFileListView_Previews: PreviewProvider {
             username: "sarpvulas" // Sample patient data
         )
 
-        EEGFileListView(viewModel: EEGFileListViewModel(patient: mockPatient), onSelect: { selectedFile in
+        // Pass in any mode you like, e.g. "prediction"
+        EEGFileListView(
+            viewModel: EEGFileListViewModel(patient: mockPatient),
+            mode: "prediction"
+        ) { selectedFile in
             Text("Selected file: \(selectedFile.name)")
-        })
-        .previewDisplayName("EEG File List View")
+        }
+        .previewDisplayName("EEG File List View - Prediction Mode")
     }
 }
