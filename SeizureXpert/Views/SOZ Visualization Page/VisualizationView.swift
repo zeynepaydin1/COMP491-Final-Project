@@ -7,6 +7,8 @@ struct EEGFile: Identifiable {
     let path: String
 }
 
+// MARK: - Visualization View
+import SwiftUI
 
 // MARK: - Visualization View
 struct VisualizationView: View {
@@ -38,7 +40,7 @@ struct VisualizationView: View {
                 VStack(spacing: 32) {
                     HStack(spacing: 32) {
                         NavigationLink(
-                            destination: EEGFileListViewWrapper(patient: patient) { file in
+                            destination: EEGFileListViewWrapper(patient: patient, mode: nil) { file in
                                 Visualize2DView(file: file)
                             }
                         ) {
@@ -52,7 +54,7 @@ struct VisualizationView: View {
                                 .shadow(color: .gray.opacity(0.5), radius: 5, x: 0, y: 4)
                         }
                         NavigationLink(
-                            destination: EEGFileListViewWrapper(patient: patient) { file in
+                            destination: EEGFileListViewWrapper(patient: patient, mode: nil) { file in
                                 Visualize3DView(file: file)
                             }
                         ) {
@@ -69,7 +71,7 @@ struct VisualizationView: View {
 
                     HStack(spacing: 32) {
                         NavigationLink(
-                            destination: EEGFileListViewWrapper(patient: patient) { file in
+                            destination: EEGFileListViewWrapper(patient: patient, mode: "heatmap") { file in
                                 HeatmapView(patient: patient, file: file)
                             }
                         ) {
@@ -83,11 +85,11 @@ struct VisualizationView: View {
                                 .shadow(color: .gray.opacity(0.5), radius: 5, x: 0, y: 4)
                         }
                         NavigationLink(
-                            destination: EEGFileListViewWrapper(patient: patient) { file in
-                                DisplayRawEEGView(file: file)
+                            destination: EEGFileListViewWrapper(patient: patient, mode: "raw") { file in
+                                DisplayRawEEGView(patient: patient, file: file)
                             }
                         ) {
-                            Text("Display Raw EEG Frequency")
+                            Text("Display Raw EEG Data")
                                 .font(.headline)
                                 .foregroundColor(Colors.primary)
                                 .frame(width: 100, height: 100)
@@ -100,7 +102,7 @@ struct VisualizationView: View {
 
                     HStack(spacing: 32) {
                         NavigationLink(
-                            destination: EEGFileListViewWrapper(patient: patient) { file in
+                            destination: EEGFileListViewWrapper(patient: patient, mode: nil) { file in
                                 GPTResponseView(patient: patient, file: file)
                             }
                         ) {
@@ -129,6 +131,7 @@ struct VisualizationView: View {
 // MARK: - EEGFileListViewWrapper
 struct EEGFileListViewWrapper<Destination: View>: View {
     let patient: SamplePatient
+    let mode: String?
     let destination: (EEGFile) -> Destination
 
     @State private var selectedFile: EEGFile?
@@ -136,9 +139,12 @@ struct EEGFileListViewWrapper<Destination: View>: View {
 
     var body: some View {
         VStack {
-            EEGFileListView(patient: patient) { file in
-                // When a file is selected, record it and trigger navigation
+            EEGFileListView(viewModel: EEGFileListViewModel(patient: patient)) { file in
+                // When a file is selected, send the corresponding command and navigate
                 self.selectedFile = file
+                if let mode = mode {
+                    sendCommand(for: file, mode: mode)
+                }
                 self.showDetail = true
             }
 
@@ -156,8 +162,19 @@ struct EEGFileListViewWrapper<Destination: View>: View {
             }
         }
     }
-}
 
+    /// Send a command to the server for the selected EEG file
+    private func sendCommand(for file: EEGFile, mode: String) {
+        let viewModel = EEGFileListViewModel(patient: patient)
+        viewModel.sendCommand(for: file, mode: mode) { success in
+            if success {
+                print("\(mode.capitalized) command executed successfully.")
+            } else {
+                print("Failed to execute \(mode.capitalized) command.")
+            }
+        }
+    }
+}
 
 // MARK: - Preview
 struct VisualizationView_Previews: PreviewProvider {
@@ -168,7 +185,7 @@ struct VisualizationView_Previews: PreviewProvider {
             surname: "Doe",
             age: "30",
             gender: "female",
-            username: "janedoe" // Sample patient data
+            username: "sarpvulas" // Sample patient data
         )
 
         VisualizationView(patient: mockPatient)

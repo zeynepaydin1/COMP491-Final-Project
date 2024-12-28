@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		789A88782D1F53A900B941F8 /* EEGFileListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 789A88772D1F53A900B941F8 /* EEGFileListViewModel.swift */; };
 		78A2DD432D148EE10032C2E4 /* Visualize2DView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78A2DD422D148EE10032C2E4 /* Visualize2DView.swift */; };
 		78A2DD452D148EF00032C2E4 /* Visualize3DView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78A2DD442D148EF00032C2E4 /* Visualize3DView.swift */; };
 		78A2DD4B2D148F190032C2E4 /* GPTResponseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78A2DD4A2D148F190032C2E4 /* GPTResponseView.swift */; };
@@ -116,6 +117,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		789A88772D1F53A900B941F8 /* EEGFileListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EEGFileListViewModel.swift; sourceTree = "<group>"; };
 		78A2DD422D148EE10032C2E4 /* Visualize2DView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Visualize2DView.swift; sourceTree = "<group>"; };
 		78A2DD442D148EF00032C2E4 /* Visualize3DView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Visualize3DView.swift; sourceTree = "<group>"; };
 		78A2DD4A2D148F190032C2E4 /* GPTResponseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPTResponseView.swift; sourceTree = "<group>"; };
@@ -480,6 +482,7 @@
 				78A2DD4C2D148F290032C2E4 /* HeatmapView.swift */,
 				78A2DD4E2D148F430032C2E4 /* DisplayRawEEGView.swift */,
 				78A2DD502D15A6FF0032C2E4 /* EEGFileListView.swift */,
+				789A88772D1F53A900B941F8 /* EEGFileListViewModel.swift */,
 			);
 			path = "SOZ Visualization Page";
 			sourceTree = "<group>";
@@ -654,6 +657,7 @@
 				D762DAE62CDCA57D001A6927 /* AppState.swift in Sources */,
 				D762DAE82CDCA57D001A6927 /* LoginViewModel.swift in Sources */,
 				D7B145622D134CB400F48834 /* ServerConfig.swift in Sources */,
+				789A88782D1F53A900B941F8 /* EEGFileListViewModel.swift in Sources */,
 				D71D636B2CEF1E71008C00C2 /* DisableAutofillTextField.swift in Sources */,
 				D7BF5BC22CFCB3E700300ADC /* DoctorProfileView.swift in Sources */,
 				D7BF5BCA2CFCB45D00300ADC /* VisualizationView.swift in Sources */,
@@ -810,7 +814,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 3YL59MWSRT;
+				DEVELOPMENT_TEAM = 24S3P97D2N;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSCameraUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -842,7 +846,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 3YL59MWSRT;
+				DEVELOPMENT_TEAM = 24S3P97D2N;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSCameraUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
