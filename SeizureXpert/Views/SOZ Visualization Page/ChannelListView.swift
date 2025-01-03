@@ -1,28 +1,26 @@
 import SwiftUI
 
 struct ChannelListView: View {
-    let patient: SamplePatient
-    let file: EEGFile
+    @StateObject var viewModel: ChannelListViewModel
 
-    @State private var isLoading = true
-    @State private var executionError: String?
-    @State private var channelNames: [String] = []
-    @State private var selectedChannels: Set<String> = []
+    // This state drives navigation to TSVInfoView
+    @State private var showTSVView = false
 
     var body: some View {
         ZStack {
+            // Background Color
             Color(.systemGroupedBackground)
                 .edgesIgnoringSafeArea(.all)
 
             VStack(spacing: 20) {
-                // Header
+                // Header Section
                 VStack(alignment: .leading, spacing: 8) {
-                    Text("Patient: \(patient.name) \(patient.surname)")
+                    Text("Patient: \(viewModel.patient.name) \(viewModel.patient.surname)")
                         .font(.title3)
                         .fontWeight(.semibold)
                         .foregroundColor(.primary)
 
-                    Text("EEG File: \(file.name)")
+                    Text("EEG File: \(viewModel.file.name)")
                         .font(.subheadline)
                         .foregroundColor(.secondary)
                 }
@@ -34,7 +32,8 @@ struct ChannelListView: View {
                 )
                 .padding(.horizontal)
 
-                if let error = executionError {
+                // Error or Loading States
+                if let error = viewModel.executionError {
                     VStack {
                         Text("Error")
                             .font(.title3)
@@ -46,7 +45,7 @@ struct ChannelListView: View {
                             .foregroundColor(.secondary)
                     }
                     .padding()
-                } else if isLoading {
+                } else if viewModel.isLoading {
                     VStack {
                         ProgressView("Loading Channels...")
                             .padding()
@@ -54,17 +53,18 @@ struct ChannelListView: View {
                             .font(.body)
                             .foregroundColor(.secondary)
                     }
-                } else if channelNames.isEmpty {
+                } else if viewModel.channelNames.isEmpty {
                     Text("No channels found.")
                         .font(.body)
                         .foregroundColor(.secondary)
                         .padding()
                 } else {
+                    // Main content after channels are loaded
                     VStack {
-                        // "Select All" and "Deselect All" Buttons
+                        // Select/Deselect All Buttons
                         HStack(spacing: 16) {
                             Button(action: {
-                                selectedChannels = Set(channelNames)
+                                viewModel.selectAllChannels()
                             }) {
                                 HStack {
                                     Image(systemName: "checkmark.circle.fill")
@@ -81,7 +81,7 @@ struct ChannelListView: View {
                             }
 
                             Button(action: {
-                                selectedChannels.removeAll()
+                                viewModel.deselectAllChannels()
                             }) {
                                 HStack {
                                     Image(systemName: "xmark.circle.fill")
@@ -102,10 +102,10 @@ struct ChannelListView: View {
                         // Channel List with Multi-Select
                         ScrollView {
                             LazyVStack(spacing: 12) {
-                                ForEach(channelNames, id: \.self) { channel in
+                                ForEach(viewModel.channelNames, id: \.self) { channel in
                                     HStack {
-                                        Image(systemName: selectedChannels.contains(channel) ? "checkmark.circle.fill" : "circle")
-                                            .foregroundColor(selectedChannels.contains(channel) ? .blue : .gray)
+                                        Image(systemName: viewModel.selectedChannels.contains(channel) ? "checkmark.circle.fill" : "circle")
+                                            .foregroundColor(viewModel.selectedChannels.contains(channel) ? .blue : .gray)
                                             .font(.title3)
 
                                         Text(channel)
@@ -123,12 +123,37 @@ struct ChannelListView: View {
                                             .shadow(color: Color.black.opacity(0.1), radius: 3, x: 0, y: 2)
                                     )
                                     .onTapGesture {
-                                        toggleSelection(for: channel)
+                                        viewModel.toggleSelection(for: channel)
                                     }
                                 }
                             }
                             .padding(.horizontal)
                         }
+
+                        // Predict Button
+                        Button(action: {
+                            viewModel.predict()
+                        }) {
+                            HStack {
+                                if viewModel.isPredicting {
+                                    ProgressView()
+                                        .scaleEffect(1.5)
+                                } else {
+                                    Image(systemName: "play.circle.fill")
+                                        .font(.title3)
+                                    Text("Predict")
+                                        .font(.headline)
+                                }
+                            }
+                            .padding()
+                            .frame(maxWidth: .infinity)
+                            .background(viewModel.selectedChannels.isEmpty ? Color.gray.opacity(0.2) : Color.green.opacity(0.2))
+                            .foregroundColor(viewModel.selectedChannels.isEmpty ? .gray : .green)
+                            .cornerRadius(12)
+                            .shadow(color: viewModel.selectedChannels.isEmpty ? Color.clear : Color.green.opacity(0.3), radius: 3, x: 0, y: 2)
+                        }
+                        .disabled(viewModel.selectedChannels.isEmpty || viewModel.isPredicting)
+                        .padding(.horizontal)
                     }
                 }
             }
@@ -137,95 +162,21 @@ struct ChannelListView: View {
         .navigationTitle("Channels")
         .navigationBarTitleDisplayMode(.inline)
         .onAppear {
-            runScriptAndFetchChannels()
+            viewModel.fetchChannels()
         }
-    }
-
-    /// Toggles the selection of a channel
-    private func toggleSelection(for channel: String) {
-        if selectedChannels.contains(channel) {
-            selectedChannels.remove(channel)
-        } else {
-            selectedChannels.insert(channel)
-        }
-    }
-
-    /// Fetch channels and parse them
-    private func runScriptAndFetchChannels() {
-        isLoading = true
-        executionError = nil
-
-        guard let url = URL(string: ServerConfig.constructURL(for: "/run-script")) else {
-            self.executionError = "Invalid server URL."
-            self.isLoading = false
-            return
-        }
-
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        request.setValue(file.name, forHTTPHeaderField: "X-File-Name")
-        request.setValue(patient.username, forHTTPHeaderField: "X-Patient-Username")
-        request.setValue("channels", forHTTPHeaderField: "X-Mode")  // Request for channels mode
-
-        URLSession.shared.dataTask(with: request) { data, response, error in
-            if let error = error {
-                DispatchQueue.main.async {
-                    self.executionError = "Failed to execute script: \(error.localizedDescription)"
-                    self.isLoading = false
-                }
-                return
-            }
-
-            guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200,
-                  let data = data else {
-                let serverError = String(data: data ?? Data(), encoding: .utf8) ?? "Unknown error"
-                DispatchQueue.main.async {
-                    self.executionError = "Server error: \(serverError)"
-                    self.isLoading = false
-                }
-                return
-            }
-
-            // Parse the channels data received from the server
-            if let channelsResponse = String(data: data, encoding: .utf8) {
-                self.parseTSV(channelsResponse)
-            } else {
-                DispatchQueue.main.async {
-                    self.executionError = "Failed to decode server response."
-                    self.isLoading = false
-                }
+        // 1) Observe changes to `predictionResult`
+        .onChange(of: viewModel.predictionResult) { newValue in
+            // If a new prediction result arrives, trigger navigation
+            if newValue != nil {
+                showTSVView = true
             }
         }
-        .resume()
-    }
-
-    /// Splits TSV lines, extracts channel names (skipping the header row).
-    private func parseTSV(_ tsvString: String) {
-        let lines = tsvString.components(separatedBy: .newlines)
-        guard lines.count > 1 else {
-            DispatchQueue.main.async {
-                self.executionError = "TSV file appears empty."
-                self.isLoading = false
-            }
-            return
-        }
-
-        // Extract data rows (skip the header line)
-        let dataLines = Array(lines.dropFirst())
-
-        var extracted: [String] = []
-        for line in dataLines {
-            if line.trimmingCharacters(in: .whitespaces).isEmpty { continue }
-
-            let columns = line.components(separatedBy: "\t")
-            if let channelName = columns.first {
-                extracted.append(channelName)  // Add the first column (channel name)
-            }
-        }
-
-        DispatchQueue.main.async {
-            self.channelNames = extracted
-            self.isLoading = false
+        // 2) NavigationLink that becomes active when showTSVView = true
+        NavigationLink(
+            destination: TSVInfoView(viewModel: viewModel),
+            isActive: $showTSVView
+        ) {
+            EmptyView()
         }
     }
 }

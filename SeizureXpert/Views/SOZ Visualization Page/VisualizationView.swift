@@ -62,7 +62,7 @@ struct VisualizationView: View {
                         }
                         NavigationButton(title: "Predict Surgery Outcome", icon: "heart.fill") {
                             EEGFileListViewWrapper(patient: patient, mode: "prediction") { file in
-                                ChannelListView(patient: patient, file: file)
+                                ChannelListView(viewModel: ChannelListViewModel(patient: patient, file: file))
                             }
                         }
                     }

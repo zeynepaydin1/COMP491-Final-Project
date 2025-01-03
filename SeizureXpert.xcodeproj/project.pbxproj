@@ -10,6 +10,8 @@
 		789A88782D1F53A900B941F8 /* EEGFileListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 789A88772D1F53A900B941F8 /* EEGFileListViewModel.swift */; };
 		789A887A2D20487C00B941F8 /* SurgeryOutcomePredictionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 789A88792D20487C00B941F8 /* SurgeryOutcomePredictionView.swift */; };
 		789A887C2D204BA100B941F8 /* ChannelListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 789A887B2D204BA100B941F8 /* ChannelListView.swift */; };
+		789A887E2D22B7CA00B941F8 /* ChannelListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 789A887D2D22B7CA00B941F8 /* ChannelListViewModel.swift */; };
+		789A88822D26BFA900B941F8 /* TSVInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 789A88812D26BFA900B941F8 /* TSVInfoView.swift */; };
 		78A2DD4B2D148F190032C2E4 /* GPTResponseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78A2DD4A2D148F190032C2E4 /* GPTResponseView.swift */; };
 		78A2DD4D2D148F290032C2E4 /* HeatmapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78A2DD4C2D148F290032C2E4 /* HeatmapView.swift */; };
 		78A2DD4F2D148F430032C2E4 /* DisplayRawEEGView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78A2DD4E2D148F430032C2E4 /* DisplayRawEEGView.swift */; };
@@ -120,6 +122,8 @@
 		789A88772D1F53A900B941F8 /* EEGFileListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EEGFileListViewModel.swift; sourceTree = "<group>"; };
 		789A88792D20487C00B941F8 /* SurgeryOutcomePredictionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurgeryOutcomePredictionView.swift; sourceTree = "<group>"; };
 		789A887B2D204BA100B941F8 /* ChannelListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelListView.swift; sourceTree = "<group>"; };
+		789A887D2D22B7CA00B941F8 /* ChannelListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelListViewModel.swift; sourceTree = "<group>"; };
+		789A88812D26BFA900B941F8 /* TSVInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TSVInfoView.swift; sourceTree = "<group>"; };
 		78A2DD4A2D148F190032C2E4 /* GPTResponseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPTResponseView.swift; sourceTree = "<group>"; };
 		78A2DD4C2D148F290032C2E4 /* HeatmapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeatmapView.swift; sourceTree = "<group>"; };
 		78A2DD4E2D148F430032C2E4 /* DisplayRawEEGView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayRawEEGView.swift; sourceTree = "<group>"; };
@@ -483,6 +487,8 @@
 				789A88772D1F53A900B941F8 /* EEGFileListViewModel.swift */,
 				789A88792D20487C00B941F8 /* SurgeryOutcomePredictionView.swift */,
 				789A887B2D204BA100B941F8 /* ChannelListView.swift */,
+				789A887D2D22B7CA00B941F8 /* ChannelListViewModel.swift */,
+				789A88812D26BFA900B941F8 /* TSVInfoView.swift */,
 			);
 			path = "SOZ Visualization Page";
 			sourceTree = "<group>";
@@ -611,6 +617,7 @@
 				D75F376B2D005D4D0038C742 /* ImagePicker.swift in Sources */,
 				D7BF5BC52CFCB3FA00300ADC /* NotificationsView.swift in Sources */,
 				D762DAA12CDCA52A001A6927 /* ViewController.swift in Sources */,
+				789A88822D26BFA900B941F8 /* TSVInfoView.swift in Sources */,
 				D7A5895E2CFCB60E00F63A7A /* Components.swift in Sources */,
 				D72A20162CFC9ABA00017B7F /* Radius.swift in Sources */,
 				D72A20212CFC9ABA00017B7F /* SecureFieldDS.swift in Sources */,
@@ -647,6 +654,7 @@
 				D786DE152D12F4CB00E71396 /* PatientDetailView.swift in Sources */,
 				D751E3602D0058BA00F179C6 /* AssignPatientViewModel.swift in Sources */,
 				D762DAEC2CDCA5CF001A6927 /* SeizureXpertApp.swift in Sources */,
+				789A887E2D22B7CA00B941F8 /* ChannelListViewModel.swift in Sources */,
 				789A887C2D204BA100B941F8 /* ChannelListView.swift in Sources */,
 				D72A201A2CFC9ABA00017B7F /* TextFieldDS.swift in Sources */,
 				D7BA90862CFE60AB00229618 /* AddPatientViewModel.swift in Sources */,
