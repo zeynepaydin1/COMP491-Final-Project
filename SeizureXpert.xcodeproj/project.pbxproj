@@ -12,6 +12,11 @@
 		789A887C2D204BA100B941F8 /* ChannelListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 789A887B2D204BA100B941F8 /* ChannelListView.swift */; };
 		789A887E2D22B7CA00B941F8 /* ChannelListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 789A887D2D22B7CA00B941F8 /* ChannelListViewModel.swift */; };
 		789A88822D26BFA900B941F8 /* TSVInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 789A88812D26BFA900B941F8 /* TSVInfoView.swift */; };
+		789A88852D28711D00B941F8 /* OpenAISwift in Frameworks */ = {isa = PBXBuildFile; productRef = 789A88842D28711D00B941F8 /* OpenAISwift */; };
+		789A88892D28760F00B941F8 /* RequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 789A88882D28760F00B941F8 /* RequestBuilder.swift */; };
+		789A888B2D28765100B941F8 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 789A888A2D28765100B941F8 /* NetworkManager.swift */; };
+		789A888D2D28766100B941F8 /* AIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 789A888C2D28766100B941F8 /* AIService.swift */; };
+		789A888F2D28767500B941F8 /* AIResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 789A888E2D28767500B941F8 /* AIResponse.swift */; };
 		78A2DD4B2D148F190032C2E4 /* GPTResponseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78A2DD4A2D148F190032C2E4 /* GPTResponseView.swift */; };
 		78A2DD4D2D148F290032C2E4 /* HeatmapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78A2DD4C2D148F290032C2E4 /* HeatmapView.swift */; };
 		78A2DD4F2D148F430032C2E4 /* DisplayRawEEGView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78A2DD4E2D148F430032C2E4 /* DisplayRawEEGView.swift */; };
@@ -124,6 +129,10 @@
 		789A887B2D204BA100B941F8 /* ChannelListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelListView.swift; sourceTree = "<group>"; };
 		789A887D2D22B7CA00B941F8 /* ChannelListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelListViewModel.swift; sourceTree = "<group>"; };
 		789A88812D26BFA900B941F8 /* TSVInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TSVInfoView.swift; sourceTree = "<group>"; };
+		789A88882D28760F00B941F8 /* RequestBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestBuilder.swift; sourceTree = "<group>"; };
+		789A888A2D28765100B941F8 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		789A888C2D28766100B941F8 /* AIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIService.swift; sourceTree = "<group>"; };
+		789A888E2D28767500B941F8 /* AIResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIResponse.swift; sourceTree = "<group>"; };
 		78A2DD4A2D148F190032C2E4 /* GPTResponseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPTResponseView.swift; sourceTree = "<group>"; };
 		78A2DD4C2D148F290032C2E4 /* HeatmapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeatmapView.swift; sourceTree = "<group>"; };
 		78A2DD4E2D148F430032C2E4 /* DisplayRawEEGView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayRawEEGView.swift; sourceTree = "<group>"; };
@@ -209,6 +218,7 @@
 				D762DB0E2CDCA72F001A6927 /* FirebaseAnalytics in Frameworks */,
 				D762DB342CDCA8D9001A6927 /* FirebaseFunctionsCombine-Community in Frameworks */,
 				D75F37712D007C1C0038C742 /* FirebaseAnalyticsOnDeviceConversion in Frameworks */,
+				789A88852D28711D00B941F8 /* OpenAISwift in Frameworks */,
 				D762DB462CDCA8D9001A6927 /* FirebaseVertexAI in Frameworks */,
 				D75F37732D007C1C0038C742 /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
 				D762DB302CDCA8D9001A6927 /* FirebaseFirestoreCombine-Community in Frameworks */,
@@ -489,6 +499,10 @@
 				789A887B2D204BA100B941F8 /* ChannelListView.swift */,
 				789A887D2D22B7CA00B941F8 /* ChannelListViewModel.swift */,
 				789A88812D26BFA900B941F8 /* TSVInfoView.swift */,
+				789A88882D28760F00B941F8 /* RequestBuilder.swift */,
+				789A888A2D28765100B941F8 /* NetworkManager.swift */,
+				789A888C2D28766100B941F8 /* AIService.swift */,
+				789A888E2D28767500B941F8 /* AIResponse.swift */,
 			);
 			path = "SOZ Visualization Page";
 			sourceTree = "<group>";
@@ -544,6 +558,7 @@
 				D75F37722D007C1C0038C742 /* FirebaseAnalyticsWithoutAdIdSupport */,
 				D75F37742D007C1C0038C742 /* FirebaseAppCheck */,
 				D75F37762D007C1C0038C742 /* FirebaseAppDistribution-Beta */,
+				789A88842D28711D00B941F8 /* OpenAISwift */,
 			);
 			productName = SeizureXpert;
 			productReference = D762DA992CDCA52A001A6927 /* SeizureXpert.app */;
@@ -575,6 +590,7 @@
 			mainGroup = D762DA902CDCA52A001A6927;
 			packageReferences = (
 				D762DB0C2CDCA72F001A6927 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				789A88832D28711D00B941F8 /* XCRemoteSwiftPackageReference "OpenAISwift" */,
 			);
 			productRefGroup = D762DA9A2CDCA52A001A6927 /* Products */;
 			projectDirPath = "";
@@ -612,6 +628,7 @@
 				D762DAE72CDCA57D001A6927 /* VideoUploader.swift in Sources */,
 				D7BF5BBB2CFCB3A500300ADC /* AnalysisCellView.swift in Sources */,
 				D7A589602CFCB78200F63A7A /* MySamplePatientsView.swift in Sources */,
+				789A888D2D28766100B941F8 /* AIService.swift in Sources */,
 				D7A2A3332D13616B0056CC3B /* UploadEEGDataViewModel.swift in Sources */,
 				D793A0662CFC7AB5002A8665 /* DesignSystem.swift in Sources */,
 				D75F376B2D005D4D0038C742 /* ImagePicker.swift in Sources */,
@@ -624,6 +641,7 @@
 				78A2DD512D15A6FF0032C2E4 /* EEGFileListView.swift in Sources */,
 				D7B73CD62CFE7651006FAAC8 /* FirestoreUtility.swift in Sources */,
 				D762DAD52CDCA57D001A6927 /* SignUpViewModel.swift in Sources */,
+				789A88892D28760F00B941F8 /* RequestBuilder.swift in Sources */,
 				D786DE132D12F4C600E71396 /* PatientDetailViewModel.swift in Sources */,
 				D72A201E2CFC9ABA00017B7F /* Spacing.swift in Sources */,
 				D7BF5BD22CFCB4BD00300ADC /* Dimensions.swift in Sources */,
@@ -640,6 +658,8 @@
 				78A2DD4B2D148F190032C2E4 /* GPTResponseView.swift in Sources */,
 				78A2DD4F2D148F430032C2E4 /* DisplayRawEEGView.swift in Sources */,
 				D7BA90842CFE608E00229618 /* AddPatientView.swift in Sources */,
+				789A888B2D28765100B941F8 /* NetworkManager.swift in Sources */,
+				789A888F2D28767500B941F8 /* AIResponse.swift in Sources */,
 				D793A06C2CFC7B94002A8665 /* SocialLoginButton.swift in Sources */,
 				D751E35B2D00544700F179C6 /* ProfileView.swift in Sources */,
 				D762DAF72CDCA5DE001A6927 /* Subscription.swift in Sources */,
@@ -902,6 +922,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		789A88832D28711D00B941F8 /* XCRemoteSwiftPackageReference "OpenAISwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/adamrushy/OpenAISwift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.4.1;
+			};
+		};
 		D762DB0C2CDCA72F001A6927 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
@@ -913,6 +941,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		789A88842D28711D00B941F8 /* OpenAISwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 789A88832D28711D00B941F8 /* XCRemoteSwiftPackageReference "OpenAISwift" */;
+			productName = OpenAISwift;
+		};
 		D75F376E2D007C1C0038C742 /* FirebaseAnalytics */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = D762DB0C2CDCA72F001A6927 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
