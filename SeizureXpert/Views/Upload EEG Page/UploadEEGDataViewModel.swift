@@ -18,9 +18,8 @@ class UploadEEGDataViewModel: ObservableObject {
 
         resetMessages()
         isUploading = true
-        let destinationPath = "\(patient.username)/\(fileURL.lastPathComponent)"
 
-        uploadFile(to: destinationPath, fileURL: fileURL) { [weak self] result in
+        uploadFile(patientUsername: patient.username, fileURL: fileURL) { [weak self] result in
             DispatchQueue.main.async {
                 self?.isUploading = false
                 switch result {
@@ -33,7 +32,7 @@ class UploadEEGDataViewModel: ObservableObject {
         }
     }
 
-    private func uploadFile(to path: String, fileURL: URL, completion: @escaping (Result<Void, Error>) -> Void) {
+    private func uploadFile(patientUsername: String, fileURL: URL, completion: @escaping (Result<Void, Error>) -> Void) {
         guard let serverURL = URL(string: ServerConfig.baseURL) else {
             completion(.failure(NSError(domain: "Invalid URL", code: -1, userInfo: nil)))
             return
@@ -41,28 +40,37 @@ class UploadEEGDataViewModel: ObservableObject {
 
         var request = URLRequest(url: serverURL)
         request.httpMethod = "POST"
-        request.addValue(path, forHTTPHeaderField: "X-File-Name")
+        request.addValue(fileURL.lastPathComponent, forHTTPHeaderField: "X-File-Name") // File name header
+        request.addValue(patientUsername, forHTTPHeaderField: "X-Patient-Username")    // Username header
 
-        URLSession.shared.uploadTask(with: request, fromFile: fileURL) { [weak self] _, response, error in
+        // Upload task
+        URLSession.shared.uploadTask(with: request, fromFile: fileURL) { data, response, error in
             if let error = error {
-                completion(.failure(error))
+                completion(.failure(error)) // Handle error
                 return
             }
 
-            guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
-                let uploadError = NSError(
-                    domain: "UploadError",
-                    code: -2,
-                    userInfo: [NSLocalizedDescriptionKey: "Failed to upload file."]
-                )
-                completion(.failure(uploadError))
+            guard let httpResponse = response as? HTTPURLResponse else {
+                completion(.failure(NSError(domain: "Invalid Response", code: -1, userInfo: nil)))
                 return
             }
 
-            self?.simulateUploadProgress() // Simulate progress update
-            completion(.success(()))
+            if httpResponse.statusCode == 200 {
+                // Optionally parse the response
+                if let data = data,
+                   let jsonResponse = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
+                   let message = jsonResponse["message"] as? String {
+                    print("Server Response: \(message)")
+                }
+                completion(.success(()))
+            } else {
+                let errorMessage = HTTPURLResponse.localizedString(forStatusCode: httpResponse.statusCode)
+                completion(.failure(NSError(domain: "Upload Error", code: httpResponse.statusCode, userInfo: [NSLocalizedDescriptionKey: errorMessage])))
+            }
         }.resume()
     }
+
+
 
     private func simulateUploadProgress() {
         DispatchQueue.global().async { [weak self] in
