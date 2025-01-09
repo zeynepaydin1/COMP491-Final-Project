@@ -45,7 +45,6 @@ struct PatientDetailView: View {
                         VStack(spacing: 20) {
                             InfoField(title: "Name", value: patient.name)
                             InfoField(title: "Gender", value: patient.gender.capitalized)
-                            InfoField(title: "Progress", value: "50%")
                         }
                         .padding(15)
                         .background(

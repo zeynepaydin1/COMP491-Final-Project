@@ -54,9 +54,9 @@ struct HomeScreenView: View {
 
                 // Analysis Table
                 List {
-                    Section(header: Text("Completed Analyses")) {
+                    Section(header: Text("Patients")) {
                         if viewModel.completedAnalyses.isEmpty {
-                            Text("No completed analyses available.")
+                            Text("No patients available.")
                                 .foregroundColor(.gray)
                         } else {
                             ForEach(viewModel.completedAnalyses) { patient in

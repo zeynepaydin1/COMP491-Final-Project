@@ -13,10 +13,6 @@ struct AnalysisCellView: View {
                     .font(Fonts.primary(size: 16, weight: .bold))
                     .foregroundColor(Colors.textPrimary)
                     .lineLimit(1)
-
-                Text("Progress: 50%") // Replace "50%" with dynamic progress if available
-                    .font(Fonts.caption)
-                    .foregroundColor(Colors.textSecondary)
             }
 
             Spacer()

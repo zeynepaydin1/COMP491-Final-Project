@@ -77,9 +77,7 @@ struct AllPatientsView: View {
                     .font(Fonts.body)
                     .foregroundColor(Colors.textPrimary)
 
-                Text("Progress: 50%")
-                    .font(Fonts.caption)
-                    .foregroundColor(Colors.textSecondary)
+              
             }
         }
         .padding(8)
