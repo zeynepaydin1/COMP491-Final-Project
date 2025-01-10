@@ -77,9 +77,15 @@ struct AllPatientsView: View {
                     .font(Fonts.body)
                     .foregroundColor(Colors.textPrimary)
 
-                Text("Progress: 50%")
-                    .font(Fonts.caption)
-                    .foregroundColor(Colors.textSecondary)
+//                Text("Progress: 50%")
+//                    .font(Fonts.caption)
+//                    .foregroundColor(Colors.textSecondary)
+                Image(systemName: "waveform.path.ecg") // Default image on error
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: 25, height: 25)
+                    .clipShape(Circle())
+                    .foregroundColor(.gray)
             }
         }
         .padding(8)

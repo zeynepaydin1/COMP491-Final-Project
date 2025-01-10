@@ -14,9 +14,15 @@ struct AnalysisCellView: View {
                     .foregroundColor(Colors.textPrimary)
                     .lineLimit(1)
 
-                Text("Progress: 50%") // Replace "50%" with dynamic progress if available
-                    .font(Fonts.caption)
-                    .foregroundColor(Colors.textSecondary)
+//                Text("Progress: 50%") // Replace "50%" with dynamic progress if available
+//                    .font(Fonts.caption)
+//                    .foregroundColor(Colors.textSecondary)
+                Image(systemName: "waveform.path.ecg") // Default image on error
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: 25, height: 25)
+                    .clipShape(Circle())
+                    .foregroundColor(.gray)
             }
 
             Spacer()

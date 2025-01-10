@@ -45,7 +45,13 @@ struct PatientDetailView: View {
                         VStack(spacing: 20) {
                             InfoField(title: "Name", value: patient.name)
                             InfoField(title: "Gender", value: patient.gender.capitalized)
-                            InfoField(title: "Progress", value: "50%")
+//                            InfoField(title: "Progress", value: "50%")
+                            Image(systemName: "waveform.path.ecg") // Default image on error
+                                .resizable()
+                                .scaledToFill()
+                                .frame(width: 50, height: 50)
+                                .clipShape(Circle())
+                                .foregroundColor(.gray)
                         }
                         .padding(15)
                         .background(
